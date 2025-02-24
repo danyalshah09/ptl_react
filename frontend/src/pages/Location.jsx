@@ -1,4 +1,113 @@
+import React, { useState } from "react";
+
+// Reusable Image component with loading and error states
+const OptimizedImage = ({ src, alt, className, height = "h-48" }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  // Generate blur placeholder
+  const blurDataURL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMi4xMi4uMS8yNzY5ODY1PjA/SVFOUUlXWldaXGR4dISEiK7//2wBDARVFx4aHx8eKRkaKa+xr7Gvr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6//wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
+
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      {/* Blur placeholder */}
+      <div 
+        className={`absolute inset-0 ${isLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        style={{
+          backgroundImage: `url(${blurDataURL})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(8px)',
+        }}
+      />
+
+      {/* Loading spinner */}
+      {!isLoaded && !error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
+          <div className="w-8 h-8 border-4 border-black rounded-full animate-spin border-t-transparent"></div>
+        </div>
+      )}
+
+      <img
+        src={src}
+        alt={alt}
+        className={`${className} ${height} object-cover transition-opacity duration-300 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setError(true)}
+      />
+
+      {/* Error state */}
+      {error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+          <span className="text-gray-500">Failed to load image</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function Location() {
+  const attractions = [
+    {
+      name: "Karimabad Hunza",
+      distance: "60 km",
+      time: "1.5-hour drive",
+      image: "./assets/location/karimabad1.jpg",
+    },
+    {
+      name: "Baltit Fort",
+      distance: "60 km",
+      time: "1.5-hour drive",
+      image: "./assets/location/baltit.jpg",
+    },
+    {
+      name: "Attabad Lake",
+      distance: "35 km",
+      time: "45-min drive",
+      image: "./assets/location/attabad_lake.jpg",
+    },
+    {
+      name: "Hussaini Suspension Bridge",
+      distance: "5 km",
+      time: "10-min drive",
+      image: "./assets/location/hussaini_suspension.jpg",
+    },
+    {
+      name: "Borith Lake",
+      distance: "7 km",
+      time: "15-min drive",
+      image: "./assets/location/borith.jpg",
+    },
+    {
+      name: "Passu Village",
+      distance: "1 km",
+      time: "5-min walk",
+      image: "./assets/location/passu.jpg",
+    },
+    {
+      name: "Batura Lake",
+      distance: "10 km",
+      time: "20-min drive",
+      image: "./assets/location/batura.jpeg",
+    },
+    {
+      name: "Khunjerab Border",
+      distance: "85 km",
+      time: "2-hour drive",
+      image: "./assets/location/khunjerab.jpeg",
+    },
+    {
+      name: "Sost Dryport",
+      distance: "35 km",
+      time: "40-min drive",
+      image: "./assets/location/sost.jpeg",
+    },
+  ];
+
   return (
     <div className="bg-gray-50">
       <section className="container mx-auto px-4 py-12">
@@ -25,34 +134,33 @@ export default function Location() {
               in Islamabad
             </p>
 
-            <img
-  src="./assets/location/byair.PNG"
-  className="rounded-lg shadow-md h-[400px] w-full object-cover object-center"
-  alt="Flight to Gilgit"
-  loading="lazy"
-/>
+            <OptimizedImage
+              src="./assets/location/byair.PNG"
+              alt="Flight to Gilgit"
+              className="rounded-lg shadow-md"
+              height="h-[400px]"
+            />
           </div>
 
           {/* Road Travel */}
           <div className="bg-gray-100 p-6 rounded-xl shadow-md flex flex-col h-full">
-  <h3 className="text-2xl font-semibold text-gray-700 mb-4">By Car</h3>
-  <p className="text-gray-600">
-    <strong>Gilgit to Passu Tourist Lodge:</strong> 3-hour drive (125 km) via the scenic Karakoram Highway
-  </p>
-  <p className="text-gray-600">
-    The journey offers breathtaking views of mountains, rivers, and valleys.
-  </p>
+            <h3 className="text-2xl font-semibold text-gray-700 mb-4">By Car</h3>
+            <p className="text-gray-600">
+              <strong>Gilgit to Passu Tourist Lodge:</strong> 3-hour drive (125 km) via the scenic Karakoram Highway
+            </p>
+            <p className="text-gray-600">
+              The journey offers breathtaking views of mountains, rivers, and valleys.
+            </p>
 
-  <div className="flex-grow"></div> {/* Pushes the image down */}
+            <div className="flex-grow"></div>
 
-  <img
-  src="./assets/location/gilgit.PNG"
-  alt="Mountain drive"
-  className="rounded-lg shadow-md h-[400px] w-full object-cover object-center"
-  loading="lazy"
-/>
-</div>
-
+            <OptimizedImage
+              src="./assets/location/gilgit.PNG"
+              alt="Mountain drive"
+              className="rounded-lg shadow-md"
+              height="h-[400px]"
+            />
+          </div>
         </div>
       </section>
 
@@ -63,68 +171,12 @@ export default function Location() {
             Nearby Attractions
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Karimabad Hunza",
-                distance: "60 km",
-                time: "1.5-hour drive",
-                image: "./assets/location/karimabad1.jpg",
-              },
-              {
-                name: "Baltit Fort",
-                distance: "60 km",
-                time: "1.5-hour drive",
-                image: "./assets/location/baltit.jpg",
-              },
-              {
-                name: "Attabad Lake",
-                distance: "35 km",
-                time: "45-min drive",
-                image: "./assets/location/attabad_lake.jpg",
-              },
-              {
-                name: "Hussaini Suspension Bridge",
-                distance: "5 km",
-                time: "10-min drive",
-                image: "./assets/location/hussaini_suspension.jpg",
-              },
-              {
-                name: "Borith Lake",
-                distance: "7 km",
-                time: "15-min drive",
-                image: "./assets/location/borith.jpg",
-              },
-              {
-                name: "Passu Village",
-                distance: "1 km",
-                time: "5-min walk",
-                image: "./assets/location/passu.jpg",
-              },
-              {
-                name: "Batura Lake",
-                distance: "10 km",
-                time: "20-min drive",
-                image: "./assets/location/batura.jpeg",
-              },
-              {
-                name: "Khunjerab Border",
-                distance: "85 km",
-                time: "2-hour drive",
-                image: "./assets/location/khunjerab.jpeg",
-              },
-              {
-                name: "Sost Dryport",
-                distance: "35 km",
-                time: "40-min drive",
-                image: "./assets/location/sost.jpeg",
-              },
-            ].map((attraction, index) => (
+            {attractions.map((attraction, index) => (
               <div key={index} className="rounded-xl overflow-hidden shadow-md">
-                <img
+                <OptimizedImage
                   src={attraction.image}
                   alt={attraction.name}
-                  className="w-full h-48 object-cover rounded-t-lg"
-                  loading="lazy"
+                  className="w-full rounded-t-lg"
                 />
                 <div className="p-4">
                   <h3 className="text-xl font-semibold">{attraction.name}</h3>
