@@ -34,16 +34,14 @@ const amenities = [
     list: [
       "Transport Facility",
       "Book your local guide",
+      "Meeting Rooms",
+      "Center to visit spots"
    
     ],
   },
 ];
 
-const specialFeatures = [
-  { icon: <FaPaw />, label: "Pet-Friendly" },
-  { icon: <FaWheelchair />, label: "ADA Accessible" },
-  { icon: <FaChild />, label: "Family-Friendly" },
-];
+
 
 const Amenities = () => {
   return (
@@ -79,17 +77,7 @@ const Amenities = () => {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4">
-          {specialFeatures.map((feature, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-2 bg-gray-500 text-white py-2 px-4 rounded-full"
-            >
-              <span className="text-lg">{feature.icon}</span>
-              <span>{feature.label}</span>
-            </div>
-          ))}
-        </div>
+      
       </div>
     </section>
   );

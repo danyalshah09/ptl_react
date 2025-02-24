@@ -4,7 +4,7 @@ import RoomCategories from "../ui_elements/RoomCategories";
 const Rooms = () => {
   return (
     <>
-    <div className="relative h-[600px] bg-[url('./assets/rooms/ptl3.jpg')] bg-cover bg-center bg-no-repeat ">
+    <div className="relative h-[600px] bg-[url('./assets/images/ptl_background.jpeg')] bg-cover bg-center bg-no-repeat ">
     {/* Dark overlay */}
     <div className="absolute inset-0 bg-black/30"></div>
     {/* Content */}

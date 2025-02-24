@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Intro = () => {
+ const Intro = () => {
   return (
     <section className="bg-white">
       {/* First Section */}
@@ -52,7 +52,7 @@ export const Intro = () => {
           />
         </div>
         <div className="font-light text-gray-500 sm:text-lg">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold">
+          <h2 className="mb-4 mt-4 text-4xl tracking-tight font-extrabold">
             Discover Tranquility in the Heart of Hunza
           </h2>
           <p className="mb-4">
@@ -70,3 +70,5 @@ export const Intro = () => {
     </section>
   );
 };
+
+export default Intro;

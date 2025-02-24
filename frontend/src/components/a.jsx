@@ -6,17 +6,6 @@ const Navbar = () => {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isSticky, setIsSticky] = useState(false);
-
-  // Add scroll event listener for sticky behavior
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -38,20 +27,20 @@ const Navbar = () => {
   }, []);
 
   const renderWeather = () => {
-    if (loading) return <div className="text-xs whitespace-nowrap animate-pulse bg-slate-400">⛅ Loading...</div>;
-    if (error) return <div className="text-xs whitespace-nowrap text-red-500">🌡️ Weather</div>;
+    if (loading) return <div className="text-sm animate-pulse">⛅ Loading...</div>;
+    if (error) return <div className="text-sm text-red-500">🌡️ Weather</div>;
 
     return (
-      <div className="flex items-center gap-1 border border-gray-500 rounded-full bg-white/30 px-2 py-1 backdrop-blur-sm">
+      <div className="flex items-center gap-2 bg-white/30 px-3 py-1 rounded-full backdrop-blur-sm border border-white/10">
         <img
           src={`http://openweathermap.org/img/wn/${weather?.weather?.[0]?.icon}@2x.png`}
           alt="Weather Icon"
-          className="h-6 w-6 drop-shadow-sm"
+          className="h-8 w-8 drop-shadow-sm"
           onError={(e) => {
             e.target.style.display = 'none';
           }}
         />
-        <span className="text-lg font-medium text-orange-500 whitespace-nowrap">
+        <span className="text-lg font-medium text-gray-700">
           {Math.round(weather?.main?.temp)}°C
         </span>
       </div>
@@ -59,21 +48,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav 
-      className={`w-full transition-all duration-300 ${
-        isSticky 
-          ? 'fixed top-0 left-0 border-b border-gray-200 bg-white/95 backdrop-blur-sm shadow-md z-50' 
-          : 'relative bg-white/80 backdrop-blur-sm border-b border-gray-200'
-      }`}
-    >
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-4 py-3">
+    <nav className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="/logo.png" className={`transition-all duration-300 ${isSticky ? 'h-12' : 'h-16'} w-auto`} alt="PTL Logo" />
+          <img src="/logo.jpg" className="h-16 w-auto" alt="PTL Logo" />
         </Link>
 
         {/* Mobile Right Section */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-4 md:hidden">
           {renderWeather()}
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -90,21 +73,14 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <div 
-          className={`md:flex md:items-center md:w-auto ${
-            isOpen 
-              ? "absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg" 
-              : "hidden"
-          }`}
-        >
-          <div className="flex flex-col md:flex-row md:items-center md:gap-2 lg:gap-8 ">
-            <ul className="flex flex-col md:flex-row md:space-x-2 lg:space-x-8 rtl:space-x-reverse font-medium py-4 md:py-0">
-              {["Home", "Rooms", "Amenities", "Gallery", "Location", "Dine", "Contact", "About"].map((item) => (
+        <div className={`w-full md:flex md:w-auto ${isOpen ? "block" : "hidden"}`}>
+          <div className="flex flex-col md:flex-row md:items-center md:gap-8 w-full">
+            <ul className="flex flex-col md:flex-row md:space-x-6 rtl:space-x-reverse font-medium py-4 md:py-0">
+              {["Home", "Rooms", "Amenities", "Gallery","Location", "Dine", "Contact","About"].map((item) => (
                 <li key={item} className="relative group">
                   <Link
                     to={`/${item.toLowerCase()}`}
-                    className="block md:inline-block text-gray-700 hover:text-orange-500 px-3 lg:px-2 py-2 transition-colors text-base lg:text-lg"
-                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-1 text-gray-700 hover:text-orange-500 px-3 py-2 transition-colors"
                   >
                     {item}
                     <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
@@ -114,7 +90,7 @@ const Navbar = () => {
             </ul>
             
             {/* Desktop Weather */}
-            <div className="hidden md:block min-w-fit">
+            <div className="md:ml-auto mt-4 md:mt-0">
               {renderWeather()}
             </div>
           </div>

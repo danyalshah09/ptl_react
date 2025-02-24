@@ -58,9 +58,12 @@ const facilities = [
   {
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} 
+          d="M5 17a4 4 0 100-8 4 4 0 000 8zm14 0a4 4 0 100-8 4 4 0 000 8zm-14 0h2.5l2.5-7 5 7h3m-4-10h3l3 5m-9-5l1.5 3m-6.5 7h3" />
       </svg>
     ),
+    
+  
     title: "Cycling Tours",
     description: "Guided exploration experiences"
   },
@@ -70,14 +73,14 @@ const facilities = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-3 0l-.75.75M3 5v14m18-10v8" />
       </svg>
     ),
-    title: "Gourmet Breakfast",
+    title: "Complimentary Breakfast (2)",
     description: "Complimentary morning feast"
   }
 ];
 
 export const Facilities = () => {
   return (
-    <section className="relative py-10 bg-gradient-to-b from-slate-50 to-white">
+    <section className=" w-9/10 mx-auto relative py-10 bg-gradient-to-b">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center mb-16">
           <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-orange-600">

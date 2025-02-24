@@ -15,10 +15,10 @@ export default function AboutUs() {
           </div>
           
           <div className="relative max-w-6xl mx-auto px-4 text-center text-white">
-            <h1 className="text-4xl md:text-5xl font-serif mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl  mb-6 leading-tight">
               Passu Tourist Lodge
               <br />
-              <span className="text-orange-300">Where Mountain Majesty Meets Modern Comfort</span>
+              <span className="text-orange-300 ">Where Mountain Majesty Meets Modern Comfort</span>
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto">
               Nestled at the foot of the iconic Passu Cones, we've been curating unforgettable Himalayan experiences since 2015
@@ -71,7 +71,7 @@ export default function AboutUs() {
         <section className="py-20 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-serif text-gray-900 mb-4">Our Guiding Principles</h2>
+              <h2 className="text-3xl  text-gray-900 mb-4">Our Guiding Principles</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 The foundation of every decision we make at Passu Tourist Lodge
               </p>
