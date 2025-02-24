@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from '../../src/logo.png'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [weather, setWeather] = useState(null);
@@ -69,8 +68,7 @@ const Navbar = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-4 py-3">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src={logo} className={`transition-all duration-300 ${isSticky ? 'h-12' : 'h-16'} w-auto`} alt="PTL Logo" />
-        </Link>
+        <img src="/logo.png" className={`transition-all duration-300 ${isSticky ? 'h-12' : 'h-16'} w-auto`} alt="PTL Logo" />        </Link>
 
         {/* Mobile Right Section */}
         <div className="flex items-center gap-2 md:hidden">
