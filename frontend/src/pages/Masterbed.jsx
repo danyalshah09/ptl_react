@@ -1,11 +1,10 @@
 import React from "react";
 import RoomDetails from "../ui_elements/RoomDetail";
-
 const Masterbed = () => {
   return (
     <RoomDetails
       title="Master Bedroom Suite"
-      image="./assets/rooms/ptl3.jpg"
+     image="/assets/images/ptl3.jpg"
       price="8000"
       description="Experience unparalleled comfort in our 650 sq.ft sanctuary featuring panoramic views and premium amenities."
       amenities={[

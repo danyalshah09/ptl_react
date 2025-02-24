@@ -58,7 +58,7 @@ const CustomCarouselArrows = () => {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-40">
-                  <h3 className="text-white text-xl font-semibold">
+                  <h3 className="text-white text-sm lg:text-xl font-semibold">
                     {slide.title}
                   </h3>
                 </div>

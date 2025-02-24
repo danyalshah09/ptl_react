@@ -5,7 +5,7 @@ const Masterbed = () => {
   return (
     <RoomDetails
       title="Twin Bed Room"
-      image="./assets/rooms/ptl3.jpg"
+      image="/assets/images/ptl3.jpg"
       price="9000"
       description="Experience unparalleled comfort in our 650 sq.ft sanctuary featuring panoramic views and premium amenities."
       amenities={[

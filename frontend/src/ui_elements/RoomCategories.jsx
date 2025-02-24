@@ -15,7 +15,7 @@ const RoomCategories = () => {
       <h2 className="text-3xl font-bold text-center mb-8">
         Room <span className="text-orange-500">Categories</span>
       </h2>
-      <div className="flex flex-wrap md:flex-row flex-col gap-6 max-w-7xl mx-auto">
+      <div className="flex flex-wrap md:flex-row flex-col gap-6 max-w-7xl mx-auto px-4 md:px-6">
         {rooms.map((room, index) => (
           <Link
             key={index}

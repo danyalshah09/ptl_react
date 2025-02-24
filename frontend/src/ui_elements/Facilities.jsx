@@ -62,8 +62,6 @@ const facilities = [
           d="M5 17a4 4 0 100-8 4 4 0 000 8zm14 0a4 4 0 100-8 4 4 0 000 8zm-14 0h2.5l2.5-7 5 7h3m-4-10h3l3 5m-9-5l1.5 3m-6.5 7h3" />
       </svg>
     ),
-    
-  
     title: "Cycling Tours",
     description: "Guided exploration experiences"
   },
@@ -80,7 +78,7 @@ const facilities = [
 
 export const Facilities = () => {
   return (
-    <section className=" w-9/10 mx-auto relative py-10 bg-gradient-to-b">
+    <section className="w-9/10 mx-auto relative py-10 bg-gradient-to-b">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center mb-16">
           <h1 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-orange-600">
@@ -88,7 +86,12 @@ export const Facilities = () => {
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* 
+          - Grid with 2 columns for screens smaller than 768px (default to md:)
+          - Grid with 3 columns for screens between 768px and 992px (md: to lg:)
+          - Grid with 4 columns for screens larger than 992px (lg: and up)
+        */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
           {facilities.map((facility, index) => (
             <div 
               key={index}
@@ -96,16 +99,16 @@ export const Facilities = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white-50 to-emerald-50 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
               
-              <div className="relative p-6">
-                <div className="mb-4">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-gray-400 to-gray-700 rounded-lg group-hover:scale-110 transition-transform duration-300">
+              <div className="relative p-3 md:p-4 lg:p-6">
+                <div className="mb-2 md:mb-4">
+                  <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-gray-400 to-gray-700 rounded-lg group-hover:scale-110 transition-transform duration-300">
                     {React.cloneElement(facility.icon, { 
-                      className: "h-8 w-8 text-white stroke-2" 
+                      className: "h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white stroke-2" 
                     })}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-800">{facility.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{facility.description}</p>
+                <h3 className="text-sm md:text-base lg:text-xl font-semibold mb-1 md:mb-2 text-gray-800">{facility.title}</h3>
+                <p className="text-xs md:text-sm text-gray-600 leading-relaxed">{facility.description}</p>
               </div>
             </div>
           ))}
