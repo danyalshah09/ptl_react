@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from '../../public/assets/logo.png'
+import logo from '../../src/logo.png'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [weather, setWeather] = useState(null);
