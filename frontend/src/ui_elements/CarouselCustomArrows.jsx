@@ -23,7 +23,7 @@ const CustomCarouselArrows = () => {
       id: 4, 
       title: "PTL Huts",
       imageUrl: "./assets/slider/ptl_huts.jpg"
-    }
+    },
   ];
 
   const nextSlide = () => {

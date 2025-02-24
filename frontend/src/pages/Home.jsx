@@ -6,6 +6,7 @@ import VideoSection from "./Video";
 import Places from "../ui_elements/Places";
 import Intro from "../ui_elements/Intro";
 import CarouselCustomArrows from "../ui_elements/CarouselCustomArrows";
+import Button from "../ui_elements/Button";
 
 const Home = () => {
   const roomCategoriesRef = useRef(null);
@@ -28,12 +29,10 @@ const Home = () => {
           </p>
 
           {/* Scroll to RoomCategories when clicked */}
-          <button
-            onClick={scrollToRooms}
-            className="btn_book py-2 px-6 bg-gray-300 text-black-700 text-center mt-4 hover:bg-gray-500 hover:text-black"
-          >
-            Book Now
-          </button>
+         
+          <Button onClick={scrollToRooms} className="btn_book py-2 px-6 bg-gray-300 text-black-700 text-center mt-4 hover:bg-gray-500 hover:text-white">
+          Book Now
+        </Button>
         </div>
       </section>
       

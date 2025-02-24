@@ -8,10 +8,12 @@ import "swiper/css/pagination";
 const RoomImageSlider = ({ roomType }) => {
   const roomImages = {
     masterbed: [
-        "/assets/rooms/masterbed.jpg",
+      "/assets/rooms/masterbed111.jpg",
        "/assets/rooms/masterbed2.jpg",
        "/assets/rooms/masterbed3.jpg",
-       "/assets/rooms/masterbed4.jpg"
+       "/assets/rooms/masterbed4.jpg",
+       "/assets/rooms/masterbed.jpg",
+
 
     ],
     twinbed: [

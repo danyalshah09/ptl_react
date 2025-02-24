@@ -7,7 +7,7 @@ const RoomCategories = () => {
   const rooms = [
     { to: "/masterbed", imgSrc:         "/assets/rooms/masterbed1.jpg",
        title: "Deluxe Room" },
-    { to: "/twinbed", imgSrc:"/assets/rooms/twinbed1.jpg", title: "Executive Room" },
+    { to: "/twinbed", imgSrc:"/assets/images/ptl_twin.jpg", title: "Executive Room" },
     { to: "/triplebed", imgSrc: "./assets/rooms/triplebed1.jpg", title: "Triple Bed" },
   ];
 

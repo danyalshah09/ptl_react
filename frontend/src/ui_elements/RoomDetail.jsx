@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
 import HotelBookingForm from "../ui_elements/HotelBookingForm";
 import { useLocation } from "react-router-dom";
 import RoomImageSlider from "./RoomImageSlider";
-const RoomDetails = ({ title, image, price, description, amenities, policies,roomType  }) => {
+import Button from "./Button";
+
+const RoomDetails = ({ title, image, price, description, amenities, policies, roomType }) => {
+  const bookingSectionRef = useRef(null);
+
+  // Function to scroll smoothly to the booking section
+  const scrollToBooking = () => {
+    bookingSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const location = useLocation();
   const { bookingDetails } = location.state || {}; // Accessing booking details from Cart.jsx
 
@@ -15,9 +24,9 @@ const RoomDetails = ({ title, image, price, description, amenities, policies,roo
           <div className="text-center max-w-3xl px-4">
             <h1 className="text-4xl font-extrabold text-white mb-4">{title}</h1>
             <p className="text-lg text-white/80 mb-6">{description}</p>
-            <button className="bg-blue-600 text-white px-8 py-3 rounded hover:bg-blue-700 transition">
+            <Button onClick={scrollToBooking} className="btn_book">
               Book Now
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -43,8 +52,8 @@ const RoomDetails = ({ title, image, price, description, amenities, policies,roo
             ))}
           </div>
 
-          {/* Amenities & Booking */}
-          <div className="bg-white p-6 shadow">
+          {/* Booking Section (Ref) */}
+          <div ref={bookingSectionRef} className="bg-white p-6 shadow">
             <h2 className="text-4xl font-bold text-gray-800 mb-4 text-center">PKR {price}/night</h2>
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Amenities</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
