@@ -69,7 +69,7 @@ const Footer = () => {
       </div>
 
       {/* WhatsApp Button */}
-      <div className="fixed bottom-24 right-5 w-16 h-16 rounded-full shadow-2xl bg-gradient-to-r from-green-400 to-green-600 hover:scale-110 transition-transform duration-300 ease-in-out">
+      <div className="fixed z-10 bottom-24 right-5 w-16 h-16 rounded-full shadow-2xl bg-gradient-to-r from-green-400 to-green-600 hover:scale-110 transition-transform duration-300 ease-in-out">
         <a href="https://wa.me/923554477788" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
           <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="WhatsApp Logo" className="w-10 h-10 mx-auto my-3" />
         </a>
