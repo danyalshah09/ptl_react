@@ -67,10 +67,8 @@ const Navbar = () => {
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-4 py-3">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="/logo.png" className={`transition-all duration-300 ${isSticky ? 'h-12' : 'h-16'} w-auto`} alt="PTL Logo" />  
-        </Link>
-
+        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse"/>
+        <img src={import.meta.env.VITE_LOGO_PATH} className={`transition-all duration-300 ${isSticky ? 'h-12' : 'h-16'} w-auto`} alt="PTL Logo" />
         {/* Mobile Right Section */}
         <div className="flex items-center gap-2 md:hidden">
           {renderWeather()}
