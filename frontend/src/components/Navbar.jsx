@@ -59,17 +59,17 @@ const Navbar = () => {
 
   return (
     <nav 
-      className={`w-full transition-all duration-300 ${
+      className={`w-full transition-all duration-300 z-50 ${
         isSticky 
-          ? 'fixed top-0 left-0 border-b border-gray-200 bg-white/95 backdrop-blur-sm shadow-md z-50' 
+          ? 'fixed top-0 left-0 border-b border-gray-200 bg-white/95 backdrop-blur-sm shadow-md' 
           : 'relative bg-white/80 backdrop-blur-sm border-b border-gray-200'
       }`}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-4 py-3">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="/logo.png" className={`transition-all duration-300 ${isSticky ? 'h-12' : 'h-16'} w-auto`} alt="PTL Logo" />  
-              </Link>
+          <img src="/logo.png" className={`transition-all duration-300 ${isSticky ? 'h-12' : 'h-16'} w-auto`} alt="PTL Logo" />  
+        </Link>
 
         {/* Mobile Right Section */}
         <div className="flex items-center gap-2 md:hidden">
@@ -88,12 +88,14 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop and Mobile Navigation */}
         <div 
-          className={`md:flex md:items-center md:w-auto ${
-            isOpen 
-              ? "absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg" 
-              : "hidden"
+          className={`w-full  md:items-center md:w-auto md:block ${
+            isOpen ? "block" : "hidden"
+          } ${
+            isOpen && !isSticky 
+              ? "absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50" 
+              : ""
           }`}
         >
           <div className="flex flex-col md:flex-row md:items-center md:gap-2 lg:gap-8 ">

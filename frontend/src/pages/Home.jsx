@@ -20,7 +20,7 @@ const Home = () => {
     <>
       <h1 className="text-center text-4xl mt-4">Passu Tourist Lodge</h1> 
       <section className="parallax_section h-full mt-4 w-full">
-        <div className="parallax1 flex flex-col items-center justify-start mx-auto h-[70vh] w-[85%] bg-cover bg-center bg-fixed bg-no-repeat bg-[url('/assets/images/ptl_old.jpg')]
+        <div className="parallax1 flex flex-col items-center justify-start mx-auto h-[70vh] w-[85%] bg-cover md:bg-contain lg:bg-contain bg-center bg-fixed bg-no-repeat bg-[url('/assets/images/ptl_old.jpg')]
  mb-4">
           <p
             className="font-dancing_script text-2xl sm:text-xl md:text-3xl mt-6 text-center py-2 text-white"

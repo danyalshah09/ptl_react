@@ -144,7 +144,7 @@ export default function DineSection() {
         <div className="w-full mx-auto px-4">
           <h2 className="text-3xl font-serif text-center mb-8">Guest Reviews</h2>
           <div className="w-full gap-8">
-          <div class="elfsight-app-6ac20a8f-b939-48be-93ca-1598a88c42b8" data-elfsight-app-lazy></div>
+          <div className="elfsight-app-6ac20a8f-b939-48be-93ca-1598a88c42b8" data-elfsight-app-lazy></div>
           </div>
         </div>
       </section>
