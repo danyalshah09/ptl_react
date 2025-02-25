@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function HotelBookingForm() {
+const HotelBookingForm = ()=> {
   const [bookings, setBookings] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -118,72 +118,73 @@ export default function HotelBookingForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br p-4">
       <div className="max-w-2xl mx-auto">
-        {/* Cart Preview */}
-        <div className="mb-8 mt-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+        {/* Cart Preview - Improved mobile responsiveness */}
+        <div className="mb-6 mt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
           <button
             onClick={handleViewCart}
-            className="w-full sm:w-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            className="w-full sm:w-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 text-sm sm:text-base"
           >
             {showCart ? 'Hide Cart' : 'View Cart'} ({bookings.length} items)
           </button>
           {bookings.length > 0 && (
             <button
               onClick={() => navigate("/cart", { state: { bookings } })}
-              className="w-full sm:w-auto bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
+              className="w-full sm:w-auto bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 text-sm sm:text-base mt-2 sm:mt-0"
             >
               Proceed to Checkout
             </button>
           )}
         </div>
 
+        {/* Notification - Made more mobile friendly */}
         {showNotification && (
-          <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-slideIn z-50">
+          <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg shadow-lg animate-slideIn z-50 text-sm sm:text-base">
             ✅ Added to Cart!
           </div>
         )}
 
-        {/* Cart Details */}
+        {/* Cart Details - Improved for small screens */}
         {showCart && bookings.length > 0 && (
-          <div className="bg-white p-4 rounded-lg shadow-xl mb-8 overflow-hidden">
-            <h3 className="text-xl font-bold mb-4">Cart Details</h3>
-            <div className="overflow-x-auto -mx-4 sm:mx-0">
+          <div className="bg-white p-3 sm:p-4 rounded-lg shadow-xl mb-6 sm:mb-8">
+            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Cart Details</h3>
+            <div className="overflow-x-auto -mx-3 sm:mx-0">
               <div className="min-w-full inline-block align-middle">
                 <div className="overflow-hidden">
                   <table className="min-w-full">
                     <thead>
                       <tr className="bg-gray-50">
-                        <th className="px-4 py-2 text-left">Room</th>
-                        <th className="px-4 py-2 text-left">Dates</th>
-                        <th className="px-4 py-2 text-right">Price</th>
-                        <th className="px-4 py-2 text-right">Subtotal</th>
+                        <th className="px-2 sm:px-4 py-2 text-left text-xs sm:text-sm">Room</th>
+                        <th className="px-2 sm:px-4 py-2 text-left text-xs sm:text-sm">Dates</th>
+                        <th className="px-2 sm:px-4 py-2 text-right text-xs sm:text-sm">Price</th>
+                        <th className="px-2 sm:px-4 py-2 text-right text-xs sm:text-sm">Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
                       {bookings.map((booking, index) => (
                         <tr key={index} className="border-t">
-                          <td className="px-4 py-2">
-                            <div className="font-semibold">{booking.category}</div>
-                            <div className="text-sm text-gray-600">
+                          <td className="px-2 sm:px-4 py-2">
+                            <div className="font-semibold text-xs sm:text-sm">{booking.category}</div>
+                            <div className="text-xs text-gray-600">
                               {booking.rooms} room(s), {booking.nights} night(s)
                             </div>
                           </td>
-                          <td className="px-4 py-2">
-                            <div className="text-sm">{booking.checkin}</div>
-                            <div className="text-sm">{booking.checkout}</div>
+                          <td className="px-2 sm:px-4 py-2">
+                            <div className="text-xs sm:text-sm">{booking.checkin}</div>
+                            <div className="text-xs sm:text-sm">{booking.checkout}</div>
                           </td>
-                          <td className="px-4 py-2 text-right">
-                            {booking.price} PKR/night
+                          <td className="px-2 sm:px-4 py-2 text-right text-xs sm:text-sm">
+                            {booking.price} PKR
                           </td>
-                          <td className="px-4 py-2 text-right font-semibold">
+                          <td className="px-2 sm:px-4 py-2 text-right font-semibold text-xs sm:text-sm">
                             {booking.subtotal} PKR
                           </td>
                         </tr>
                       ))}
                       <tr className="border-t">
-                        <td colSpan="3" className="px-4 py-2 text-right font-bold">
+                        <td colSpan="3" className="px-2 sm:px-4 py-2 text-right font-bold text-xs sm:text-sm">
                           Total:
                         </td>
-                        <td className="px-4 py-2 text-right font-bold">
+                        <td className="px-2 sm:px-4 py-2 text-right font-bold text-xs sm:text-sm">
                           {calculateTotalCost()} PKR
                         </td>
                       </tr>
@@ -195,60 +196,60 @@ export default function HotelBookingForm() {
           </div>
         )}
 
-        {/* Booking Form */}
+        {/* Booking Form - Improved mobile layout */}
         <form
           onSubmit={handleAddBooking}
-          className="bg-white p-4 sm:p-8 shadow-xl rounded-lg"
+          className="bg-white p-4 sm:p-8 shadow-xl rounded-lg w-[100%]"
         >
-          <h2 className="text-center text-orange-600 text-2xl sm:text-3xl font-bold mb-6">
+          <h2 className="text-center text-orange-600 text-xl sm:text-3xl font-bold mb-4 sm:mb-6">
             Book Your Perfect Stay
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
             {/* Personal Information */}
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Name</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Name</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
                 required
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Email</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
                 required
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Phone</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Phone</label>
               <input
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
                 required
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Room Category</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Room Category</label>
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
               >
                 <option value="Master Bed">Master Bed</option>
                 <option value="Twin Bed">Twin Bed</option>
@@ -257,43 +258,43 @@ export default function HotelBookingForm() {
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Check-in Date</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Check-in Date</label>
               <input
                 type="date"
                 name="checkin"
                 value={formData.checkin}
                 onChange={handleChange}
                 min={new Date().toISOString().split("T")[0]}
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
                 required
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Check-out Date</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Check-out Date</label>
               <input
                 type="date"
                 name="checkout"
                 value={formData.checkout}
                 onChange={handleChange}
                 min={formData.checkin || new Date().toISOString().split("T")[0]}
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
                 required
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Number of Nights</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Number of Nights</label>
               <input
                 type="text"
                 readOnly
                 value={nights > 0 ? nights : "0"}
-                className="w-full p-3 border-2 border-gray-200 rounded-lg bg-gray-100"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg bg-gray-100 text-sm sm:text-base"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Number of Rooms</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Number of Rooms</label>
               <input
                 type="number"
                 name="rooms"
@@ -301,39 +302,39 @@ export default function HotelBookingForm() {
                 onChange={handleChange}
                 min="1"
                 max="20"
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Adults</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Adults</label>
               <input
                 type="number"
                 name="adults"
                 value={formData.adults}
                 onChange={handleChange}
                 min="1"
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="font-semibold text-gray-700">Children</label>
+              <label className="font-semibold text-gray-700 text-sm sm:text-base">Children</label>
               <input
                 type="number"
                 name="children"
                 value={formData.children}
                 onChange={handleChange}
                 min="0"
-                className="w-full p-3 border-2 border-gray-200 rounded-lg"
+                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
               />
             </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <button
               type="submit"
-              className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800"
+              className="w-full bg-black text-white py-2 sm:py-3 px-6 rounded-lg hover:bg-gray-800 text-sm sm:text-base"
             >
               Add Booking
             </button>
@@ -343,3 +344,5 @@ export default function HotelBookingForm() {
     </div>
   );
 }
+
+export default HotelBookingForm
