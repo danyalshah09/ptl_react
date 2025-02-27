@@ -204,7 +204,6 @@ const HotelBookingForm = ()=> {
           <h2 className="text-center text-orange-600 text-xl sm:text-3xl font-bold mb-4 sm:mb-6">
             Book Your Perfect Stay
           </h2>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
             {/* Personal Information */}
             <div className="space-y-1">
