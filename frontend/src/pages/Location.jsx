@@ -1,80 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-// Reusable Image component with improved loading performance
+// Reliable image component that ensures images load properly
 const OptimizedImage = ({ src, alt, className, height = "h-48", priority = false }) => {
-  const [imageStatus, setImageStatus] = useState("loading"); // "loading", "loaded", "error"
-  const [imageSrc, setImageSrc] = useState(null);
-
-  // Generate blur placeholder - a lightweight base64 image
-  const blurDataURL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMi4xMi4uMS8yNzY5ODY1PjA/SVFOUUlXWldaXGR4dISEiK7//2wBDARVFx4aHx8eKRkaKa+xr7Gvr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6+vr6//wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
-  
-  // Preload image
-  useEffect(() => {
-    // Create new image object to preload
-    if (src) {
-      const img = new Image();
-      
-      img.onload = () => {
-        setImageSrc(src);
-        setImageStatus("loaded");
-      };
-      
-      img.onerror = () => {
-        setImageStatus("error");
-      };
-      
-      // Start loading the image
-      img.src = src;
-    }
-    
-    // Cleanup function
-    return () => {
-      setImageStatus("loading");
-      setImageSrc(null);
-    };
-  }, [src]);
-
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      {/* Blur placeholder shown while loading */}
-      <div 
-        className={`absolute inset-0 ${imageStatus === "loaded" ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-        style={{
-          backgroundImage: `url(${blurDataURL})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(8px)',
+    <div className={`relative overflow-hidden ${className} bg-gray-200`}>
+      {/* Direct image with proper attributes for guaranteed loading */}
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full ${height} object-cover`}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={priority ? "high" : "auto"}
+        onError={(e) => {
+          // Fallback for error - replace with a placeholder
+          e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Cpath d='M30,50 L70,50 M50,30 L50,70' stroke='%23cccccc' stroke-width='5'/%3E%3C/svg%3E";
+          e.currentTarget.className = `w-full ${height} object-cover opacity-60`;
         }}
-        aria-hidden="true"
       />
-
-      {/* Loading spinner */}
-      {imageStatus === "loading" && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
-          <div className="w-8 h-8 border-4 border-black rounded-full animate-spin border-t-transparent" aria-label="Loading image"></div>
-        </div>
-      )}
-
-      {/* Actual image - only rendered once preloaded */}
-      {imageSrc && (
-        <img
-          src={imageSrc}
-          alt={alt}
-          className={`w-full ${height} object-cover transition-opacity duration-300 ${
-            imageStatus === "loaded" ? 'opacity-100' : 'opacity-0'
-          }`}
-          loading="lazy"
-          decoding="async"
-          fetchpriority={priority ? "high" : "auto"}
-        />
-      )}
-
-      {/* Error state */}
-      {imageStatus === "error" && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-          <span className="text-gray-500">Failed to load image</span>
-        </div>
-      )}
     </div>
   );
 };

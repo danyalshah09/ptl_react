@@ -199,7 +199,7 @@ const HotelBookingForm = ()=> {
         {/* Booking Form - Improved mobile layout */}
         <form
           onSubmit={handleAddBooking}
-          className="bg-white p-4 sm:p-8 shadow-xl rounded-lg w-[100%]"
+          className="bg-gray-200 p-4 sm:p-8 shadow-xl rounded-lg w-[100%]"
         >
           <h2 className="text-center text-orange-600 text-xl sm:text-3xl font-bold mb-4 sm:mb-6">
             Book Your Perfect Stay

@@ -1,11 +1,8 @@
-
-
-
 import { FaWifi, FaUtensils, FaSpa, FaPaw, FaWheelchair, FaChild } from "react-icons/fa";
 
 const amenities = [
   {
-    icon: <FaWifi className="text-3xl text-black mb-3" />,
+    icon: <FaWifi className="text-3xl text-white mb-3" />, // Changed to white
     title: "Accommodation Comforts",
     list: [
       " Wi-Fi",
@@ -13,11 +10,10 @@ const amenities = [
       "TV Lounge",
       "Private balconies",
       "24/7 hot water",
-      
     ],
   },
   {
-    icon: <FaUtensils className="text-3xl text-black mb-3" />,
+    icon: <FaUtensils className="text-3xl text-white mb-3" />, // Changed to white
     title: "Culinary Experiences",
     highlight: true,
     list: [
@@ -29,23 +25,20 @@ const amenities = [
     ],
   },
   {
-    icon: <FaSpa className="text-3xl text-black mb-3" />,
+    icon: <FaSpa className="text-3xl text-white mb-3" />, // Changed to white
     title: "Wellness Retreat",
     list: [
-      "Transport Facility",
-      "Book your local guide",
-      "Meeting Rooms",
-      "Center to visit spots"
-   
+      "Booking Facility",
+      "Local Guide Reservation",
+      "Conference Hall",
+      "Visitor Center"
     ],
   },
 ];
 
-
-
 const Amenities = () => {
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-16">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-4xl font-bold text-center text-gray-600 mb-4">
           Hotel Amenities & Services
@@ -58,15 +51,15 @@ const Amenities = () => {
           {amenities.map((item, index) => (
             <div
               key={index}
-              className={`bg-white p-6 rounded-xl shadow-lg transition-transform transform hover:-translate-y-2 ${
-                item.highlight ? "border-2 border-gray-500" : ""
+              className={`bg-gray-900 p-6 rounded-xl shadow-lg transition-transform transform hover:-translate-y-2 ${
+                item.highlight ? "border-2 " : ""
               }`}
             >
               {item.icon}
-              <h3 className="text-xl font-semibold text-gray-600 mb-3">
+              <h3 className="text-xl font-semibold text-white mb-3">
                 {item.title}
               </h3>
-              <ul className="space-y-2 text-gray-600">
+              <ul className="space-y-2 text-white">
                 {item.list.map((amenity, idx) => (
                   <li key={idx} className="border-b last:border-none py-2">
                     {amenity}
@@ -76,8 +69,6 @@ const Amenities = () => {
             </div>
           ))}
         </div>
-
-      
       </div>
     </section>
   );
