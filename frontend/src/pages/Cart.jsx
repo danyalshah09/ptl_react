@@ -26,14 +26,27 @@ const Cart = () => {
   };
   const handleProceedToPayment = async () => {
     try {
-      console.log('Sending bookings:', bookings); // Add this for debugging
-  
+      // Format bookings data to ensure proper types
+      const formattedBookings = bookings.map(booking => ({
+        ...booking,
+        checkin: new Date(booking.checkin),
+        checkout: new Date(booking.checkout),
+        adults: Number(booking.adults),
+        children: Number(booking.children),
+        rooms: Number(booking.rooms),
+        nights: Number(booking.nights),
+        price: Number(booking.price),
+        subtotal: Number(booking.subtotal)
+      }));
+      
+      console.log('Sending bookings:', formattedBookings);
+    
       const response = await fetch('https://passubackend.vercel.app/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(bookings),
+        body: JSON.stringify(formattedBookings),
       });
   
       const data = await response.json();
