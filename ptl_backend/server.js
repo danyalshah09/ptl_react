@@ -9,9 +9,11 @@ const app = express();
 connectDB();
 
 // Middleware
-// Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+  origin: '*', // This allows all origins - only use this in development
+  methods: ['GET', 'POST'],
+  credentials: true
+}));app.use(express.json());
 
 // Add debugging middleware
 app.use((req, res, next) => {
@@ -27,6 +29,7 @@ app.get('/', (req, res) => {
 // Routes
 const bookingRoutes = require('./routes/bookings');
 app.use('/api/bookings', bookingRoutes);
+// Update your CORS configuration to be more permissive for development
 
 // Test route
 app.get('/test', (req, res) => {
