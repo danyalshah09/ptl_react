@@ -28,9 +28,12 @@ const Cart = () => {
     try {
       // Format bookings data to ensure proper types
       const formattedBookings = bookings.map(booking => ({
-        ...booking,
-        checkin: new Date(booking.checkin),
-        checkout: new Date(booking.checkout),
+        name: booking.name,
+        email: booking.email,
+        phone: booking.phone,
+        checkin: new Date(booking.checkin).toISOString(),
+        checkout: new Date(booking.checkout).toISOString(),
+        category: booking.category,
         adults: Number(booking.adults),
         children: Number(booking.children),
         rooms: Number(booking.rooms),
@@ -45,7 +48,9 @@ const Cart = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
+        mode: 'cors',  // Add this explicitly
         body: JSON.stringify(formattedBookings),
       });
   
