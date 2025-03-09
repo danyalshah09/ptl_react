@@ -28,7 +28,7 @@ const Cart = () => {
     try {
       console.log('Sending bookings:', bookings); // Add this for debugging
   
-      const response = await fetch('https://ptlpassu.vercel.app/api/bookings', {
+      const response = await fetch('https://passubackend.vercel.app/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
