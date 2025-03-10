@@ -8,16 +8,30 @@ const app = express();
 // Connect to Database
 connectDB();
 
-// Middleware
+// CORS Configuration - Fixed for Vercel deployment
 app.use(cors({
-  origin: '*', // This allows all origins - only use this in development
-  methods: ['GET', 'POST'],
-  credentials: true
-}));app.use(express.json());
+  origin: ['https://passutouristlodge.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+}));
+
+// Middleware
+app.use(express.json());
 
 // Add debugging middleware
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
+  
+  // Add CORS headers directly for preflight requests
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Origin', 'https://passutouristlodge.vercel.app');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    return res.status(200).json({});
+  }
+  
   next();
 });
 
@@ -29,12 +43,12 @@ app.get('/', (req, res) => {
 // Routes
 const bookingRoutes = require('./routes/bookings');
 app.use('/api/bookings', bookingRoutes);
-// Update your CORS configuration to be more permissive for development
 
 // Test route
 app.get('/test', (req, res) => {
   res.json({ message: "Backend is working!" });
 });
+
 // For Vercel serverless functions
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 5000;
@@ -44,4 +58,3 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = app;
- 

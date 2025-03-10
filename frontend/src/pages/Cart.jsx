@@ -44,13 +44,13 @@ const Cart = () => {
       
       console.log('Sending bookings:', formattedBookings);
     
-      const response = await fetch('https://passubackend.vercel.app/api/bookings', {
+      const response = await fetch('https://ptlpassu.vercel.app/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        mode: 'cors',  // Add this explicitly
+        credentials: 'omit', // Change from 'include' to 'omit'
         body: JSON.stringify(formattedBookings),
       });
   
@@ -61,7 +61,7 @@ const Cart = () => {
         setIsModalOpen(true);  // Show the modal on success
         setTimeout(() => {
           navigate('/masterbed', { state: { bookings: [] } });
-        }, 5000);  // Redirect after 3 seconds to allow user to see the modal
+        }, 5000);  // Redirect after 5 seconds to allow user to see the modal
       } else {
         alert(`Error: ${data.message || 'Error processing booking. Please try again.'}`);
       }
@@ -129,27 +129,24 @@ const Cart = () => {
           </button>
         </div>
       </div>
-   {/* Modal for successful booking */}
-  {/* Modal for successful booking */}
-{isModalOpen && (
-  <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-    <div className="bg-white p-8 rounded shadow-lg max-w-md mx-auto">
-      <h3 className="text-xl font-semibold text-center">Reservation Successful</h3>
-      <p className="text-center mt-4">Your booking has been successfully processed. A confirmation email has been sent to your registered email address.</p>
-      <button
-        onClick={() => setIsModalOpen(false)} 
-        className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full"
-      >
-        Close
-      </button>
-    </div>
-  </div>  // <-- Close the modal div here
-)}
-
-
       
+      {/* Modal for successful booking */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded shadow-lg max-w-md mx-auto">
+            <h3 className="text-xl font-semibold text-center">Reservation Successful</h3>
+            <p className="text-center mt-4">Your booking has been successfully processed. A confirmation email has been sent to your registered email address.</p>
+            <button
+              onClick={() => setIsModalOpen(false)} 
+              className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-     )
+  );
 };
 
 export default Cart;

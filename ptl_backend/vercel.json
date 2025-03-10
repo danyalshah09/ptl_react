@@ -1,19 +1,21 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "server.js",
-        "use": "@vercel/node"
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/server.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://passutouristlodge.vercel.app",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+        "Access-Control-Allow-Credentials": "true"
       }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/server.js"
-      }
-    ]
-<<<<<<< HEAD
-  }
-=======
-  }
->>>>>>> 7a58478d4cc0d9a94c7150ad842c4196622e61ef
+    }
+  ]
+}
