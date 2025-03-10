@@ -10,7 +10,7 @@ connectDB();
 
 // CORS Configuration - Fixed for Vercel deployment
 app.use(cors({
-  origin: ['https://passutouristlodge.vercel.app', 'http://localhost:3000'],
+  origin: ['https://ptl-react-zmw4.vercel.app', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   
   // Add CORS headers directly for preflight requests
   if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Origin', 'https://passutouristlodge.vercel.app');
+    res.header('Access-Control-Allow-Origin', 'https://ptl-react-zmw4.vercel.app');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
     res.header('Access-Control-Allow-Credentials', 'true');
