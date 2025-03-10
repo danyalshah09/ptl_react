@@ -5,7 +5,9 @@ import { useState } from "react";
 const Cart = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const { bookings } = location.state || {};
 
@@ -24,7 +26,11 @@ const Cart = () => {
   const calculateTotalCost = () => {
     return bookings.reduce((total, booking) => total + booking.subtotal, 0);
   };
+
   const handleProceedToPayment = async () => {
+    setIsLoading(true);
+    setError(null);
+    
     try {
       // Format bookings data to ensure proper types
       const formattedBookings = bookings.map(booking => ({
@@ -43,31 +49,53 @@ const Cart = () => {
       }));
       
       console.log('Sending bookings:', formattedBookings);
-    
-      const response = await fetch('https://ptlpassu.vercel.app/api/bookings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        credentials: 'omit', // Change from 'include' to 'omit'
-        body: JSON.stringify(formattedBookings),
-      });
+      
+      // Use a fallback mechanism to try multiple endpoints
+      let response;
+      
+      try {
+        // First try the production endpoint
+        response = await fetch('https://ptlpassu.vercel.app/api/bookings', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formattedBookings),
+        });
+      } catch (primaryError) {
+        console.log('Primary endpoint failed, trying backup:', primaryError);
+        
+        // If that fails, try the alternative URL (check both URL patterns)
+        response = await fetch('https://passubackend.vercel.app/api/bookings', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formattedBookings),
+        });
+      }
   
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`);
+      }
+      
       const data = await response.json();
-      console.log('Server response:', data); // Add this for debugging
+      console.log('Server response:', data);
   
       if (data.success) {
-        setIsModalOpen(true);  // Show the modal on success
+        // Show success modal
+        setIsModalOpen(true);
         setTimeout(() => {
           navigate('/masterbed', { state: { bookings: [] } });
-        }, 5000);  // Redirect after 5 seconds to allow user to see the modal
+        }, 5000);
       } else {
-        alert(`Error: ${data.message || 'Error processing booking. Please try again.'}`);
+        setError(data.message || 'Error processing booking. Please try again.');
       }
     } catch (error) {
-      console.error('Error details:', error); // Add this for debugging
-      alert(`Error: ${error.message || 'Error processing booking. Please try again.'}`);
+      console.error('Error details:', error);
+      setError(error.message || 'Error connecting to server. Please try again later.');
+    } finally {
+      setIsLoading(false);
     }
   };
   
@@ -109,23 +137,36 @@ const Cart = () => {
         <div className="text-right font-bold text-lg">
           Total Cost: {calculateTotalCost()} PKR
         </div>
+        
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4 mb-4">
+            <p>{error}</p>
+          </div>
+        )}
+        
         <div className="mt-6 flex justify-between gap-4">
           <div className="flex gap-4">
             <button
               onClick={handleNewBooking}
               className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+              disabled={isLoading}
             >
               Add New Booking
             </button>
             <button
               onClick={handleClearCart}
               className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+              disabled={isLoading}
             >
               Clear Cart
             </button>
           </div>
-          <button onClick={handleProceedToPayment} className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600">
-            Proceed to Payment
+          <button 
+            onClick={handleProceedToPayment} 
+            className={`${isLoading ? 'bg-gray-400' : 'bg-orange-500 hover:bg-orange-600'} text-white py-2 px-4 rounded`}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Processing...' : 'Proceed to Payment'}
           </button>
         </div>
       </div>
