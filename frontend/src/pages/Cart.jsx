@@ -1,4 +1,3 @@
-// Cart.jsx
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -50,50 +49,54 @@ const Cart = () => {
       
       console.log('Sending bookings:', formattedBookings);
       
-      // Use a fallback mechanism to try multiple endpoints
-      let response;
+      // Determine API endpoint based on environment
+      let apiUrl;
       
-      try {
-        // First try the production endpoint
-        response = await fetch('https://ptlpassu.vercel.app/api/bookings', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formattedBookings),
-        });
-      } catch (primaryError) {
-        console.log('Primary endpoint failed, trying backup:', primaryError);
-        
-        // If that fails, try the alternative URL (check both URL patterns)
-        response = await fetch('https://passubackend.vercel.app/api/bookings', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formattedBookings),
-        });
-      }
-  
-      if (!response.ok) {
-        throw new Error(`Server responded with status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      console.log('Server response:', data);
-  
-      if (data.success) {
-        // Show success modal
-        setIsModalOpen(true);
-        setTimeout(() => {
-          navigate('/masterbed', { state: { bookings: [] } });
-        }, 5000);
+      if (window.location.hostname === 'localhost') {
+        apiUrl = 'http://localhost:5000/api/bookings';
+        console.log('Using local API endpoint:', apiUrl);
       } else {
-        setError(data.message || 'Error processing booking. Please try again.');
+        apiUrl = 'https://passutouristlodge-backend.vercel.app/api/bookings';
+        console.log('Using production API endpoint:', apiUrl);
+      }
+      
+      // Make the API call with improved error logging
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formattedBookings),
+        });
+        
+        console.log('Response status:', response.status);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Error response body:', errorText);
+          throw new Error(`Server responded with status: ${response.status}. Details: ${errorText || 'No details provided'}`);
+        }
+        
+        const data = await response.json();
+        console.log('Server response:', data);
+    
+        if (data.success) {
+          // Show success modal
+          setIsModalOpen(true);
+          setTimeout(() => {
+            navigate('/masterbed', { state: { bookings: [] } });
+          }, 5000);
+        } else {
+          setError(data.message || 'Error processing booking. Please try again.');
+        }
+      } catch (fetchError) {
+        console.error('Fetch error:', fetchError);
+        throw fetchError;
       }
     } catch (error) {
       console.error('Error details:', error);
-      setError(error.message || 'Error connecting to server. Please try again later.');
+      setError(`Error: ${error.message || 'Unable to connect to server. Please try again later.'}`);
     } finally {
       setIsLoading(false);
     }
