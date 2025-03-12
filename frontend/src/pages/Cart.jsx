@@ -50,9 +50,15 @@ const Cart = () => {
       console.log('Sending bookings:', formattedBookings);
       
       // Updated API URL to always use the deployed backend
-      const apiUrl = 'https://passubackend.vercel.app/api/bookings';
-      console.log('Using API endpoint:', apiUrl);
+      let apiUrl;
       
+      if (window.location.hostname === 'localhost') {
+        apiUrl = 'http://localhost:5000/api/bookings';
+        console.log('Using local API endpoint:', apiUrl);
+      } else {
+        apiUrl = 'https://passubackend.vercel.app/api/bookings';
+        console.log('Using production API endpoint:', apiUrl);
+      }
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
