@@ -65,8 +65,6 @@ const Cart = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formattedBookings),
-        // Add this for cross-origin requests with credentials
-        credentials: 'include'
       });
       
       console.log('Response status:', response.status);
