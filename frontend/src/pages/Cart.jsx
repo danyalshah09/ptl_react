@@ -49,50 +49,39 @@ const Cart = () => {
       
       console.log('Sending bookings:', formattedBookings);
       
-      // Determine API endpoint based on environment
-      let apiUrl;
+      // Updated API URL to always use the deployed backend
+      const apiUrl = 'https://passubackend.vercel.app/api/bookings';
+      console.log('Using API endpoint:', apiUrl);
       
-      if (window.location.hostname === 'localhost') {
-        apiUrl = 'http://localhost:5000/api/bookings';
-        console.log('Using local API endpoint:', apiUrl);
-      } else {
-        apiUrl = 'https://passutouristlodge-backend.vercel.app/api/bookings';
-        console.log('Using production API endpoint:', apiUrl);
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formattedBookings),
+        // Add this for cross-origin requests with credentials
+        credentials: 'include'
+      });
+      
+      console.log('Response status:', response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Error response body:', errorText);
+        throw new Error(`Server responded with status: ${response.status}. Details: ${errorText || 'No details provided'}`);
       }
       
-      // Make the API call with improved error logging
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formattedBookings),
-        });
-        
-        console.log('Response status:', response.status);
-        
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('Error response body:', errorText);
-          throw new Error(`Server responded with status: ${response.status}. Details: ${errorText || 'No details provided'}`);
-        }
-        
-        const data = await response.json();
-        console.log('Server response:', data);
-    
-        if (data.success) {
-          // Show success modal
-          setIsModalOpen(true);
-          setTimeout(() => {
-            navigate('/masterbed', { state: { bookings: [] } });
-          }, 5000);
-        } else {
-          setError(data.message || 'Error processing booking. Please try again.');
-        }
-      } catch (fetchError) {
-        console.error('Fetch error:', fetchError);
-        throw fetchError;
+      const data = await response.json();
+      console.log('Server response:', data);
+  
+      if (data.success) {
+        // Show success modal
+        setIsModalOpen(true);
+        setTimeout(() => {
+          navigate('/masterbed', { state: { bookings: [] } });
+        }, 5000);
+      } else {
+        setError(data.message || 'Error processing booking. Please try again.');
       }
     } catch (error) {
       console.error('Error details:', error);

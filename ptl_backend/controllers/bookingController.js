@@ -1,5 +1,5 @@
 const Booking = require('../models/Booking');
-const transporter = require('../config/email');
+const createTransporter = require('../config/email');
 const createEmailContent = require('../utils/emailTemplate');
 
 exports.createBooking = async (req, res) => {
@@ -12,18 +12,27 @@ exports.createBooking = async (req, res) => {
       const savedBooking = await booking.save();
       savedBookings.push(savedBooking);
 
-      // Send confirmation email
-      const mailOptions = {
-        from: {
-          name: 'Passu Tourist Lodge',
-          address: process.env.EMAIL_USER
-        },
-        to: booking.email,
-        subject: 'Thank You for choosing Passu Tourist Lodge.Your Hotel Booking Confirmation',
-        html: createEmailContent(booking)
-      };
+      try {
+        // Create a new transporter for each email
+        const transporter = createTransporter();
+        
+        // Send confirmation email
+        const mailOptions = {
+          from: {
+            name: 'Passu Tourist Lodge',
+            address: process.env.EMAIL_USER
+          },
+          to: booking.email,
+          subject: 'Thank You for choosing Passu Tourist Lodge. Your Hotel Booking Confirmation',
+          html: createEmailContent(booking)
+        };
 
-      await transporter.sendMail(mailOptions);
+        await transporter.sendMail(mailOptions);
+        console.log(`Email sent to ${booking.email}`);
+      } catch (emailError) {
+        console.error('Error sending email:', emailError);
+        // Continue with the booking process even if email fails
+      }
     }
     
     res.status(201).json({
