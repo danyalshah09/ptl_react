@@ -5,69 +5,34 @@ const connectDB = require('./config/db');
 
 const app = express();
 
+// Connect to Database
+connectDB();
+
 // Middleware
-app.use(cors({
-  origin: ['https://passutouristlodge.vercel.app', 'http://localhost:3000'],
-  credentials: true,
-  methods: ['GET', 'POST', 'OPTIONS']
-}));
+app.use(cors());
 app.use(express.json());
 
 // Routes
 const bookingRoutes = require('./routes/bookings');
+app.use('/api/bookings', bookingRoutes);
 
-// Simple health check that doesn't require DB connection
-app.get('/', (req, res) => {
-  res.status(200).send('Server is running');
-});
-
+// Test route
 app.get('/api/test', (req, res) => {
   res.json({ message: "Backend is working!" });
 });
 
-// Add the database test route here
-app.get('/api/db-test', async (req, res) => {
-  const startTime = Date.now();
-  try {
-    await connectDB();
-    const connectionTime = Date.now() - startTime;
-    res.json({ 
-      success: true, 
-      message: "Database connection successful", 
-      connectionTimeMs: connectionTime 
-    });
-  } catch (error) {
-    const connectionTime = Date.now() - startTime;
-    res.status(500).json({ 
-      success: false, 
-      message: "Database connection failed", 
-      error: error.message,
-      connectionTimeMs: connectionTime 
-    });
-  }
+// Home route
+app.get('/', (req, res) => {
+  res.send('Backend server is running');
 });
 
-// Connect DB only for routes that need it
-app.use('/api/bookings', async (req, res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (error) {
-    console.error("Database connection error:", error);
-    res.status(500).json({ 
-      success: false, 
-      message: "Database connection failed. Please try again later."
-    });
-  }
-}, bookingRoutes);
-
-// Only start server when running locally
+// For local development
+const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
 }
 
-// Export for serverless
+// Export for Vercel
 module.exports = app;
