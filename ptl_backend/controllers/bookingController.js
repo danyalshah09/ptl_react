@@ -7,16 +7,26 @@ exports.createBooking = async (req, res) => {
     const bookings = Array.isArray(req.body) ? req.body : [req.body];
     const savedBookings = [];
 
+    // First, save all bookings to the database
     for (const bookingData of bookings) {
       const booking = new Booking(bookingData);
       const savedBooking = await booking.save();
       savedBookings.push(savedBooking);
-
+    }
+    
+    // Respond to the client immediately after saving bookings
+    res.status(201).json({
+      success: true,
+      message: 'Bookings created successfully',
+      data: savedBookings
+    });
+    
+    // Then attempt to send emails asynchronously (after response is sent)
+    // This won't block the function from returning
+    for (const booking of savedBookings) {
       try {
-        // Create a new transporter for each email
         const transporter = createTransporter();
         
-        // Send confirmation email
         const mailOptions = {
           from: {
             name: 'Passu Tourist Lodge',
@@ -27,19 +37,13 @@ exports.createBooking = async (req, res) => {
           html: createEmailContent(booking)
         };
 
-        await transporter.sendMail(mailOptions);
-        console.log(`Email sent to ${booking.email}`);
+        transporter.sendMail(mailOptions)
+          .then(() => console.log(`Email sent to ${booking.email}`))
+          .catch(emailError => console.error('Error sending email:', emailError));
       } catch (emailError) {
-        console.error('Error sending email:', emailError);
-        // Continue with the booking process even if email fails
+        console.error('Error setting up email:', emailError);
       }
     }
-    
-    res.status(201).json({
-      success: true,
-      message: 'Bookings created successfully',
-      data: savedBookings
-    });
   } catch (error) {
     console.error('Booking error:', error);
     res.status(500).json({
