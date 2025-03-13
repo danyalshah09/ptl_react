@@ -81,7 +81,7 @@ const createEmailContent = (booking) => {
         <ul>
           <li>Check-in time: 2:00 PM</li>
           <li>Check-out time: 12:00 PM</li>
-          <li>We accept cash on deveivery upon check-in</li>
+          <li>We ACCEPT Cash on delievery *ONLY</li>
         </ul>
 
         <p>If you need to modify or cancel your reservation, please contact us at least 24 hours before your check-in date.</p>
