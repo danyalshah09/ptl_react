@@ -56,7 +56,7 @@ const Cart = () => {
         apiUrl = 'http://localhost:5000/api/bookings';
         console.log('Using local API endpoint:', apiUrl);
       } else {
-        apiUrl = 'https://passubackend.vercel.app/api/bookings';
+        apiUrl = 'https://ptl-react.onrender.com/api/bookings';
         console.log('Using production API endpoint:', apiUrl);
       }
       const response = await fetch(apiUrl, {
