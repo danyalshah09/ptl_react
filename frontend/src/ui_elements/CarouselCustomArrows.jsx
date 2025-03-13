@@ -44,6 +44,51 @@ const CustomCarouselArrows = () => {
 
   return (
     <div className="w-full md:w-4/5 lg:w-3/5 relative mx-auto">
+      {/* Fixed position navigation arrows */}
+      <div className="absolute inset-y-0 left-0 z-10 flex items-center">
+        <button 
+          onClick={prevSlide}
+          className="group p-1 sm:p-2 ml-2 sm:ml-4 flex justify-center items-center border border-solid border-white w-8 h-8 sm:w-10 md:w-12 sm:h-10 md:h-12 transition-all duration-500 rounded-full hover:bg-white bg-black bg-opacity-40"
+        >
+          <svg 
+            className="h-4 w-4 sm:h-5 sm:w-5 text-white group-hover:text-black" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 16 16" 
+            fill="none"
+          >
+            <path 
+              d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" 
+              stroke="currentColor" 
+              strokeWidth="1.6" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+            />
+          </svg>
+        </button>
+      </div>
+      
+      <div className="absolute inset-y-0 right-0 z-10 flex items-center">
+        <button 
+          onClick={nextSlide}
+          className="group p-1 sm:p-2 mr-2 sm:mr-4 flex justify-center items-center border border-solid border-white w-8 h-8 sm:w-10 md:w-12 sm:h-10 md:h-12 transition-all duration-500 rounded-full hover:bg-white bg-black bg-opacity-40"
+        >
+          <svg 
+            className="h-4 w-4 sm:h-5 sm:w-5 text-white group-hover:text-black" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 16 16" 
+            fill="none"
+          >
+            <path 
+              d="M5.99984 4.00012L10 8.00029L5.99748 12.0028" 
+              stroke="currentColor" 
+              strokeWidth="1.6" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+            />
+          </svg>
+        </button>
+      </div>
+      
       <div className="relative overflow-hidden">
         <div 
           className="flex transition-transform duration-500 ease-in-out" 
@@ -57,54 +102,11 @@ const CustomCarouselArrows = () => {
                   alt={slide.title}
                   className="w-full h-full object-cover"
                 />
-                {/* Modified title container - adjusted padding on mobile */}
-                <div className="absolute bottom-0 left-0 right-0 px-4 py-2 sm:py-4 bg-black bg-opacity-40 flex justify-between items-center">
-                  <h3 className="text-white text-sm lg:text-xl font-semibold pr-20 sm:pr-0">
+                {/* Title container at the bottom */}
+                <div className="absolute bottom-0 left-0 right-0 px-4 py-2 sm:py-4 bg-black bg-opacity-40">
+                  <h3 className="text-white text-sm lg:text-xl font-semibold">
                     {slide.title}
                   </h3>
-                  
-                  {/* Navigation controls moved inside the title bar for better mobile layout */}
-                  <div className="flex gap-2 absolute right-4 bottom-2 sm:bottom-4">
-                    <button 
-                      onClick={prevSlide}
-                      className="group p-1 sm:p-2 flex justify-center items-center border border-solid border-white w-8 h-8 sm:w-10 md:w-12 sm:h-10 md:h-12 transition-all duration-500 rounded-full hover:bg-white bg-black bg-opacity-40"
-                    >
-                      <svg 
-                        className="h-4 w-4 sm:h-5 sm:w-5 text-white group-hover:text-black" 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        viewBox="0 0 16 16" 
-                        fill="none"
-                      >
-                        <path 
-                          d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" 
-                          stroke="currentColor" 
-                          strokeWidth="1.6" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                        />
-                      </svg>
-                    </button>
-                    
-                    <button 
-                      onClick={nextSlide}
-                      className="group p-1 sm:p-2 flex justify-center items-center border border-solid border-white w-8 h-8 sm:w-10 md:w-12 sm:h-10 md:h-12 transition-all duration-500 rounded-full hover:bg-white bg-black bg-opacity-40"
-                    >
-                      <svg 
-                        className="h-4 w-4 sm:h-5 sm:w-5 text-white group-hover:text-black" 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        viewBox="0 0 16 16" 
-                        fill="none"
-                      >
-                        <path 
-                          d="M5.99984 4.00012L10 8.00029L5.99748 12.0028" 
-                          stroke="currentColor" 
-                          strokeWidth="1.6" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                        />
-                      </svg>
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
