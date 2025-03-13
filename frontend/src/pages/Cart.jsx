@@ -11,7 +11,7 @@ const Cart = () => {
   const { bookings } = location.state || {};
 
   if (!bookings || bookings.length === 0) {
-    return <div className="p-6 text-center">No bookings in the cart!</div>;
+    return <div className="p-4 md:p-6 text-center">No bookings in the cart!</div>;
   }
 
   const handleNewBooking = () => {
@@ -96,62 +96,110 @@ const Cart = () => {
   };
   
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold text-center mb-6">Your Cart</h2>
-      <div className="bg-white p-4 shadow-md">
-        <table className="table-auto w-full mb-4">
-          <thead>
-            <tr>
-              <th className="border px-4 py-2">Product</th>
-              <th className="border px-4 py-2">Price</th>
-              <th className="border px-4 py-2">Nights</th>
-              <th className="border px-4 py-2">Rooms</th>
-              <th className="border px-4 py-2">Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookings.map((booking, index) => (
-              <tr key={index}>
-                <td className="border px-4 py-2">
-                  <strong>{booking.category}</strong>
-                  <div>Name: {booking.name}</div>
-                  <div>Email: {booking.email}</div>
-                  <div>Phone: {booking.phone}</div>
-                  <div>Check-in: {booking.checkin}</div>
-                  <div>Check-out: {booking.checkout}</div>
-                  <div>Adults: {booking.adults}</div>
-                  <div>Children: {booking.children}</div>
-                </td>
-                <td className="border px-4 py-2">{booking.price}</td>
-                <td className="border px-4 py-2">{booking.nights}</td>
-                <td className="border px-4 py-2">{booking.rooms}</td>
-                <td className="border px-4 py-2">{booking.subtotal}</td>
+    <div className="p-4 md:p-6">
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-4 md:mb-6">Your Cart</h2>
+      <div className="bg-white p-3 md:p-4 shadow-md rounded">
+        {/* Desktop View - Table */}
+        <div className="hidden md:block overflow-x-auto">
+          <table className="table-auto w-full mb-4">
+            <thead>
+              <tr>
+                <th className="border px-2 py-2">Product</th>
+                <th className="border px-2 py-2">Price</th>
+                <th className="border px-2 py-2">Nights</th>
+                <th className="border px-2 py-2">Rooms</th>
+                <th className="border px-2 py-2">Subtotal</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="text-right font-bold text-lg">
+            </thead>
+            <tbody>
+              {bookings.map((booking, index) => (
+                <tr key={index}>
+                  <td className="border px-2 py-2">
+                    <strong>{booking.category}</strong>
+                    <div>Name: {booking.name}</div>
+                    <div>Email: {booking.email}</div>
+                    <div>Phone: {booking.phone}</div>
+                    <div>Check-in: {booking.checkin}</div>
+                    <div>Check-out: {booking.checkout}</div>
+                    <div>Adults: {booking.adults}</div>
+                    <div>Children: {booking.children}</div>
+                  </td>
+                  <td className="border px-2 py-2">{booking.price}</td>
+                  <td className="border px-2 py-2">{booking.nights}</td>
+                  <td className="border px-2 py-2">{booking.rooms}</td>
+                  <td className="border px-2 py-2">{booking.subtotal}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
+        {/* Mobile View - Cards */}
+        <div className="md:hidden space-y-4">
+          {bookings.map((booking, index) => (
+            <div key={index} className="border rounded p-3 mb-3">
+              <div className="font-bold text-lg mb-2">{booking.category}</div>
+              
+              <div className="grid grid-cols-2 gap-1 mb-2 text-sm">
+                <div>Name:</div>
+                <div>{booking.name}</div>
+                
+                <div>Email:</div>
+                <div className="truncate">{booking.email}</div>
+                
+                <div>Phone:</div>
+                <div>{booking.phone}</div>
+                
+                <div>Check-in:</div>
+                <div>{booking.checkin}</div>
+                
+                <div>Check-out:</div>
+                <div>{booking.checkout}</div>
+                
+                <div>Adults:</div>
+                <div>{booking.adults}</div>
+                
+                <div>Children:</div>
+                <div>{booking.children}</div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-2 mt-3 pt-2 border-t">
+                <div className="text-sm">
+                  <div>Price: {booking.price}</div>
+                  <div>Nights: {booking.nights}</div>
+                  <div>Rooms: {booking.rooms}</div>
+                </div>
+                <div className="text-right">
+                  <div className="font-bold">Subtotal:</div>
+                  <div>{booking.subtotal} PKR</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="text-right font-bold text-lg my-4">
           Total Cost: {calculateTotalCost()} PKR
         </div>
         
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4 mb-4">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded mt-3 mb-3 text-sm md:text-base">
             <p>{error}</p>
           </div>
         )}
         
-        <div className="mt-6 flex justify-between gap-4">
-          <div className="flex gap-4">
+        <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-between gap-3 md:gap-4">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
             <button
               onClick={handleNewBooking}
-              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+              className="bg-gray-500 text-white py-2 px-3 rounded hover:bg-gray-600 text-sm md:text-base flex-1 md:flex-none"
               disabled={isLoading}
             >
               Add New Booking
             </button>
             <button
               onClick={handleClearCart}
-              className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+              className="bg-red-500 text-white py-2 px-3 rounded hover:bg-red-400 text-sm md:text-base flex-1 md:flex-none"
               disabled={isLoading}
             >
               Clear Cart
@@ -159,7 +207,7 @@ const Cart = () => {
           </div>
           <button 
             onClick={handleProceedToPayment} 
-            className={`${isLoading ? 'bg-gray-400' : 'bg-orange-500 hover:bg-orange-600'} text-white py-2 px-4 rounded`}
+            className={`${isLoading ? 'bg-gray-400' : 'bg-orange-500 hover:bg-orange-600'} text-white py-2 px-3 rounded text-sm md:text-base w-full md:w-auto mt-2 md:mt-0`}
             disabled={isLoading}
           >
             {isLoading ? 'Processing...' : 'Proceed to Payment'}
@@ -169,10 +217,10 @@ const Cart = () => {
       
       {/* Modal for successful booking */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-          <div className="bg-white p-8 rounded shadow-lg max-w-md mx-auto">
-            <h3 className="text-xl font-semibold text-center">Reservation Successful</h3>
-            <p className="text-center mt-4">Your booking has been successfully processed. A confirmation email has been sent to your registered email address.</p>
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 p-4">
+          <div className="bg-white p-5 md:p-8 rounded shadow-lg max-w-md mx-auto w-full">
+            <h3 className="text-lg md:text-xl font-semibold text-center">Reservation Successful</h3>
+            <p className="text-center mt-3 md:mt-4 text-sm md:text-base">Your booking has been successfully processed. A confirmation email has been sent to your registered email address.</p>
             <button
               onClick={() => setIsModalOpen(false)} 
               className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full"
