@@ -55,12 +55,12 @@ const createEmailContent = (booking) => {
         <h1>Booking Confirmation</h1>
         <p>Thank you for choosing Passu Tourist Lodge!</p>
       </div>
-      
+
       <div class="content">
         <p>Dear ${booking.name},</p>
-        
+
         <p>We are pleased to confirm your booking at our hotel. Below are your booking details:</p>
-        
+
         <div class="booking-details">
           <h3>Booking Information</h3>
           <p><strong>Booking Reference:</strong> ${Math.random().toString(36).substring(7).toUpperCase()}</p>
@@ -83,7 +83,7 @@ const createEmailContent = (booking) => {
           <li>Check-out time: 12:00 PM</li>
           <li>We accept cash on deveivery upon check-in</li>
         </ul>
-        
+
         <p>If you need to modify or cancel your reservation, please contact us at least 24 hours before your check-in date.</p>
         <p>Please <strong>Note</strong>This is not the final confirmation.Our team will reach you out through the number you have provided in order to Reserve your Room.</p>
         <p>For any questions or special requests, please don't hesitate to contact us:</p>
