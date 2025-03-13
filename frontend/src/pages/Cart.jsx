@@ -97,6 +97,24 @@ const Cart = () => {
   
   return (
     <div className="p-4 md:p-6">
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div className="fixed inset-0 flex flex-col justify-center items-center bg-black bg-opacity-60 z-50">
+          <div className="flex justify-center items-center mb-4">
+            <div className="relative w-20 h-20">
+              {/* Spinner circles */}
+              <div className="absolute inset-0 border-4 border-t-orange-500 border-r-orange-300 border-b-orange-200 border-l-orange-400 rounded-full animate-spin"></div>
+              <div className="absolute inset-2 border-4 border-t-blue-500 border-r-blue-300 border-b-blue-200 border-l-blue-400 rounded-full animate-spin animate-reverse"></div>
+              <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+                <div className="w-3 h-3 bg-white rounded-full"></div>
+              </div>
+            </div>
+          </div>
+          <div className="text-white font-medium text-lg">Processing Payment...</div>
+          <div className="text-white text-sm mt-2">Please wait while we confirm your reservation</div>
+        </div>
+      )}
+
       <h2 className="text-xl md:text-2xl font-bold text-center mb-4 md:mb-6">Your Cart</h2>
       <div className="bg-white p-3 md:p-4 shadow-md rounded">
         {/* Desktop View - Table */}
@@ -207,7 +225,7 @@ const Cart = () => {
           </div>
           <button 
             onClick={handleProceedToPayment} 
-            className={`${isLoading ? 'bg-gray-400' : 'bg-orange-500 hover:bg-orange-600'} text-white py-2 px-3 rounded text-sm md:text-base w-full md:w-auto mt-2 md:mt-0`}
+            className={`${isLoading ? 'bg-gray-400' : 'bg-orange-500 hover:bg-orange-600'} text-white py-2 px-3 rounded text-sm md:text-base w-full md:w-auto mt-2 md:mt-0 transition-colors duration-300`}
             disabled={isLoading}
           >
             {isLoading ? 'Processing...' : 'Proceed to Payment'}
@@ -219,6 +237,13 @@ const Cart = () => {
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 p-4">
           <div className="bg-white p-5 md:p-8 rounded shadow-lg max-w-md mx-auto w-full">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+            </div>
             <h3 className="text-lg md:text-xl font-semibold text-center">Reservation Successful</h3>
             <p className="text-center mt-3 md:mt-4 text-sm md:text-base">Your booking has been successfully processed. A confirmation email has been sent to your registered email address.</p>
             <button
