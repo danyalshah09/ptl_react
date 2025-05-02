@@ -5,32 +5,54 @@
     <link rel="icon" type="image/svg+xml" href="/ptl_icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Passu Tourist Lodge</title>
-    <!-- Google Fonts link  -->
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/main.jsx" as="script" />
+    <link rel="preload" href="/assets/images/ptl_old.webp" as="image" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    
+    <!-- Google Fonts with font display strategy -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&display=swap&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <!-- Fallback for font loading -->
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Dancing+Script&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
-    <!-- font awesome link  -->
+    <!-- Font awesome with async loading -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      media="print" 
+      onload="this.media='all'"
     />
   </head>
 
   <body>
     <div id="root"></div>
    
-
     <script type="module" src="/src/main.jsx"></script>
-   
-    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2024/12/02/20/20241202205224-S1IQMZDB.js"></script>
-<script src="https://static.elfsight.com/platform/platform.js" async></script>
-  
-    </body>
+    
+    <!-- Defer non-critical scripts -->
+    <script defer src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script defer src="https://files.bpcontent.cloud/2024/12/02/20/20241202205224-S1IQMZDB.js"></script>
+    <script defer src="https://static.elfsight.com/platform/platform.js"></script>
+  </body>
 </html>
