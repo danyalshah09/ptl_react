@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "tailwindcss";  // Import Tailwind CSS
 import autoprefixer from "autoprefixer";  // Import Autoprefixer
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
@@ -10,6 +11,13 @@ export default defineConfig({
       plugins: [tailwindcss(), autoprefixer()],  // Use Tailwind CSS and Autoprefixer
     },
   },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      '@assets': resolve(__dirname, 'public/assets'),
+    },
+  },
+  publicDir: 'public',
   build: {
     minify: 'terser',
     terserOptions: {
@@ -31,7 +39,14 @@ export default defineConfig({
           const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
           return `assets/${fileName}-[hash].js`;
         },
-        assetFileNames: 'assets/[name]-[hash][extname]',
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/\.(png|jpe?g|gif|webp|svg)$/.test(assetInfo.name)) {
+            return `assets/images/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
       },
     },
     chunkSizeWarningLimit: 1000,
