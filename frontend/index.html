@@ -2,41 +2,49 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/ptl_icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Passu Tourist Lodge</title>
     
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/src/main.jsx" as="script" />
-    <link rel="preload" href="/assets/images/ptl_old.webp" as="image" />
-    
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Performance optimizations -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     
-    <!-- Google Fonts with font display strategy -->
+    <!-- Preload critical assets -->
+    <link rel="preload" as="script" href="/src/main.jsx" fetchpriority="high" />
+    <link rel="preload" as="image" href="/assets/images/ptl_old.webp" fetchpriority="high" />
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/alegreya/v40/4UaBrEBBsBhlBjvfkSLhx6g.woff2" type="font/woff2" crossorigin />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/ptl_icon.svg" />
+    
+    <!-- Inline critical CSS will be injected by main.jsx -->
+    
+    <!-- Font loading optimization -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&display=swap&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&display=swap&text=PassuTouritLodge"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+      fetchpriority="high"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap&text=ExperienceComfortandSerenityUnderMajesticPassuCones"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <!-- Fallback for font loading -->
+    <!-- Font fallback -->
     <noscript>
       <link
         href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Dancing+Script&display=swap"
         rel="stylesheet"
       />
     </noscript>
-
-    <!-- Font awesome with async loading -->
+    
+    <!-- Font Awesome - load asynchronously with reduced subset -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -46,9 +54,25 @@
   </head>
 
   <body>
-    <div id="root"></div>
-   
+    <!-- Inline loading state for immediate visual feedback -->
+    <div id="root">
+      <div style="display:flex;justify-content:center;align-items:center;height:100vh">
+        <div style="border:3px solid #f3f3f3;border-top:3px solid #3498db;border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite"></div>
+      </div>
+    </div>
+    
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Preload critical above-the-fold image -->
+    <script>
+      const preloadHeroImage = new Image();
+      preloadHeroImage.src = '/assets/images/ptl_old.webp';
+    </script>
+    
+    <!-- Keyframes for spinner animation -->
+    <style>
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
     
     <!-- Defer non-critical scripts -->
     <script defer src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>

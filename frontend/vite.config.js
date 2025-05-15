@@ -24,8 +24,35 @@ export default defineConfig({
           vendor: ['react', 'react-dom', 'react-router-dom'],
           ui: ['@headlessui/react', '@heroicons/react', '@material-tailwind/react'],
         },
+        // Optimize chunk loading order for FCP
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : [];
+          const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
+          return `assets/${fileName}-[hash].js`;
+        },
+        assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
     chunkSizeWarningLimit: 1000,
+    // Enable source maps for production debugging
+    sourcemap: false,
+    // Optimize CSS output
+    cssCodeSplit: true,
+    // Enable aggressive asset optimization
+    assetsInlineLimit: 4096,
+  },
+  // Enable HTTP/2 push hints for preloading
+  server: {
+    fs: {
+      strict: true,
+    },
+    headers: {
+      'Cache-Control': 'public, max-age=31536000',
+    },
+  },
+  // Experimental features for faster builds
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
 });

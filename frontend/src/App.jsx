@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./pages/Footer";
+import NavPreload from "./utils/NavPreload";
 
 // Lazy load components
 const Home = lazy(() => import("./pages/Home"));
@@ -17,7 +18,7 @@ const Cart = lazy(() => import("./pages/Cart"));
 const About = lazy(() => import("./pages/About"));
 const Location = lazy(() => import("./pages/Location"));
 
-// Loading fallback
+// Loading fallback - optimized for FCP
 const LoadingFallback = () => (
   <div className="flex items-center justify-center h-screen">
     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
@@ -29,6 +30,7 @@ function App() {
     <>
       <Router>
         <Navbar />
+        <NavPreload />
         <Suspense fallback={<LoadingFallback />}>
           <Routes>
             <Route path="/" element={<Home />} />

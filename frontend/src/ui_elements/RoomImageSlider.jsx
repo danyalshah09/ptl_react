@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { OptimizedImage } from "../utils/imageOptimizer";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -15,10 +16,10 @@ const RoomImageSlider = ({ roomType }) => {
       "/assets/rooms/masterbed.jpg",
     ],
     twinbed: [
-      "/assets/rooms/twinbed4.webp",
+      "/assets/rooms/twinbed4.jpg",
       "/assets/rooms/twinbed1.jpg",
       "/assets/rooms/twinbed2.jpg",
-      "/assets/rooms/twinbed3.webp"
+      "/assets/rooms/twinbed3.jpg"
     ],
     triplebed: [
       "/assets/rooms/triplebed.jpg",
@@ -60,10 +61,15 @@ const RoomImageSlider = ({ roomType }) => {
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
-            <img
+            <OptimizedImage
               src={image}
-              alt={`Slide ${index + 1}`}
+              alt={`${roomType} Room View ${index + 1}`}
               className="w-full h-[700px] object-contain rounded-lg"
+              width={1200}
+              height={800}
+              priority={index === 0}
+              loading={index < 2 ? "eager" : "lazy"}
+              objectFit="contain"
             />
           </SwiperSlide>
         ))}
