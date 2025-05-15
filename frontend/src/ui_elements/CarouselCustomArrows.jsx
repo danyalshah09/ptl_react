@@ -80,13 +80,20 @@ const CustomCarouselArrows = () => {
   }, [currentSlide, isVisible]);
 
   return (
+<<<<<<< HEAD
     <div className="w-full md:w-4/5 lg:w-3/5 relative mx-auto" ref={carouselRef}>
+=======
+    <div className="w-full md:w-4/5 lg:w-3/5 relative mx-auto">
+>>>>>>> b77fc23204c9e832a523a2709adff95bd1f62e75
       {/* Fixed position navigation arrows */}
       <div className="absolute inset-y-0 left-0 z-10 flex items-center">
         <button 
           onClick={prevSlide}
           className="group p-1 sm:p-2 ml-2 sm:ml-4 flex justify-center items-center border border-solid border-white w-8 h-8 sm:w-10 md:w-12 sm:h-10 md:h-12 transition-all duration-500 rounded-full hover:bg-white bg-black bg-opacity-40"
+<<<<<<< HEAD
           aria-label="Previous slide"
+=======
+>>>>>>> b77fc23204c9e832a523a2709adff95bd1f62e75
         >
           <svg 
             className="h-4 w-4 sm:h-5 sm:w-5 text-white group-hover:text-black" 
@@ -109,7 +116,10 @@ const CustomCarouselArrows = () => {
         <button 
           onClick={nextSlide}
           className="group p-1 sm:p-2 mr-2 sm:mr-4 flex justify-center items-center border border-solid border-white w-8 h-8 sm:w-10 md:w-12 sm:h-10 md:h-12 transition-all duration-500 rounded-full hover:bg-white bg-black bg-opacity-40"
+<<<<<<< HEAD
           aria-label="Next slide"
+=======
+>>>>>>> b77fc23204c9e832a523a2709adff95bd1f62e75
         >
           <svg 
             className="h-4 w-4 sm:h-5 sm:w-5 text-white group-hover:text-black" 
@@ -136,6 +146,7 @@ const CustomCarouselArrows = () => {
           {slides.map((slide, index) => (
             <div key={slide.id} className="w-full flex-shrink-0">
               <div className="relative h-64 sm:h-80 md:h-96 w-full">
+<<<<<<< HEAD
                 {/* Only render the current slide and adjacent slides */}
                 {(Math.abs(index - currentSlide) <= 1 || index === slides.length - 1 && currentSlide === 0 || index === 0 && currentSlide === slides.length - 1) && (
                   <picture>
@@ -151,6 +162,13 @@ const CustomCarouselArrows = () => {
                     />
                   </picture>
                 )}
+=======
+                <img 
+                  src={slide.imageUrl}
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                />
+>>>>>>> b77fc23204c9e832a523a2709adff95bd1f62e75
                 {/* Title container at the bottom */}
                 <div className="absolute bottom-0 left-0 right-0 px-4 py-2 sm:py-4 bg-black bg-opacity-40">
                   <h3 className="text-white text-sm lg:text-xl font-semibold">
