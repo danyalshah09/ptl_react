@@ -6,7 +6,7 @@ const Intro = () => {
       <div className="gap-8 items-center py-8 px-4 mx-auto max-w-5xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-12">
         <div className="font-light text-gray-500 sm:text-lg">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold">
-            Hello to Passu Tourist Lodge
+            Hello to Hello
           </h2>
           <p className="mb-4">
             Experience breathtaking views of the Passu Cones from our cozy lodge
