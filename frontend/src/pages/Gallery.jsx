@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { OptimizedImage, preloadCriticalImages } from "../utils/imageOptimizer";
+import { OptimizedImage, preloadCriticalImages } from "../utils/imageOptimizer.jsx";
 
 const Gallery = () => {
   const images = [

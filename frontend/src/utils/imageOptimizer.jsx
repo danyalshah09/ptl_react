@@ -13,8 +13,9 @@ export const getWebPPath = (src) => {
   const lastDotIndex = src.lastIndexOf('.');
   if (lastDotIndex === -1) return null;
   
-  // Create the WebP path
-  return `${src.substring(0, lastDotIndex)}.webp`;
+  // Create the WebP path with a different filename to avoid conflicts
+  const basePath = src.substring(0, lastDotIndex);
+  return `${basePath}_webp.webp`;
 };
 
 // Generate srcset with both original format and WebP
