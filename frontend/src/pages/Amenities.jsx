@@ -43,7 +43,7 @@ const Amenities = () => {
         {/* Changed from h1 to h2 - assuming this is a section within a page */}
         <h2 className="text-4xl font-bold text-center text-gray-600 mb-4">
           Hotel Amenities & Services
-        </h1>
+        </h2>
         <p className="text-center text-gray-600 mb-10">
           Experience unparalleled comfort and convenience during your stay
         </p>
