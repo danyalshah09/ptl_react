@@ -4,7 +4,7 @@ const MapSection = () => {
   return (
     <section id="map_section_container" className="py-12 text-center">
    <h2 className="text-3xl font-bold text-center mb-8">
-          Find Us <span className="text-orange-500">Here</span>
+          Find Us <span className="text-orange-700">Here</span>
         </h2>
       <div className="map-container relative max-w-4xl w-full h-screen border-0 mx-auto overflow-hidden shadow-xl">
         <iframe

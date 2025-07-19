@@ -40,9 +40,9 @@ const Amenities = () => {
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center text-gray-600 mb-4">
+        <h1 className="text-4xl font-bold text-center text-gray-600 mb-4">
           Hotel Amenities & Services
-        </h2>
+        </h1>
         <p className="text-center text-gray-600 mb-10">
           Experience unparalleled comfort and convenience during your stay
         </p>
@@ -56,9 +56,9 @@ const Amenities = () => {
               }`}
             >
               {item.icon}
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <h2 className="text-xl font-semibold text-white mb-3">
                 {item.title}
-              </h3>
+              </h2>
               <ul className="space-y-2 text-white">
                 {item.list.map((amenity, idx) => (
                   <li key={idx} className="border-b last:border-none py-2">
