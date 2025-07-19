@@ -23,7 +23,7 @@ const Navbar = () => {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=36.4918&lon=74.8553&appid=55e9528c3c2564b58091de5170b028bf&units=metric`
         );
-        
+
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         setWeather(data);
@@ -50,7 +50,7 @@ const Navbar = () => {
             e.target.style.display = 'none';
           }}
         />
-        <span className="text-lg font-medium text-orange-500 whitespace-nowrap">
+        <span className="text-lg font-medium text-orange-700 whitespace-nowrap">
           {Math.round(weather?.main?.temp)}°C
         </span>
       </div>
@@ -58,23 +58,23 @@ const Navbar = () => {
   };
 
   return (
-    <nav 
+    <nav
       className={`w-full transition-all duration-300 z-50 ${
-        isSticky 
-          ? 'fixed top-0 left-0 border-b border-gray-200 bg-white/95 backdrop-blur-sm shadow-md' 
+        isSticky
+          ? 'fixed top-0 left-0 border-b border-gray-200 bg-white/95 backdrop-blur-sm shadow-md'
           : 'relative bg-white/80 backdrop-blur-sm border-b border-gray-200'
       }`}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-4 py-3">
         {/* Logo - Increased size */}
         <Link to="/" className="flex items-center">
-          <img 
-            src={import.meta.env.VITE_LOGO_PATH} 
-            className={`transition-all duration-300 ${isSticky ? 'h-20' : 'h-24'} w-auto`} 
-            alt="PTL Logo" 
+          <img
+            src={import.meta.env.VITE_LOGO_PATH}
+            className={`transition-all duration-300 ${isSticky ? 'h-20' : 'h-24'} w-auto`}
+            alt="PTL Logo"
           />
         </Link>
-        
+
         {/* Mobile Right Section */}
         <div className="flex items-center gap-2 md:hidden">
           {renderWeather()}
@@ -93,12 +93,12 @@ const Navbar = () => {
         </div>
 
         {/* Desktop and Mobile Navigation */}
-        <div 
+        <div
           className={`w-full md:items-center md:w-auto md:block ${
             isOpen ? "block" : "hidden"
           } ${
-            isOpen && !isSticky 
-              ? "absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50" 
+            isOpen && !isSticky
+              ? "absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50"
               : ""
           }`}
         >
@@ -117,7 +117,7 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-            
+
             {/* Desktop Weather */}
             <div className="hidden md:block min-w-fit">
               {renderWeather()}

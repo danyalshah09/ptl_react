@@ -33,21 +33,36 @@ const Footer = () => {
             </ul>
             {/* Social Icons */}
             <div className="flex gap-4 mt-3">
-              <a href="https://www.facebook.com/ptlpassu" className="text-gray-400 hover:text-[#1877F2] transition-colors">
-                <FaFacebook className="h-8 w-8" />
-              </a>
-              <a href="https://www.instagram.com/ptl_passu?igsh=NW9tYXVkaHozOHpu" className="text-gray-400 hover:text-[#E4405F] transition-colors">
-                <FaInstagram className="h-8 w-8" />
-              </a>
-              <a href="https://wa.me/+923554477788" className="text-gray-400 hover:text-[#25D366] transition-colors">
-                <FaWhatsapp className="h-8 w-8" />
-              </a>
-             
-            
-              <a href="#" className="text-gray-400 hover:text-[#34E0A1] transition-colors">
-                <FaTripadvisor className="h-8 w-8" />
-              </a>
-            </div>
+  <a
+    href="https://www.facebook.com/ptlpassu"
+    className="text-gray-400 hover:text-[#1877F2] transition-colors"
+    aria-label="Facebook"
+  >
+    <FaFacebook className="h-8 w-8" />
+  </a>
+  <a
+    href="https://www.instagram.com/ptl_passu?igsh=NW9tYXVkaHozOHpu"
+    className="text-gray-400 hover:text-[#E4405F] transition-colors"
+    aria-label="Instagram"
+  >
+    <FaInstagram className="h-8 w-8" />
+  </a>
+  <a
+    href="https://wa.me/+923554477788"
+    className="text-gray-400 hover:text-[#25D366] transition-colors"
+    aria-label="WhatsApp"
+  >
+    <FaWhatsapp className="h-8 w-8" />
+  </a>
+  <a
+    href="#"
+    className="text-gray-400 hover:text-[#34E0A1] transition-colors"
+    aria-label="Tripadvisor"
+  >
+    <FaTripadvisor className="h-8 w-8" />
+  </a>
+</div>
+
           </div>
 
           {/* Quick Links */}
@@ -64,7 +79,8 @@ const Footer = () => {
 
         {/* Copyright Section */}
         <div className="border-t border-gray-700 mt-6 pt-4 text-center">
-          <p>Copyright &copy; 2024 All Rights Reserved by <a href="#" className="text-orange-500 hover:text-white">QubaSoft</a></p>
+          <p>Copyright &copy; 2024 All Rights Reserved by <a href="#" class="text-orange-500 underline hover:text-orange-700">QubaSoft</a>
+          </p>
         </div>
       </div>
 

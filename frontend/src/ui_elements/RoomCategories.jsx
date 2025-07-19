@@ -13,7 +13,7 @@ const RoomCategories = () => {
   return (
     <section id="room_types" className="py-8">
       <h2 className="text-3xl font-bold text-center mb-8">
-        Room <span className="text-orange-500">Categories</span>
+        Room <span className="text-orange-700">Categories</span>
       </h2>
       <div className="flex flex-wrap md:flex-row flex-col gap-6 max-w-7xl mx-auto px-4 md:px-6">
         {rooms.map((room, index) => (
@@ -31,7 +31,7 @@ const RoomCategories = () => {
             <div className="h-64 md:h-96 overflow-hidden">
               <img
                 src={room.imgSrc}
-                alt={room.title}
+                alt=""
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>

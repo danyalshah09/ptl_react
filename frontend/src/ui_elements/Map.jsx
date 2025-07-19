@@ -15,6 +15,7 @@ const MapSection = () => {
           allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
+          title="Map showing the location of Passu Tourist Lodge"
         ></iframe>
       </div>
     </section>
