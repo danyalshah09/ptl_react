@@ -32,9 +32,9 @@ exports.createBooking = async (req, res) => {
           subject: 'Thank You for choosing Passu Tourist Lodge. Your Hotel Booking Confirmation',
           html: createEmailContent(booking)
         };
-  
+
         await transporter.sendMail(mailOptions);
-        console.log(`Email sent to ${booking.email}`);
+        // console.log(`Email sent to ${booking.email}`);
       } catch (emailError) {
         console.error('Email sending error:', emailError);
         // Consider implementing a retry mechanism or logging for failed emails

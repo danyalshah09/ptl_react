@@ -21,7 +21,7 @@ const Intro = () => {
         </div>
         <div className="grid grid-cols-2 gap-4 mt-8">
           <img className="w-full rounded-lg" src="./assets/images/ptl_dining.jpg" alt="Dining Area" />
-          <img className="mt-4 w-full h-full lg:mt-10 rounded-lg" src="./assets/images/testimonial1.jpg" alt="Guest Testimonial" />
+          <img className="mt-4 w-full lg:mt-10 rounded-lg" src="./assets/images/testimonial1.jpg" alt="Guest Testimonial" />
         </div>
       </div>
 

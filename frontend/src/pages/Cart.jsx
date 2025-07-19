@@ -29,7 +29,7 @@ const Cart = () => {
   const handleProceedToPayment = async () => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
       // Format bookings data to ensure proper types
       const formattedBookings = bookings.map(booking => ({
@@ -46,18 +46,18 @@ const Cart = () => {
         price: Number(booking.price),
         subtotal: Number(booking.subtotal)
       }));
-      
-      console.log('Sending bookings:', formattedBookings);
-      
+
+      // console.log('Sending bookings:', formattedBookings);
+
       // Updated API URL to always use the deployed backend
       let apiUrl;
-      
+
       if (window.location.hostname === 'localhost') {
         apiUrl = 'http://localhost:5000/api/bookings';
-        console.log('Using local API endpoint:', apiUrl);
+        // console.log('Using local API endpoint:', apiUrl);
       } else {
         apiUrl = 'https://ptl-react.onrender.com/api/bookings';
-        console.log('Using production API endpoint:', apiUrl);
+        // console.log('Using production API endpoint:', apiUrl);
       }
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -66,18 +66,18 @@ const Cart = () => {
         },
         body: JSON.stringify(formattedBookings),
       });
-      
-      console.log('Response status:', response.status);
-      
+
+      // console.log('Response status:', response.status);
+
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Error response body:', errorText);
+        // console.error('Error response body:', errorText);
         throw new Error(`Server responded with status: ${response.status}. Details: ${errorText || 'No details provided'}`);
       }
-      
+
       const data = await response.json();
-      console.log('Server response:', data);
-  
+      // console.log('Server response:', data);
+
       if (data.success) {
         // Show success modal
         setIsModalOpen(true);
@@ -94,7 +94,7 @@ const Cart = () => {
       setIsLoading(false);
     }
   };
-  
+
   return (
     <div className="p-4 md:p-6">
       {/* Loading Overlay */}
@@ -151,36 +151,36 @@ const Cart = () => {
             </tbody>
           </table>
         </div>
-        
+
         {/* Mobile View - Cards */}
         <div className="md:hidden space-y-4">
           {bookings.map((booking, index) => (
             <div key={index} className="border rounded p-3 mb-3">
               <div className="font-bold text-lg mb-2">{booking.category}</div>
-              
+
               <div className="grid grid-cols-2 gap-1 mb-2 text-sm">
                 <div>Name:</div>
                 <div>{booking.name}</div>
-                
+
                 <div>Email:</div>
                 <div className="truncate">{booking.email}</div>
-                
+
                 <div>Phone:</div>
                 <div>{booking.phone}</div>
-                
+
                 <div>Check-in:</div>
                 <div>{booking.checkin}</div>
-                
+
                 <div>Check-out:</div>
                 <div>{booking.checkout}</div>
-                
+
                 <div>Adults:</div>
                 <div>{booking.adults}</div>
-                
+
                 <div>Children:</div>
                 <div>{booking.children}</div>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-2 mt-3 pt-2 border-t">
                 <div className="text-sm">
                   <div>Price: {booking.price}</div>
@@ -195,17 +195,17 @@ const Cart = () => {
             </div>
           ))}
         </div>
-        
+
         <div className="text-right font-bold text-lg my-4">
           Total Cost: {calculateTotalCost()} PKR
         </div>
-        
+
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded mt-3 mb-3 text-sm md:text-base">
             <p>{error}</p>
           </div>
         )}
-        
+
         <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-between gap-3 md:gap-4">
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
             <button
@@ -223,8 +223,8 @@ const Cart = () => {
               Clear Cart
             </button>
           </div>
-          <button 
-            onClick={handleProceedToPayment} 
+          <button
+            onClick={handleProceedToPayment}
             className={`${isLoading ? 'bg-gray-400' : 'bg-orange-500 hover:bg-orange-600'} text-white py-2 px-3 rounded text-sm md:text-base w-full md:w-auto mt-2 md:mt-0 transition-colors duration-300`}
             disabled={isLoading}
           >
@@ -232,7 +232,7 @@ const Cart = () => {
           </button>
         </div>
       </div>
-      
+
       {/* Modal for successful booking */}
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 p-4">
@@ -247,7 +247,7 @@ const Cart = () => {
             <h3 className="text-lg md:text-xl font-semibold text-center">Reservation Successful</h3>
             <p className="text-center mt-3 md:mt-4 text-sm md:text-base">Your booking has been successfully processed. A confirmation email has been sent to your registered email address.</p>
             <button
-              onClick={() => setIsModalOpen(false)} 
+              onClick={() => setIsModalOpen(false)}
               className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full"
             >
               Close
