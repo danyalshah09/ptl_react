@@ -49,16 +49,8 @@ const Cart = () => {
 
       // console.log('Sending bookings:', formattedBookings);
 
-      // Updated API URL to always use the deployed backend
-      let apiUrl;
+      const apiUrl = 'https://ptl-react.onrender.com/api/bookings';
 
-      if (window.location.hostname === 'localhost') {
-        apiUrl = 'http://localhost:5000/api/bookings';
-        // console.log('Using local API endpoint:', apiUrl);
-      } else {
-        apiUrl = 'https://ptl-react.onrender.com/api/bookings';
-        // console.log('Using production API endpoint:', apiUrl);
-      }
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
