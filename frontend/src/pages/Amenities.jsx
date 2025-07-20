@@ -9,7 +9,7 @@ const amenities = [
       "Peaceful Environment",
       "TV Lounge",
       "Private balconies",
-      "24/7 hot water",
+      "Hot water"
     ],
   },
   {

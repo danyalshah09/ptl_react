@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <>
-      <h1 className="text-center text-4xl mt-4">Passu Tourist Lodge</h1> 
+      <h1 className="text-center text-4xl mt-4">Passu Tourist Lodge</h1>
       <section className="parallax_section h-full mt-4 w-full">
         <div className="parallax1 flex flex-col items-center justify-start mx-auto h-[50vh] lg:h-[70vh] w-[85%] bg-contain bg-center bg-fixed bg-no-repeat bg-[url('/assets/images/ptl_old.jpg')]
  mb-4">
@@ -30,13 +30,13 @@ const Home = () => {
           </p>
 
           {/* Scroll to RoomCategories when clicked */}
-         
-          <Button onClick={scrollToRooms} className="btn_book py-2 px-6 bg-gray-300 text-black-700 text-center mt-4 hover:bg-gray-500 hover:text-white">
+
+          <Button onClick={scrollToRooms} className="btn_book py-2 px-6 bg-gray-300 text-black-700 text-center mt-4 hover:bg-gray-400 hover:text-white">
           Book Now
         </Button>
         </div>
       </section>
-      
+
       <Intro />
       <CarouselCustomArrows />
 
