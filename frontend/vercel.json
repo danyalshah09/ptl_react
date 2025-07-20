@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'nonce-random123' 'strict-dynamic' https://*.botpress.cloud https://*.elfsight.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://*.elfsight.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://api.botpress.cloud https://maps.googleapis.com https://api.openweathermap.org https://*.elfsight.com https://*.vercel.app; frame-src 'self' https://*.google.com https://maps.googleapis.com https://*.elfsight.com; frame-ancestors 'self';"
+          "value": "default-src 'self'; script-src 'self' 'nonce-random123' https://*.botpress.cloud https://*.elfsight.com; style-src 'self' 'unsafe-inline' data: https://fonts.googleapis.com https://cdnjs.cloudflare.com https://*.elfsight.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' https://api.botpress.cloud https://maps.googleapis.com https://api.openweathermap.org https://*.elfsight.com https://*.vercel.app; frame-src 'self' https://*.google.com https://maps.googleapis.com https://*.elfsight.com; frame-ancestors 'self';"
         },
         {
           "key": "Cross-Origin-Opener-Policy",
