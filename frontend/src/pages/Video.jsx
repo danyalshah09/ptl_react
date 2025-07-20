@@ -1,77 +1,58 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 const videos = [
   {
     id: 1,
     url: "/assets/Videos/face_mela.mp4",
-    thumbnail: "/assets/Videos/video_0.jpg",
+    thumbnail: "/assets/Videos/vid_0.jpg",
     fallbackThumbnail: "/assets/images/fallback-hotel.jpg",
     title: "Face Mela Experience"
   },
   {
     id: 2,
     url: "/assets/Videos/video2.mp4",
-    thumbnail: "/assets/Videos/video_1.jpg",
+    thumbnail: "/assets/Videos/vid_1.jpg",
     fallbackThumbnail: "/assets/images/fallback-nature.jpg",
     title: "Nature & Mountains"
   },
   {
     id: 3,
     url: "/assets/Videos/birthday.mp4",
-    thumbnail: "/assets/Videos/video_2.jpg",
+    thumbnail: "/assets/Videos/vid_3.jpg",
     fallbackThumbnail: "/assets/images/fallback-food.jpg",
     title: "Birthday Celebrations"
   },
   {
     id: 4,
     url: "/assets/Videos/musical_nights.mp4",
-    thumbnail: "/assets/Videos/video_3.jpg",
+    thumbnail: "/assets/Videos/vid_4.jpg",
     fallbackThumbnail: "/assets/images/fallback-music.jpg",
     title: "Musical Nights"
   },
   {
     id: 5,
     url: "/assets/Videos/guest_review2.mp4",
-    thumbnail: "/assets/Videos/video_4.jpg",
+    thumbnail: "/assets/Videos/vid_5.jpg",
     fallbackThumbnail: "/assets/images/fallback-review.jpg",
     title: "Guest Reviews"
   },
   {
     id: 6,
     url: "/assets/Videos/video1.mp4",
-    thumbnail: "/assets/Videos/video_5.jpg",
+    thumbnail: "/assets/Videos/vid_6.jpg",
     fallbackThumbnail: "/assets/images/fallback-lodge.jpg",
     title: "Lodge Experience"
   }
 ];
 
-const VideoPlayer = ({ video, isError, onPlay, onError, setVideoRef, poster }) => {
-  if (isError) {
-    return (
-      <div className="w-full aspect-video bg-gray-800 flex flex-col items-center justify-center text-gray-400 rounded-lg">
-        <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mb-4">
-          <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zM12 8a1 1 0 112 0v4a1 1 0 11-2 0V8z" clipRule="evenodd" />
-          </svg>
-        </div>
-        <p className="text-sm text-center px-4">
-          Video temporarily unavailable
-        </p>
-        <p className="text-xs text-gray-500 mt-1">{video.title}</p>
-      </div>
-    );
-  }
-
+const VideoPlayer = ({ video, poster }) => {
   return (
     <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
       <video
-        ref={setVideoRef}
         className="w-full h-full object-cover"
         controls
         preload="metadata"
         poster={poster}
-        onPlay={onPlay}
-        onError={onError}
       >
         <source src={video.url} type="video/mp4" />
         <source src={video.url.replace('.mp4', '.webm')} type="video/webm" />
@@ -87,28 +68,7 @@ const VideoPlayer = ({ video, isError, onPlay, onError, setVideoRef, poster }) =
 };
 
 const VideoSection = () => {
-  const [currentlyPlaying, setCurrentlyPlaying] = useState(null);
-  const [videoErrors, setVideoErrors] = useState({});
   const [thumbnailErrors, setThumbnailErrors] = useState({});
-  const videoRefs = useRef({});
-
-  const handlePlay = (videoId) => {
-    // Pause all other videos when a new one starts playing
-    Object.entries(videoRefs.current).forEach(([id, videoElement]) => {
-      if (parseInt(id) !== videoId && videoElement && !videoElement.paused) {
-        videoElement.pause();
-      }
-    });
-    setCurrentlyPlaying(videoId);
-  };
-
-  const handleVideoError = (videoId, error) => {
-    console.warn(`Video ${videoId} failed to load:`, error);
-    setVideoErrors(prev => ({
-      ...prev,
-      [videoId]: true
-    }));
-  };
 
   const createPlaceholderImage = (title) => {
     // Create a simple SVG placeholder
@@ -174,10 +134,6 @@ const VideoSection = () => {
               <VideoPlayer
                 video={video}
                 poster={getPosterImage(video)}
-                isError={!!videoErrors[video.id]}
-                setVideoRef={el => videoRefs.current[video.id] = el}
-                onPlay={() => handlePlay(video.id)}
-                onError={(e) => handleVideoError(video.id, e)}
               />
 
               {/* Hidden thumbnail tester */}
