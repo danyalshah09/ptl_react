@@ -79,7 +79,7 @@ const Footer = () => {
 
         {/* Copyright Section */}
         <div className="border-t border-gray-700 mt-6 pt-4 text-center">
-          <p>Copyright &copy; 2024 All Rights Reserved by <a href="#" class="text-orange-500 underline hover:text-orange-700">QubaSoft</a>
+          <p>Copyright &copy; 2024 All Rights Reserved by <a href="#" className="text-orange-500 underline hover:text-orange-700">QubaSoft</a>
           </p>
         </div>
       </div>
