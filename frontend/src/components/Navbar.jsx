@@ -43,7 +43,7 @@ const Navbar = () => {
     return (
       <div className="flex items-center gap-1 border border-gray-500 rounded-full bg-white/30 px-2 py-1 backdrop-blur-sm">
         <img
-          src={`http://openweathermap.org/img/wn/${weather?.weather?.[0]?.icon}@2x.png`}
+          src={`https://openweathermap.org/img/wn/${weather?.weather?.[0]?.icon}@2x.png`}
           alt="Weather Icon"
           className="h-6 w-6 drop-shadow-sm"
           onError={(e) => {
