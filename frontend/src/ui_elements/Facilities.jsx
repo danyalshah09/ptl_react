@@ -4,7 +4,7 @@ const facilities = [
   {
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12h2m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
       </svg>
     ),
     title: "24/7 Hot Water",
@@ -58,8 +58,8 @@ const facilities = [
   {
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} 
-          d="M5 17a4 4 0 100-8 4 4 0 000 8zm14 0a4 4 0 100-8 4 4 0 000 8zm-14 0h2.5l2.5-7 5 7h3m-4-10h3l3 5m-9-5l1.5 3m-6.5 7h3" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+          d="M5 17a4 4 0 100-8 4 4 0 000 8zm14 0a4 4 0 100-8 4 4 0 000 8zm-14 0h2.5l2.5-7 5 7h2m-4-10h2l3 5m-9-5l1.5 3m-6.5 7h2" />
       </svg>
     ),
     title: "Cycling Tours",
@@ -86,28 +86,28 @@ export const Facilities = () => {
           </h1>
         </div>
 
-        {/* 
+        {/*
           - Grid with 2 columns for screens smaller than 768px (default to md:)
           - Grid with 3 columns for screens between 768px and 992px (md: to lg:)
           - Grid with 4 columns for screens larger than 992px (lg: and up)
         */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
           {facilities.map((facility, index) => (
-            <div 
+            <div
               key={index}
               className="group relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-out hover:-translate-y-2"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white-50 to-emerald-50 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
-              
+
               <div className="relative p-3 md:p-4 lg:p-6">
                 <div className="mb-2 md:mb-4">
                   <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-gray-400 to-gray-700 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                    {React.cloneElement(facility.icon, { 
-                      className: "h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white stroke-2" 
+                    {React.cloneElement(facility.icon, {
+                      className: "h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white stroke-2"
                     })}
                   </div>
                 </div>
-                <h3 className="text-sm md:text-base lg:text-xl font-semibold mb-1 md:mb-2 text-gray-800">{facility.title}</h3>
+                <h2 className="text-sm md:text-base lg:text-xl font-semibold mb-1 md:mb-2 text-gray-800">{facility.title}</h2>
                 <p className="text-xs md:text-sm text-gray-600 leading-relaxed">{facility.description}</p>
               </div>
             </div>
