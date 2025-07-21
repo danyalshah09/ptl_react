@@ -41,7 +41,7 @@ const Navbar = () => {
     if (error) return <div className="text-xs whitespace-nowrap text-red-500">🌡️ Weather</div>;
 
     return (
-      <div className="flex items-center gap-1 border border-gray-500 rounded-full bg-white/30 px-2 py-1 backdrop-blur-sm">
+      <div className="flex items-center gap-1 border border-gray-500 rounded-full bg-white/30 px-2 py-1 backdrop-blur-sm hover:bg-orange-500 hover:text-white">
         <img
           src={`https://openweathermap.org/img/wn/${weather?.weather?.[0]?.icon}@2x.png`}
           alt="Weather Icon"
@@ -50,7 +50,7 @@ const Navbar = () => {
             e.target.style.display = 'none';
           }}
         />
-        <span className="text-lg font-medium text-orange-700 whitespace-nowrap">
+        <span className="text-lg font-medium text-orange-700 whitespace-nowrap hover:text-white">
           {Math.round(weather?.main?.temp)}°C
         </span>
       </div>
