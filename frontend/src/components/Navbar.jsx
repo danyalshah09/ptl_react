@@ -33,11 +33,16 @@ const Navbar = () => {
         setLoading(false);
       }
     };
-    fetchWeather();
+
+    const timer = setTimeout(() => {
+      fetchWeather();
+    }, 3000); // Delay of 3 seconds
+
+    return () => clearTimeout(timer); // Cleanup the timer
   }, []);
 
   const renderWeather = () => {
-    if (loading) return <div className="text-xs whitespace-nowrap animate-pulse bg-slate-400">⛅ Loading...</div>;
+    if (loading) return <div className="text-xs whitespace-nowrap animate-pulse bg-slate-400 rounded-full px-2 py-1">⛅ Loading...</div>;
     if (error) return <div className="text-xs whitespace-nowrap text-red-500">🌡️ Weather</div>;
 
     return (
