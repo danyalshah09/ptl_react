@@ -55,7 +55,7 @@ const VideoPlayer = ({ video }) => {
         poster={video.thumbnail}
       >
         <source src={video.url} type="video/mp4" />
-        <source src={video.url.replace('.mp4', '.webm')} type="video/webm" />
+        {/* <source src={video.url.replace('.mp4', '.webm')} type="video/webm" /> */}
         <p className="text-gray-400 p-4">
           Your browser does not support the video tag.
           <a href={video.url} className="text-amber-500 hover:underline ml-1">
