@@ -1,55 +1,88 @@
-import React, { useRef } from "react";
-import RoomCategories from "../ui_elements/RoomCategories";
-import { Facilities } from "../ui_elements/Facilities";
-import MapSection from "../ui_elements/Map";
-import VideoSection from "./Video";
-import Places from "../ui_elements/Places";
-import Intro from "../ui_elements/Intro";
-import CarouselCustomArrows from "../ui_elements/CarouselCustomArrows";
-import Button from "../ui_elements/Button";
-
+// pages/Home/Home.jsx
+import React, { useRef } from 'react';
+import RoomCategories from '../ui_elements/RoomCategories';
+import Facilities from '../ui_elements/Facilities';
+import MapSection from '../ui_elements/Map';
+import VideoSection from './Video';
+import Places from '../ui_elements/Places';
+import Intro from '../ui_elements/Intro';
+import CarouselCustomArrows from '../ui_elements/CarouselCustomArrows';
+import Section from './Section';
+import HeroSection from '../ui_elements/HeroSection';
+import { useScrollTo } from './hooks/useScrollTo';
+import { useEffect } from 'react';
+import gsap from 'gsap';
 const Home = () => {
   const roomCategoriesRef = useRef(null);
+  const titleRef = useRef(null);
+  const scrollTo = useScrollTo();
+ // ✨ Animate heading on mount
+ useEffect(() => {
+  gsap.fromTo(
+    titleRef.current,
+    {
+      y: 100,      // Start 100px below
+      opacity: 0  // Invisible
+    },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 1.5,
+      ease: 'power3.out',
+      force3D: true // Add force3D for smoother animation
+    }
+  );
+}, []);
 
-  // Function to scroll smoothly
-  const scrollToRooms = () => {
-    roomCategoriesRef.current?.scrollIntoView({ behavior: "smooth" });
+  const handleBookNowClick = () => {
+    scrollTo(roomCategoriesRef, { block: 'start' });
   };
 
   return (
-    <>
-      <h1 className="text-center text-4xl mt-4">Passu Tourist Lodge</h1>
-      <section className="parallax_section h-full mt-4 w-full">
-        <div className="parallax1 flex flex-col items-center justify-start mx-auto h-[50vh] lg:h-[70vh] w-[85%] bg-contain bg-center bg-fixed bg-no-repeat bg-[url('/assets/images/ptl_old.jpg')]
- mb-4">
-          <p
-            className="font-dancing_script text-2xl sm:text-xl md:text-3xl mt-6 text-center py-2 text-white"
-            style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 1)" }}
-          >
-            Experience Comfort and Serenity Under the Majestic Passu Cones
-          </p>
+    <main className="home-page">
+      <h1
 
-          {/* Scroll to RoomCategories when clicked */}
+      ref={titleRef}
+ className='hero-title text-center text-4xl mt-4 mb-4'> Passu Touist Lodge</h1>
+      <HeroSection
+        subtitle="Experience Comfort and Serenity Under the Majestic Passu Cones"
+        onCTAClick={handleBookNowClick}
+        ctaText="Book Now"
+      />
 
-          <Button onClick={scrollToRooms} className="btn_book py-2 px-6 bg-gray-300 text-black-700 text-center mt-4 hover:bg-gray-400 hover:text-white">
-          Book Now
-        </Button>
-        </div>
-      </section>
+      <Section className="intro-section" id="intro">
+        <Intro />
+      </Section>
 
-      <Intro />
-      <CarouselCustomArrows />
+      <Section className="carousel-section" id="gallery">
+        <CarouselCustomArrows />
+      </Section>
 
-      {/* Attach ref to RoomCategories */}
-      <div ref={roomCategoriesRef}>
+      <Section
+        ref={roomCategoriesRef}
+        className="rooms-section"
+        id="rooms"
+        aria-label="Room categories and booking"
+      >
         <RoomCategories />
-      </div>
+      </Section>
 
-      <Facilities />
-      <VideoSection />
-      <MapSection />
-      <Places />
-    </>
+      <Section className="facilities-section" id="facilities">
+        <Facilities />
+      </Section>
+
+      <Section className="video-section" id="video">
+        <VideoSection />
+      </Section>
+
+      <Section className="map-section" id="location">
+        <MapSection />
+      </Section>
+
+      <Section className="places-section" id="attractions">
+        <Places />
+      </Section>
+    </main>
   );
 };
 
