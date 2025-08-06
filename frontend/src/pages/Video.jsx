@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const videos = [
   {
@@ -45,47 +46,54 @@ const videos = [
   }
 ];
 
-const VideoPlayer = ({ video }) => {
-  return (
-    <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
-      <video
-        className="w-full h-full object-contain"
-        controls
-        preload="metadata"
-        poster={video.thumbnail}
-      >
-        <source src={video.url} type="video/mp4" />
-        {/* <source src={video.url.replace('.mp4', '.webm')} type="video/webm" /> */}
-        <p className="text-gray-400 p-4">
-          Your browser does not support the video tag.
-          <a href={video.url} className="text-amber-500 hover:underline ml-1">
-            Download video
-          </a>
-        </p>
-      </video>
-    </div>
-  );
-};
+const VideoPlayer = ({ video }) => (
+  <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
+    <video
+      className="w-full h-full object-contain"
+      controls
+      preload="metadata"
+      poster={video.thumbnail}
+    >
+      <source src={video.url} type="video/mp4" />
+      <p className="text-gray-400 p-4">
+        Your browser does not support the video tag.
+        <a href={video.url} className="text-amber-500 hover:underline ml-1">
+          Download video
+        </a>
+      </p>
+    </video>
+  </div>
+);
 
 const VideoSection = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <section className="py-16  text-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-amber-500 mb-4">Experience Passu Like Never Before</h2>
-          <p className="text-gray-300 text-lg">Watch our videos to explore the magic of Passu Tourist Lodge.</p>
+          <h2 className="text-4xl font-bold text-gray-500 mb-4">
+            Experience Passu Like Never Before
+          </h2>
+          <p className="text-gray-700 text-lg">
+            Watch our videos to explore the magic of Passu Tourist Lodge.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {videos.map((video) => (
-            <div
+          {videos.map((video, index) => (
+            <motion.div
               key={video.id}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{
+                duration: 0.8,
+                ease: "easeInOut",
+                delay: index * 0.1,
+              }}
               className="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 bg-gray-800"
             >
-              <VideoPlayer
-                video={video}
-              />
-            </div>
+              <VideoPlayer video={video} />
+            </motion.div>
           ))}
         </div>
       </div>

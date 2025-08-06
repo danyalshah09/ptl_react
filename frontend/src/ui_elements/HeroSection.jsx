@@ -55,12 +55,14 @@ const HeroSection = ({ subtitle, onCTAClick, ctaText = 'Book Now' }) => {
         {onCTAClick && (
           <Button
             onClick={onCTAClick}
-            className="hero-cta btn_book py-2 px-6 bg-gray-300 text-black-700 text-center mt-4 hover:bg-gray-400 hover:text-white"
+  className="text-gray-900 hover:bg-white border hover:border-gray-300 focus:outline-none bg-transparent border-black  font-medium rounded-sm  text-sm px-5 py-2.5 me-2 mb-2  "
             aria-label="Navigate to room booking section"
           >
             {ctaText}
           </Button>
+
         )}
+
       </div>
     </Section>
   );
