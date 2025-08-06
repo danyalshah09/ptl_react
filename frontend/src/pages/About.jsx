@@ -1,21 +1,57 @@
 import { Leaf, Mountain, Diamond } from 'lucide-react';
+import { useRef } from 'react';
+import { useGsapScroll } from '../pages/hooks/useGsapScroll';
 
 export default function AboutUs() {
-    return (
+  const headerRef = useRef();
+  const subtitleRef = useRef();
+  const heritageRef = useRef();
+  const statsRef = useRef();
+  const imageRef = useRef();
+
+
+  useGsapScroll(headerRef, {
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1, duration: 1 },
+  });
+
+  useGsapScroll(subtitleRef, {
+    from: { x: -100, opacity: 0 },
+    to: { x: 0, opacity: 1, duration: 2 },
+  });
+
+  useGsapScroll(heritageRef, {
+    from: { x: -100, opacity: 0 },
+    to: { x: 0, opacity: 1, duration: 1 },
+  });
+
+  useGsapScroll(statsRef, {
+    from: { scale: 0.5, opacity: 0 },
+    to: { scale: 1, opacity: 1, duration: 0.8, stagger: 0.2 },
+  });
+
+  useGsapScroll(imageRef, {
+    from: { y: 100, opacity: 0 },
+    to: { y: 0, opacity: 1, duration: 1 },
+  });
+
+  return (
       <div className="bg-white">
         {/* Hero Section */}
-        <section
+       <section
   className="relative h-[600px] flex items-center justify-center bg-fixed bg-center bg-cover"
   style={{ backgroundImage: "url('./assets/rooms/ptl_outside.jpg')" }}
 >
   <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/30" />
   <div className="relative max-w-6xl mx-auto px-4 text-center text-white">
-    <h1 className="text-4xl md:text-5xl mb-6 leading-tight">
+    <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={headerRef}>
       Passu Tourist Lodge
       <br />
-      <span className="text-orange-300">Where Mountain Majesty Meets Modern Comfort</span>
+      <span className="text-orange-300"  >Where Mountain Majesty Meets Modern Comfort</span>
     </h1>
-    <p className="text-lg md:text-xl max-w-2xl mx-auto">
+    <p className="text-lg md:text-xl max-w-2xl mx-auto"
+    ref={subtitleRef}
+    >
       Nestled at the foot of the iconic Passu Cones, we've been curating unforgettable Himalayan experiences since 2015
     </p>
   </div>
@@ -25,7 +61,7 @@ export default function AboutUs() {
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <div className="border-l-4 border-orange-600 pl-6">
+              <div className="border-l-4 border-orange-600 pl-6" ref={heritageRef}>
                 <h2 className="text-3xl font-serif text-gray-900 mb-4">Our Heritage</h2>
                 <p className="text-gray-600 leading-relaxed">
                   Founded by local mountaineering experts, Passu Tourist Lodge emerged from a passion to share
@@ -34,7 +70,7 @@ export default function AboutUs() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-2 gap-8"   ref={statsRef}>
                 {[
                   { number: '8+', label: 'Years of Excellence' },
                   { number: '10k+', label: 'Guests Hosted' },
@@ -53,6 +89,7 @@ export default function AboutUs() {
               <img
               src="./assets/rooms/ptl_backyard.jpg"
               alt="Our History"
+              ref ={imageRef}
                 className=" shadow-2xl transform group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white px-8 py-4 rounded-lg shadow-md">
@@ -62,43 +99,8 @@ export default function AboutUs() {
           </div>
         </section>
 
-        {/* Mission & Values */}
-        <section className="py-20 bg-gray-50">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl  text-gray-900 mb-4">Our Guiding Principles</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                The foundation of every decision we make at Passu Tourist Lodge
-              </p>
-            </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-               {
-                icon: <Leaf className="w-6 h-6 text-black" />,
-                title: 'Sustainable Stewardship',
-                description: 'Solar-powered facility · Zero single-use plastics · Local sourcing'
-              },
-              {
-                icon: <Mountain className="w-6 h-6 text-black" />,
-                title: 'Cultural Preservation',
-                description: 'Wakhi architecture · Traditional cuisine · Craft workshops'
-              },
-              {
-                icon: <Diamond className="w-6 h-6 text-black" />,
-                title: 'Luxurious Simplicity',
-                description: 'Modern amenities · Handcrafted furnishings · Personalized service'
-              }
-              ].map((value, index) => (
-                <div key={index} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="text-4xl mb-6">{value.icon}</div>
-                  <h3 className="text-xl font-semibold mb-4">{value.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{value.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
 
         {/* Why Choose Us */}
         <section className="py-20 bg-white">

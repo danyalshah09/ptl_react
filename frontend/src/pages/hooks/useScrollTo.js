@@ -1,13 +1,9 @@
 import { useCallback } from 'react';
 
 export const useScrollTo = () => {
-  const scrollTo = useCallback((elementRef, options = {}) => {
-    if (elementRef?.current) {
-      elementRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        ...options
-      });
+  const scrollTo = useCallback((ref, options) => {
+    if (ref && ref.current) {
+      ref.current.scrollIntoView(options);
     }
   }, []);
 
