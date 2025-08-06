@@ -28,19 +28,22 @@ export default function DineSection() {
   return (
     <div className="relative">
       {/* Hero Section */}
-      <div className="relative h-96">
-        <img 
-                                    src="./assets/images/passu_cones.jpg"
-                                    alt="Dining Area" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-serif mb-4">Authentic Flavors with Stunning Views</h1>
-            <p className="text-xl">Experience Wakhi Cuisine at Passu Tourist Lodge</p>
-          </div>
-        </div>
-      </div>
+     {/* Hero Section */}
+<div
+  className="relative h-96 bg-fixed bg-center bg-cover"
+  style={{ backgroundImage: "url('./assets/images/passu_cones.jpg')" }}
+>
+  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+    <div className="text-center text-white">
+      <h1 className="text-4xl md:text-6xl font-serif mb-4">
+        Authentic Flavors with Stunning Views
+      </h1>
+      <p className="text-xl">
+        Experience Wakhi Cuisine at Passu Tourist Lodge
+      </p>
+    </div>
+  </div>
+</div>
 
       {/* Cuisine Section */}
       <section className="py-16 bg-white">
@@ -75,7 +78,7 @@ export default function DineSection() {
                 </button>
               ))}
             </div>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
               {menuCategories[activeTab].map((item, index) => (
                 <div key={index} className="bg-white p-6 rounded-lg shadow-md">
@@ -101,7 +104,7 @@ export default function DineSection() {
             <p className="text-gray-700 leading-relaxed">
             Experience the rich heritage of Wakhi cuisine at our traditional restaurant, where time-honored recipes meet contemporary comfort. Delight in authentic flavors crafted from local ingredients, all served in an intimate setting that accommodates up to 40 guests. Whether you're enjoying a cozy meal, hosting a musical night, or organizing a meeting or seminar, our venue offers a warm and versatile ambiance perfect for every occasion.
       </p>
-            
+
             <div className="mt-8">
               <h3 className="text-xl font-semibold mb-4">Opening Hours</h3>
               <p className="text-gray-600">Daily: 8:00 AM – 11:00 PM</p>
@@ -172,8 +175,8 @@ export default function DineSection() {
                   ))}
                 </select>
               </div>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition"
               >
                 Confirm Reservation

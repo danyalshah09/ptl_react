@@ -4,28 +4,23 @@ export default function AboutUs() {
     return (
       <div className="bg-white">
         {/* Hero Section */}
-        <section className="relative h-[600px] flex items-center justify-center">
-          <div className="absolute inset-0">
-            <img
-              src="./assets/rooms/ptl_outside.jpg"
-              alt="Passu Lodge"
-              className="w-full h-full object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/30" />
-          </div>
-          
-          <div className="relative max-w-6xl mx-auto px-4 text-center text-white">
-            <h1 className="text-4xl md:text-5xl  mb-6 leading-tight">
-              Passu Tourist Lodge
-              <br />
-              <span className="text-orange-300 ">Where Mountain Majesty Meets Modern Comfort</span>
-            </h1>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto">
-              Nestled at the foot of the iconic Passu Cones, we've been curating unforgettable Himalayan experiences since 2015
-            </p>
-          </div>
-        </section>
-  
+        <section
+  className="relative h-[600px] flex items-center justify-center bg-fixed bg-center bg-cover"
+  style={{ backgroundImage: "url('./assets/rooms/ptl_outside.jpg')" }}
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/30" />
+  <div className="relative max-w-6xl mx-auto px-4 text-center text-white">
+    <h1 className="text-4xl md:text-5xl mb-6 leading-tight">
+      Passu Tourist Lodge
+      <br />
+      <span className="text-orange-300">Where Mountain Majesty Meets Modern Comfort</span>
+    </h1>
+    <p className="text-lg md:text-xl max-w-2xl mx-auto">
+      Nestled at the foot of the iconic Passu Cones, we've been curating unforgettable Himalayan experiences since 2015
+    </p>
+  </div>
+</section>
+
         {/* Our Story */}
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
@@ -33,12 +28,12 @@ export default function AboutUs() {
               <div className="border-l-4 border-orange-600 pl-6">
                 <h2 className="text-3xl font-serif text-gray-900 mb-4">Our Heritage</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  Founded by local mountaineering experts, Passu Tourist Lodge emerged from a passion to share 
-                  the Wakhi culture with the world. What began as a modest 5-room guesthouse has evolved into 
+                  Founded by local mountaineering experts, Passu Tourist Lodge emerged from a passion to share
+                  the Wakhi culture with the world. What began as a modest 5-room guesthouse has evolved into
                   a 25-room sustainable lodge, consistently rated among Pakistan's top mountain retreats.
                 </p>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-8">
                 {[
                   { number: '8+', label: 'Years of Excellence' },
@@ -53,7 +48,7 @@ export default function AboutUs() {
                 ))}
               </div>
             </div>
-            
+
             <div className="relative group">
               <img
               src="./assets/rooms/ptl_backyard.jpg"
@@ -66,7 +61,7 @@ export default function AboutUs() {
             </div>
           </div>
         </section>
-  
+
         {/* Mission & Values */}
         <section className="py-20 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4">
@@ -76,7 +71,7 @@ export default function AboutUs() {
                 The foundation of every decision we make at Passu Tourist Lodge
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               {[
                {
@@ -104,7 +99,7 @@ export default function AboutUs() {
             </div>
           </div>
         </section>
-  
+
         {/* Why Choose Us */}
         <section className="py-20 bg-white">
           <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16">
@@ -129,7 +124,7 @@ export default function AboutUs() {
                 ))}
               </div>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-6">
               <div className="relative group">
                 <img
@@ -143,7 +138,7 @@ export default function AboutUs() {
                   <p className="text-sm opacity-90">Traditional design meets modern comfort</p>
                 </div>
               </div>
-              
+
               <div className="grid gap-6">
                 <div className="relative group h-48">
                   <img
@@ -156,7 +151,7 @@ export default function AboutUs() {
                     <p className="text-sm">Peaceful Enviroment</p>
                   </div>
                 </div>
-                
+
                 <div className="relative group h-48">
                   <img
               src="./assets/about/welcome2.jpg"
@@ -172,8 +167,8 @@ export default function AboutUs() {
             </div>
           </div>
         </section>
-  
-        
+
+
       </div>
     );
   }

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Reliable image component that ensures images load properly
+gsap.registerPlugin(ScrollTrigger);
+
+// Reusable image component
 const OptimizedImage = ({ src, alt, className, height = "h-48", priority = false }) => {
   return (
     <div className={`relative overflow-hidden ${className} bg-gray-200`}>
-      {/* Direct image with proper attributes for guaranteed loading */}
       <img
         src={src}
         alt={alt}
@@ -13,7 +16,6 @@ const OptimizedImage = ({ src, alt, className, height = "h-48", priority = false
         decoding="async"
         fetchPriority={priority ? "high" : "auto"}
         onError={(e) => {
-          // Fallback for error - replace with a placeholder
           e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Cpath d='M30,50 L70,50 M50,30 L50,70' stroke='%23cccccc' stroke-width='5'/%3E%3C/svg%3E";
           e.currentTarget.className = `w-full ${height} object-cover opacity-60`;
         }}
@@ -23,6 +25,9 @@ const OptimizedImage = ({ src, alt, className, height = "h-48", priority = false
 };
 
 export default function Location() {
+  const cardsRef = useRef([]);
+  const attractionsRef = useRef(null);
+
   const attractions = [
     {
       name: "Karimabad Hunza",
@@ -80,31 +85,43 @@ export default function Location() {
     },
   ];
 
+  // ✅ GSAP animation effect
+  useEffect(() => {
+    const elements = cardsRef.current;
+
+    gsap.fromTo(
+      elements,
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: attractionsRef.current,
+          start: "top 80%",
+          toggleActions: "restart none none none",
+        },
+      }
+    );
+  }, []);
+
   return (
     <div className="bg-gray-50">
       <section className="container mx-auto px-4 py-12">
-        <h2 className="text-4xl font-bold text-gray-800 mb-8 text-center">
-          Find Us
-        </h2>
+        <h2 className="text-4xl font-bold text-gray-800 mb-8 text-center">Find Us</h2>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Air Travel */}
+          {/* By Air */}
           <div className="bg-gray-100 p-6 rounded-xl shadow-md flex flex-col gap-4">
-            <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-              By Air
-            </h3>
-            <p className="text-gray-600">
-              <strong>Islamabad to Gilgit:</strong> 1-hour flight (PIA operates
-              daily flights, subject to weather conditions)
-            </p>
-            <p className="text-gray-600">
-              <strong>Karachi to Gilgit:</strong> 4-hour flight with a stopover
-              in Islamabad
-            </p>
-            <p className="text-gray-600">
-              <strong>Lahore to Gilgit:</strong> 2-hour flight with a stopover
-              in Islamabad
-            </p>
+            <h3 className="text-2xl font-semibold text-gray-700 mb-4">By Air</h3>
+            <p className="text-gray-600"><strong>Islamabad to Gilgit:</strong> 1-hour flight</p>
+            <p className="text-gray-600"><strong>Karachi to Gilgit:</strong> 4-hour flight</p>
+            <p className="text-gray-600"><strong>Lahore to Gilgit:</strong> 2-hour flight</p>
 
             <OptimizedImage
               src="/assets/location/byair.PNG"
@@ -115,18 +132,12 @@ export default function Location() {
             />
           </div>
 
-          {/* Road Travel */}
+          {/* By Car */}
           <div className="bg-gray-100 p-6 rounded-xl shadow-md flex flex-col h-full">
             <h3 className="text-2xl font-semibold text-gray-700 mb-4">By Car</h3>
-            <p className="text-gray-600">
-              <strong>Gilgit to Passu Tourist Lodge:</strong> 3-hour drive (125 km) via the scenic Karakoram Highway
-            </p>
-            <p className="text-gray-600">
-              The journey offers breathtaking views of mountains, rivers, and valleys.
-            </p>
-
+            <p className="text-gray-600"><strong>Gilgit to Passu:</strong> 3-hour drive (125 km)</p>
+            <p className="text-gray-600">Scenic Karakoram Highway views.</p>
             <div className="flex-grow"></div>
-
             <OptimizedImage
               src="/assets/location/gilgit.PNG"
               alt="Mountain drive"
@@ -138,26 +149,26 @@ export default function Location() {
         </div>
       </section>
 
-      {/* Nearby Attractions */}
-      <section className="bg-white py-12">
+      {/* 🔥 Nearby Attractions with animation */}
+      <section className="bg-white py-12" ref={attractionsRef}>
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">
-            Nearby Attractions
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-8">Nearby Attractions</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {attractions.map((attraction, index) => (
-              <div key={index} className="rounded-xl overflow-hidden shadow-md">
+              <div
+                key={index}
+                ref={(el) => (cardsRef.current[index] = el)}
+                className="rounded-xl overflow-hidden shadow-md"
+              >
                 <OptimizedImage
                   src={attraction.image}
                   alt={attraction.name}
                   className="w-full rounded-t-lg"
-                  priority={index < 3} // Only prioritize the first 3 attraction images
+                  priority={index < 3}
                 />
                 <div className="p-4">
                   <h3 className="text-xl font-semibold">{attraction.name}</h3>
-                  <p className="text-gray-600">
-                    {attraction.distance} • {attraction.time}
-                  </p>
+                  <p className="text-gray-600">{attraction.distance} • {attraction.time}</p>
                 </div>
               </div>
             ))}

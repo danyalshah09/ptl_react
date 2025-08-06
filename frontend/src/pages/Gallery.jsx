@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {
+  const imageRefs = useRef([]);
+
   const images = [
     { src: "./assets/images/ptl1.webp", alt: "Image 1" },
     { src: "./assets/images/ptl2.webp", alt: "Image 2" },
@@ -16,20 +22,49 @@ const Gallery = () => {
     { src: "./assets/images/ptl13.jpg", alt: "Image 12" }
   ];
 
+  useEffect(() => {
+    imageRefs.current.forEach((el, index) => {
+      if (el) {
+        gsap.fromTo(
+          el,
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            }
+          }
+        );
+      }
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
     <div className="min-h-screen">
-      {/* Section with background and centered title */}
+      {/* Section Header */}
       <div className="w-full h-56 bg-slate-500 flex items-center justify-center">
         <h1 className="text-5xl text-white font-semibold">Gallery</h1>
       </div>
 
       <hr className="w-[20%] mt-2 text-center mx-auto" />
-      
-      {/* Gallery grid with optimized image loading */}
+
+      {/* Image Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 mx-4 mt-1">
         {images.map((image, index) => (
           <div key={index} className="flex justify-center w-full">
-            <figure className="w-full relative overflow-hidden bg-gray-100">
+            <figure
+              ref={(el) => (imageRefs.current[index] = el)}
+              className="w-full relative overflow-hidden bg-gray-100"
+            >
               <img
                 src={image.src}
                 alt={image.alt}
