@@ -1,46 +1,75 @@
 import { useRef } from 'react';
 import { useGsapScroll } from './hooks/useGsapScroll';
+import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
 
 export default function AboutUs() {
-  const headerRef = useRef();
-  const subtitleRef = useRef();
-  const heritageRef = useRef();
+  const titleRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const subtitleRef = useGsapScrollAnimation("down", { duration: 1.2 });
+  const heritageRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const imageRef = useGsapScrollAnimation("down", { duration: 2 });
+  const whyTextRef = useGsapScrollAnimation("left",{ duration: 1.2 });
+  const longImageRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const rightImage1Ref = useGsapScrollAnimation("right", { duration: 1.2 });
+  const rightImage2Ref = useGsapScrollAnimation("right", { duration: 1.2 });
+
+  // const headerRef = useRef();
+  // const subtitleRef = useRef();
+  // const heritageRef = useRef();
   const statsRef = useRef();
-  const imageRef = useRef();
-  const longImageRef = useRef();
-  const rightImage1Ref = useRef();
-  const rightImage2Ref = useRef();
-  const whyTextRef = useRef();
+  // const imageRef = useRef();
+  // const longImageRef = useRef();
+  // const rightImage1Ref = useRef();
+  // const rightImage2Ref = useRef();
+  // const whyTextRef = useRef();
 
-  useGsapScroll(headerRef, {
-    from: { y: 100, opacity: 0 },
-    to: { y: 0, opacity: 1, duration: 1 },
-  });
+  // useGsapScroll(headerRef, {
+  //   from: { y: 100, opacity: 0 },
+  //   to: { y: 0, opacity: 1, duration: 1 },
+  // });
 
-  useGsapScroll(subtitleRef, {
-    from: { x: -100, opacity: 0 },
-    to: { x: 0, opacity: 1, duration: 2 },
-  });
+  // useGsapScroll(subtitleRef, {
+  //   from: { x: -100, opacity: 0 },
+  //   to: { x: 0, opacity: 1, duration: 2 },
+  // });
 
-  useGsapScroll(heritageRef, {
-    from: { x: -100, opacity: 0 },
-    to: { x: 0, opacity: 1, duration: 1 },
-  });
+  // useGsapScroll(heritageRef, {
+  //   from: { x: -100, opacity: 0 },
+  //   to: { x: 0, opacity: 1, duration: 1 },
+  // });
 
   useGsapScroll(statsRef, {
     from: { scale: 0.5, opacity: 0 },
     to: { scale: 1, opacity: 1, duration: 0.8, stagger: 0.2 },
   });
 
-  useGsapScroll(imageRef, {
-    from: { y: 100, opacity: 0 },
-    to: { y: 0, opacity: 1, duration: 1 },
-  });
+  // useGsapScroll(imageRef, {
+  //   from: { y: 100, opacity: 0 },
+  //   to: { y: 0, opacity: 1, duration: 1 },
+  // });
 
-  useGsapScroll(whyTextRef, {
-    from: { y: 30, opacity: 0 },
-    to: { y: 0, opacity: 1, duration: 0.8 },
-  });
+  // useGsapScroll(whyTextRef, {
+  //   from: { y: 30, opacity: 0 },
+  //   to: { y: 0, opacity: 1, duration: 0.8 },
+  // });
+
+
+  // useGsapScroll(longImageRef, {
+  //   from: { x: -100, opacity: 0 },
+  //   to: { x: 0, opacity: 1, duration: 1},
+  // });
+
+
+  // useGsapScroll(rightImage1Ref, {
+  //   from: { x: 100, opacity: 0 },
+  //   to: { x: 0, opacity: 1, duration: 1},
+  // });
+
+
+
+  // useGsapScroll(rightImage2Ref, {
+  //   from: { x: 100, opacity: 0 },
+  //   to: { x: 0, opacity: 1, duration: 1},
+  // });
 
   return (
     <div className="bg-white">
@@ -51,7 +80,7 @@ export default function AboutUs() {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/30" />
         <div className="relative max-w-6xl mx-auto px-4 text-center text-white">
-          <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={headerRef}>
+          <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={titleRef}>
             Passu Tourist Lodge
             <br />
             <span className="text-orange-300">Where Mountain Majesty Meets Modern Comfort</span>
@@ -67,12 +96,13 @@ export default function AboutUs() {
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
           <div className="space-y-8">
             <div className="border-l-4 border-orange-600 pl-6" ref={heritageRef}>
-              <h2 className="text-3xl font-serif text-gray-900 mb-4">Our Heritage</h2>
+              <h2 className="text-4xl font-serif text-gray-900 mb-4">Our Heritage</h2>
               <p className="text-gray-600 leading-relaxed">
-                Founded by local mountaineering experts, Passu Tourist Lodge emerged from a passion to share
-                the Wakhi culture with the world. What began as a modest 5-room guesthouse has evolved into
-                a 25-room sustainable lodge, consistently rated among Pakistan's top mountain retreats.
-              </p>
+  Founded by local mountaineering experts, Passu Tourist Lodge was born from a vision to share the rich Wakhi culture with the world.
+  What began in 1992 as a modest 5-room guesthouse has grown into a 25-room sustainable lodge, consistently ranked among Pakistan’s premier mountain retreats.
+  The lodge proudly partners with leading tourism companies to enhance the experience for both domestic and international travelers.
+</p>
+
             </div>
 
             <div className="grid grid-cols-2 gap-8" ref={statsRef}>
@@ -80,7 +110,7 @@ export default function AboutUs() {
                 { number: '8+', label: 'Years of Excellence' },
                 { number: '10k+', label: 'Guests Hosted' },
                 { number: '95%', label: 'Guest Satisfaction' },
-                { number: '15', label: 'Cultural Experiences' }
+                { number: '100+', label: 'Tour Companies' }
               ].map((stat, index) => (
                 <div key={index} className="text-center p-4 border rounded-lg">
                   <p className="text-3xl font-serif text-orange-600 mb-2">{stat.number}</p>
@@ -134,15 +164,16 @@ export default function AboutUs() {
           <div className="grid grid-cols-2 gap-6">
             <div className="relative group">
               <img
+                ref={longImageRef}
                 src="/assets/about/main/ptl_9.webp"
                 alt="Lodge"
                 className="h-full w-full object-cover rounded-xl transform-gpu will-change-transform group-hover:scale-105 transition-transform duration-500"
-                ref={longImageRef}
+
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 rounded-xl" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                 <p className="font-semibold">Classic Accommodations</p>
                 <p className="text-sm opacity-90">Traditional design meets modern comfort</p>
               </div>
@@ -158,8 +189,8 @@ export default function AboutUs() {
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 rounded-xl" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   <p className="text-sm">Peaceful Environment</p>
                 </div>
               </div>
@@ -173,8 +204,8 @@ export default function AboutUs() {
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 rounded-xl" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   <p className="text-sm">Cultural Experiences</p>
                 </div>
               </div>

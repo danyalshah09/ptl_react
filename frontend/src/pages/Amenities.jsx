@@ -1,4 +1,5 @@
 import { FaWifi, FaUtensils, FaSpa, FaPaw, FaWheelchair, FaChild } from "react-icons/fa";
+import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
 
 const amenities = [
   {
@@ -37,11 +38,12 @@ const amenities = [
 ];
 
 const Amenities = () => {
+  const headingRef = useGsapScrollAnimation("left", { duration: 0.6, distance: 40 });
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-6">
         {/* Changed from h1 to h2 - assuming this is a section within a page */}
-        <h2 className="text-4xl font-bold text-center text-gray-600 mb-4">
+        <h2 ref={headingRef} className="text-4xl font-bold text-center text-gray-600 mb-4">
           Hotel Amenities & Services
         </h2>
         <p className="text-center text-gray-600 mb-10">

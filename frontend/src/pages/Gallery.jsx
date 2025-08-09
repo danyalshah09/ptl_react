@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {
   const imageRefs = useRef([]);
+  const headingRef = useGsapScrollAnimation("left", { duration: 1.2 });
 
   const images = [
     { src: "./assets/images/ptl1.webp", alt: "Image 1" },
@@ -52,7 +54,7 @@ const Gallery = () => {
     <div className="min-h-screen">
       {/* Section Header */}
       <div className="w-full h-56 bg-slate-500 flex items-center justify-center">
-        <h1 className="text-5xl text-white font-semibold">Gallery</h1>
+        <h1 className="text-5xl text-white font-semibold" ref={headingRef}>Gallery</h1>
       </div>
 
       <hr className="w-[20%] mt-2 text-center mx-auto" />

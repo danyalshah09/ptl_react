@@ -19,7 +19,7 @@ export function useGsapScroll(ref, animation, deps = []) {
         immediateRender: false,
         scrollTrigger: {
           trigger: element,
-          start: "top 85%",
+          start: "top 95%",
           toggleActions: "play none none none",
           once: false, // allow rerun if it was missed
         },

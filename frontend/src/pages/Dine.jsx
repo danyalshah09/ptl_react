@@ -1,10 +1,17 @@
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
-
+import React from "react";
+import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
 export default function DineSection() {
+
+
+  const headingRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const cusinesRef = useGsapScrollAnimation("down", { duration: 1.2 });
+  const homeRef = useGsapScrollAnimation("down", { duration: 1.2 });
+  const tradRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const westRef = useGsapScrollAnimation("right", { duration: 1.2 });
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('breakfast');
-
   const menuCategories = {
     breakfast: [
       { name: 'Traditional Chapshuro', price: '$8.99', description: 'Savory meat-filled pastry' },
@@ -30,23 +37,23 @@ export default function DineSection() {
       {/* Hero Section */}
      {/* Hero Section */}
 <div
-  className="relative h-96 bg-fixed bg-center bg-cover"
-  style={{ backgroundImage: "url('./assets/images/passu_cones.jpg')" }}
+  className="relative h-96 bg-center bg-cover"
+  style={{ backgroundImage: "url('/assets/images/dine/passu_cones.webp')" }}
 >
   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
     <div className="text-center text-white">
-      <h1 className="text-4xl md:text-6xl font-serif mb-4">
-        Authentic Flavors with Stunning Views
-      </h1>
-      <p className="text-xl">
-        Experience Wakhi Cuisine at Passu Tourist Lodge
-      </p>
+    <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={headingRef}>
+            Authentic Flavors with Stunning Views
+            <br />
+            <span className="text-orange-300">Experience Wakhi Cuisine at Passu Tourist Lodge</span>
+          </h1>
+
     </div>
   </div>
 </div>
 
       {/* Cuisine Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white" ref={cusinesRef}>
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-serif text-center mb-8">Our Cuisines</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
@@ -61,7 +68,7 @@ export default function DineSection() {
       </section>
 
       {/* Menu Section */}
-      <section className="py-16">
+      <section className="py-16" ref={homeRef}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-serif mb-4">Our Menu</h2>
@@ -97,7 +104,7 @@ export default function DineSection() {
       </section>
 
       {/* Reservation & Hours */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white" ref={tradRef}>
         <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-3xl font-serif mb-6">Traditional Wakhi Restaurent</h2>
@@ -115,7 +122,7 @@ export default function DineSection() {
           <div className="h-96 bg-gray-100 overflow-hidden">
            <img
            className='w-full h-full object-cover'
-                                    src="./assets/images/ptl00.jpg"
+                                    src="./assets/images/dine/ptl00.webp"
 
            alt="" />
 
@@ -123,11 +130,11 @@ export default function DineSection() {
         </div>
       </section>
 {/* Western Restaurant Section */}
-<section className="py-16 bg-white">
+<section className="py-16 bg-white" ref={westRef}>
   <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12">
     <div className="h-96 bg-gray-100 overflow-hidden rounded-lg">
       <img
-              src="./assets/images/ptl_western_restaurent.jpg"
+              src="./assets/images/dine/ptl_western_restaurent.webp"
               alt="Western Restaurant"
         className="w-full h-full object-cover"
       />
