@@ -61,7 +61,7 @@ export default function DineSection() {
       </section>
 
       {/* Menu Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-serif mb-4">Our Menu</h2>
@@ -143,7 +143,7 @@ export default function DineSection() {
 </section>
 
       {/* Reviews Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="w-full mx-auto px-4">
           <h2 className="text-3xl font-serif text-center mb-8">Guest Reviews</h2>
           <div className="w-full gap-8">
@@ -155,8 +155,8 @@ export default function DineSection() {
       {/* Reservation Modal */}
       <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
         <div className="fixed inset-0 bg-black/30" />
-        <div className="fixed inset-0 flex items-center justify-center p-4">
-          <Dialog.Panel className="w-full max-w-md bg-white rounded-xl p-8">
+        <div className="fixed inset-0 flex items-center justify-center p-4 bg-blue-400">
+          <Dialog.Panel className="w-full max-w-md rounded-xl p-8">
             <h3 className="text-2xl font-serif mb-6">Make Reservation</h3>
             <form className="space-y-4">
               <div>
