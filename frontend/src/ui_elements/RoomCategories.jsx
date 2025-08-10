@@ -1,14 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useGsapScrollAnimation } from "../pages/hooks/useGsapScrollAnimation";
 
 const RoomCategories = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
+  const roomheadingRef = useGsapScrollAnimation("left", { duration: 1.2 });
 
   const rooms = [
     { to: "/masterbed", imgSrc: "/assets/rooms/masterbed1.jpg", title: "Deluxe Room" },
@@ -16,45 +12,19 @@ const RoomCategories = () => {
     { to: "/triplebed", imgSrc: "/assets/rooms/triplebed1.jpg", title: "Triple Bed" },
   ];
 
-  useEffect(() => {
-    const cards = cardsRef.current;
-
-    gsap.fromTo(
-      cards,
-      {
-        opacity: 0,
-        y: 50,
-        scale: 0.95,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-                        toggleActions: "restart none none none", // 🔁 REPEAT on re-entry
-
-        },
-      }
-    );
-  }, []);
 
   return (
-    <section id="room_types" className="py-12 bg-white" ref={sectionRef}>
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+    <section id="room_types" className="py-12 bg-white">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10" ref={roomheadingRef}>
         Room <span className="text-orange-700">Categories</span>
       </h2>
 
       <div className="flex flex-wrap md:flex-row flex-col gap-6 max-w-7xl mx-auto px-4 md:px-6">
         {rooms.map((room, index) => (
           <Link
+
             key={index}
             to={room.to}
-            ref={(el) => (cardsRef.current[index] = el)}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
             className={`overflow-hidden transition-all duration-500 relative shadow-lg rounded-lg group ${

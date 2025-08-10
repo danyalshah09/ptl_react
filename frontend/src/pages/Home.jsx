@@ -18,7 +18,6 @@ const Home = () => {
   const roomCategoriesRef = useRef(null);
   const titleRef = useGsapScrollAnimation("down", { duration: 1.2 });
   const buttonRef = useGsapScrollAnimation("left", { duration: 1.2 });
-  const carousalRef = useGsapScrollAnimation("down", { duration: 1.2 });
 
   const scrollTo = useScrollTo();
   const handleBookNowClick = () => {
@@ -42,7 +41,7 @@ const Home = () => {
         <Intro />
       </Section>
 
-      <Section className="carousel-section" id="gallery" ref={carousalRef}>
+      <Section className="carousel-section" id="gallery">
         <CarouselCustomArrows />
       </Section>
 

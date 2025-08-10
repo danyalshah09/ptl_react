@@ -3,11 +3,10 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGsapScrollAnimation } from "../pages/hooks/useGsapScrollAnimation";
 
-gsap.registerPlugin(ScrollTrigger);
 
 const CustomCarouselArrows = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const containerRef = useGsapScrollAnimation("down", { duration: 1.2 });
+  const containerRef = useGsapScrollAnimation("left", { duration: 1.2 });
 
   const slides = [
     { id: 1, title: "Mountain View", imageUrl: "./assets/slider/ptl_exteriorr.jpg" },
