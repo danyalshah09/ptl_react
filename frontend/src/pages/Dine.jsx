@@ -43,10 +43,10 @@ export default function DineSection() {
   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
     <div className="text-center text-white">
     <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={headingRef}>
-            Authentic Flavors with Stunning Views
+        Authentic Flavors with Stunning Views
             <br />
             <span className="text-orange-300">Experience Wakhi Cuisine at Passu Tourist Lodge</span>
-          </h1>
+      </h1>
 
     </div>
   </div>

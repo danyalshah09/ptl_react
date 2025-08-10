@@ -37,9 +37,11 @@ const HeroSection = ({ subtitle, onCTAClick, ctaText = "Book Now" }) => {
       </span>
     ));
 
+  // Parallax single-background version (rolled back)
+
   return (
     <Section className="hero-section parallax_section h-full mt-4 w-full">
-      <div className="hero-content parallax1 flex flex-col items-center justify-start mx-auto h-[50vh] lg:h-[70vh] w-[95%] bg-contain bg-center bg-no-repeat bg-fixed  bg-[url('/assets/images/ptl_old.jpg')] mb-4">
+      <div className="hero-content parallax1 flex flex-col items-center justify-start mx-auto h-[50vh] lg:h-[70vh] w-[95%] bg-contain bg-center bg-no-repeat bg-fixed bg-[url('/assets/images/ptl_old.jpg')] mb-4">
         {subtitle && (
           <p
             ref={subtitleRef}
