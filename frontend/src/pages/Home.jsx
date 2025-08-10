@@ -11,29 +11,16 @@ import Section from './Section';
 import HeroSection from '../ui_elements/HeroSection';
 import { useScrollTo } from './hooks/useScrollTo';
 import { useEffect } from 'react';
+import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
+
 import gsap from 'gsap';
 const Home = () => {
   const roomCategoriesRef = useRef(null);
-  const titleRef = useRef(null);
-  const scrollTo = useScrollTo();
- // ✨ Animate heading on mount
- useEffect(() => {
-  gsap.fromTo(
-    titleRef.current,
-    {
-      y: 100,      // Start 100px below
-      opacity: 0  // Invisible
-    },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 1.5,
-      ease: 'power3.out',
-      force3D: true // Add force3D for smoother animation
-    }
-  );
-}, []);
+  const titleRef = useGsapScrollAnimation("down", { duration: 1.2 });
+  const buttonRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const carousalRef = useGsapScrollAnimation("down", { duration: 1.2 });
 
+  const scrollTo = useScrollTo();
   const handleBookNowClick = () => {
     scrollTo(roomCategoriesRef, { block: 'start' });
   };
@@ -47,6 +34,7 @@ const Home = () => {
       <HeroSection
         subtitle="Experience Comfort and Serenity Under the Majestic Passu Cones"
         onCTAClick={handleBookNowClick}
+        ref={buttonRef}
         ctaText="Book Now"
       />
 
@@ -54,7 +42,7 @@ const Home = () => {
         <Intro />
       </Section>
 
-      <Section className="carousel-section" id="gallery">
+      <Section className="carousel-section" id="gallery" ref={carousalRef}>
         <CarouselCustomArrows />
       </Section>
 

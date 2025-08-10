@@ -1,13 +1,12 @@
 // components/sections/HeroSection/HeroSection.jsx
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import gsap from 'gsap';
-import Button from '../ui_elements/Button';
-import Section from "../pages/Section"
+import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import gsap from "gsap";
+import Button from "./Button";
+import Section from "../pages/Section";
 
-const HeroSection = ({ subtitle, onCTAClick, ctaText = 'Book Now' }) => {
+const HeroSection = ({ subtitle, onCTAClick, ctaText = "Book Now" }) => {
   const subtitleRef = useRef(null);
-
   useEffect(() => {
     if (subtitleRef.current) {
       const chars = subtitleRef.current.querySelectorAll("span");
@@ -28,7 +27,6 @@ const HeroSection = ({ subtitle, onCTAClick, ctaText = 'Book Now' }) => {
           duration: 0.8,
         }
       );
-
     }
   }, []);
 
@@ -41,7 +39,7 @@ const HeroSection = ({ subtitle, onCTAClick, ctaText = 'Book Now' }) => {
 
   return (
     <Section className="hero-section parallax_section h-full mt-4 w-full">
-      <div className="hero-content parallax1 flex flex-col items-center justify-start mx-auto h-[50vh] lg:h-[70vh] w-[85%] bg-contain bg-center bg-fixed bg-no-repeat bg-[url('/assets/images/ptl_old.jpg')] mb-4">
+      <div className="hero-content parallax1 flex flex-col items-center justify-start mx-auto h-[50vh] lg:h-[70vh] w-[95%] bg-contain bg-center bg-no-repeat bg-fixed  bg-[url('/assets/images/ptl_old.jpg')] mb-4">
         {subtitle && (
           <p
             ref={subtitleRef}
@@ -55,14 +53,12 @@ const HeroSection = ({ subtitle, onCTAClick, ctaText = 'Book Now' }) => {
         {onCTAClick && (
           <Button
             onClick={onCTAClick}
-  className="text-gray-900 hover:bg-white border hover:border-gray-300 focus:outline-none bg-transparent border-black  font-medium rounded-sm  text-sm px-5 py-2.5 me-2 mb-2  "
+            className="text-gray-900 hover:bg-white border hover:border-gray-300 focus:outline-none bg-transparent border-black  font-medium rounded-sm  text-sm px-5 py-2.5 me-2 mb-2  "
             aria-label="Navigate to room booking section"
           >
             {ctaText}
           </Button>
-
         )}
-
       </div>
     </Section>
   );

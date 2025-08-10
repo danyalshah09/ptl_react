@@ -38,7 +38,10 @@ const amenities = [
 ];
 
 const Amenities = () => {
-  const headingRef = useGsapScrollAnimation("left", { duration: 0.6, distance: 40 });
+  const headingRef = useGsapScrollAnimation("left", { duration: 1.2, distance: 40 });
+  const subheadingRef = useGsapScrollAnimation("down", { duration: 1.2, distance: 40 });
+  const cardRef = useGsapScrollAnimation("down", { duration: 2, distance: 40 });
+
   return (
     <section className="py-16">
       <div className="max-w-6xl mx-auto px-6">
@@ -46,10 +49,10 @@ const Amenities = () => {
         <h2 ref={headingRef} className="text-4xl font-bold text-center text-gray-600 mb-4">
           Hotel Amenities & Services
         </h2>
-        <p className="text-center text-gray-600 mb-10">
+        <p className="text-center text-gray-600 mb-10" ref={subheadingRef}>
           Experience unparalleled comfort and convenience during your stay
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10"  ref={cardRef}>
           {amenities.map((item, index) => (
             <div
               key={index}
