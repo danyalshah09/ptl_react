@@ -1,16 +1,22 @@
 import React from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaCommentDots } from 'react-icons/fa';
+import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
 
 const Contact = () => {
+  const heading1Ref = useGsapScrollAnimation("left", { duration: 1.2 });
+  const subheading1Ref = useGsapScrollAnimation("down", { duration: 1.2 });
+  const heading2Ref = useGsapScrollAnimation("left", { duration: 1.6 });
+  const heading4Ref = useGsapScrollAnimation("right", { duration: 1.2 });
+
   return (
     <section className="min-h-screen bg-gradient-to-br bg-white py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         {/* Heading Section */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-black">
+          <h2 className="text-5xl font-bold text-black" ref={heading1Ref}>
             Get in Touch
           </h2>
-          <p className="mt-4 text-lg text-gray-800 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-gray-800 max-w-2xl mx-auto" ref={subheading1Ref}>
             Reach out to us for inquiries, collaborations, or any assistance you need.
           </p>
         </div>
@@ -18,7 +24,7 @@ const Contact = () => {
         {/* Contact Info & Form Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div className="space-y-8" ref={heading2Ref}>
             {/* Contact Cards */}
             {[
               { Icon: FaPhone, title: "Direct Line", detail: "+923554477788", note: "Available 24/7 for urgent inquiries" },
@@ -41,11 +47,11 @@ const Contact = () => {
               </div>
             ))}
 
-           
+
           </div>
 
           {/* Contact Form */}
-          <div className="bg-gray-800 p-10 rounded-2xl shadow-lg">
+          <div className="bg-gray-800 p-10 rounded-2xl shadow-lg" ref={heading4Ref}>
             <form className="space-y-8">
               {[
                 { id: "name", label: "Full Name", type: "text", placeholder: "Full Name" },

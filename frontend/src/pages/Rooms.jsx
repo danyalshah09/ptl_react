@@ -5,7 +5,6 @@ const Rooms = () => {
 
   return (
   <>
-
     <RoomCategories />
   </>
   );
