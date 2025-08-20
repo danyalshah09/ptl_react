@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGsapScrollAnimation } from "../pages/hooks/useGsapScrollAnimation";
 
+gsap.registerPlugin(ScrollTrigger);
 
 const CustomCarouselArrows = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const containerRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const containerRef = useRef();
 
   const slides = [
     { id: 1, title: "Mountain View", imageUrl: "./assets/slider/ptl_exteriorr.jpg" },
@@ -29,32 +29,30 @@ const CustomCarouselArrows = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Animate on scroll
+  // Single optimized scroll animation
   useEffect(() => {
     const el = containerRef.current;
+    if (!el) return;
 
-    const animation = gsap.fromTo(
-      el,
-      { y: 80, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: 'power3.out',
-        paused: true,
+    // Set initial state
+    gsap.set(el, { x: -60, opacity: 0 });
+
+    const animation = gsap.to(el, {
+      x: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        once: true, // Only trigger once to prevent retriggering
+        invalidateOnRefresh: true,
       }
-    );
-
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 80%',
-      onEnter: () => animation.restart(),
-      onLeaveBack: () => animation.pause(0), // Reset animation when user scrolls back up
     });
 
     return () => {
+      if (animation.scrollTrigger) animation.scrollTrigger.kill();
       animation.kill();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
@@ -62,7 +60,7 @@ const CustomCarouselArrows = () => {
   return (
     <div
       ref={containerRef}
-      className="w-full md:w-4/5 lg:w-3/5 relative mx-auto group opacity-0"
+      className="w-full md:w-4/5 py-12 lg:w-3/5 relative mx-auto group"
     >
       {/* Left Arrow */}
       <div className="absolute inset-y-0 left-0 z-10 flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out">

@@ -4,9 +4,12 @@ import PropTypes from "prop-types";
 import gsap from "gsap";
 import Button from "./Button";
 import Section from "../pages/Section";
+import { useGsapScrollAnimation } from "../pages/hooks/useGsapScrollAnimation";
+
 
 const HeroSection = ({ subtitle, onCTAClick, ctaText = "Book Now" }) => {
   const subtitleRef = useRef(null);
+  const buttonRef = useGsapScrollAnimation("right", { duration: 1.2 });
   useEffect(() => {
     if (subtitleRef.current) {
       const chars = subtitleRef.current.querySelectorAll("span");
@@ -54,6 +57,7 @@ const HeroSection = ({ subtitle, onCTAClick, ctaText = "Book Now" }) => {
 
         {onCTAClick && (
           <Button
+            ref={buttonRef}
             onClick={onCTAClick}
             className="text-gray-900 hover:bg-white border hover:border-gray-300 focus:outline-none bg-transparent border-black  font-medium rounded-sm  text-sm px-5 py-2.5 me-2 mb-2  "
             aria-label="Navigate to room booking section"

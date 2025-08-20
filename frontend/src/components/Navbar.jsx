@@ -36,7 +36,7 @@ const Navbar = () => {
 
     const timer = setTimeout(() => {
       fetchWeather();
-    }, 3000); // Delay of 3 seconds
+    }, 2000); // Delay of 3 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -55,7 +55,7 @@ const Navbar = () => {
             e.target.style.display = 'none';
           }}
         />
-        <span className="text-lg font-medium text-orange-700 whitespace-nowrap hover:text-white">
+        <span className="text-lg font-mediumwhitespace-nowrap ">
           {Math.round(weather?.main?.temp)}°C
         </span>
       </div>
