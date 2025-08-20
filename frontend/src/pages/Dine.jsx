@@ -1,17 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import React from "react";
 import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
 export default function DineSection() {
-
-
+  const heroRef = useRef();
   const headingRef = useGsapScrollAnimation("left", { duration: 1.2 });
-  const cusinesRef = useGsapScrollAnimation("down", { duration: 1.2 });
+  const cusinesRef = useGsapScrollAnimation("down", { duration: 1.7 });
   const homeRef = useGsapScrollAnimation("down", { duration: 1.2 });
   const tradRef = useGsapScrollAnimation("left", { duration: 1.2 });
-  const westRef = useGsapScrollAnimation("right", { duration: 1.2 });
+  const westRef = useGsapScrollAnimation("right", { duration: 1.7 });
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('breakfast');
+
+  // Parallax effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.5;
+        heroRef.current.style.transform = `translateY(${parallax}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const menuCategories = {
     breakfast: [
       { name: 'Traditional Chapshuro', price: '$8.99', description: 'Savory meat-filled pastry' },
@@ -34,20 +47,20 @@ export default function DineSection() {
 
   return (
     <div className="relative">
-      {/* Hero Section */}
-     {/* Hero Section */}
-<div
-  className="relative h-96 bg-center bg-cover"
-  style={{ backgroundImage: "url('/assets/images/dine/passu_cones.webp')" }}
->
+      {/* Hero Section with Parallax */}
+<div className="relative h-96 overflow-hidden">
+  <div
+    ref={heroRef}
+    className="absolute inset-0 h-[120%] bg-center bg-cover bg-fixed"
+    style={{ backgroundImage: "url('/assets/images/dine/passu_cones.webp')" }}
+  ></div>
   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
     <div className="text-center text-white">
-    <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={headingRef}>
+      <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={headingRef}>
         Authentic Flavors with Stunning Views
-            <br />
-            <span className="text-orange-300">Experience Wakhi Cuisine at Passu Tourist Lodge</span>
+        <br />
+        <span className="text-orange-300">Experience Wakhi Cuisine at Passu Tourist Lodge</span>
       </h1>
-
     </div>
   </div>
 </div>
@@ -115,7 +128,7 @@ export default function DineSection() {
             <div className="mt-8">
               <h3 className="text-xl font-semibold mb-4">Opening Hours</h3>
               <p className="text-gray-600">Daily: 8:00 AM – 11:00 PM</p>
-              <p className="mt-4 text-orange-600">Friday Special: 20% off on dinner</p>
+              <p className="mt-4 text-orange-600">Friday Special: 5% off on dinner to mention on Instagram </p>
             </div>
           </div>
 

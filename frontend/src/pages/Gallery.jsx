@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
@@ -8,20 +8,22 @@ gsap.registerPlugin(ScrollTrigger);
 const Gallery = () => {
   const imageRefs = useRef([]);
   const headingRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const images = [
-    { src: "./assets/images/ptl1.webp", alt: "Image 1" },
-    { src: "./assets/images/ptl2.webp", alt: "Image 2" },
-    { src: "./assets/images/ptl3.jpg", alt: "Image 3" },
-    { src: "./assets/images/ptl4.webp", alt: "Image 4" },
-    { src: "./assets/images/ptl5.jpg", alt: "Image 5" },
-    { src: "./assets/images/ptl6.jpg", alt: "Image 6" },
-    { src: "./assets/images/ptl7.jpg", alt: "Image 7" },
-    { src: "./assets/images/ptl8.jpg", alt: "Image 8" },
-    { src: "./assets/images/ptl9.jpg", alt: "Image 9" },
-    { src: "./assets/images/room2.jpg", alt: "Image 10" },
-    { src: "./assets/images/tpl_twin.webp", alt: "Image 11" },
-    { src: "./assets/images/ptl13.jpg", alt: "Image 12" }
+    { src: "./assets/images/ptl1.webp", alt: "Lodge Exterior", size: "large" },
+    { src: "./assets/images/ptl2.webp", alt: "Mountain View", size: "medium" },
+    { src: "./assets/images/ptl3.jpg", alt: "Traditional Room", size: "small" },
+    { src: "./assets/images/ptl4.webp", alt: "Reception Area", size: "medium" },
+    { src: "./assets/images/ptl5.jpg", alt: "Dining Hall", size: "wide" },
+    { src: "./assets/images/ptl6.jpg", alt: "Guest Room", size: "small" },
+    { src: "./assets/images/ptl7.jpg", alt: "Outdoor View", size: "large" },
+    { src: "./assets/images/ptl8.jpg", alt: "Interior Design", size: "medium" },
+    { src: "./assets/images/ptl9.jpg", alt: "Scenic Beauty", size: "tall" },
+    { src: "./assets/images/room2.jpg", alt: "Comfortable Stay", size: "small" },
+    { src: "./assets/images/tpl_twin.webp", alt: "Twin Bed Room", size: "medium" },
+    { src: "./assets/images/ptl13.jpg", alt: "Lodge Experience", size: "wide" }
   ];
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const Gallery = () => {
             scrollTrigger: {
               trigger: el,
               start: "top 90%",
-              toggleActions: "play none none reverse",
+              once: true,
             }
           }
         );
@@ -50,6 +52,44 @@ const Gallery = () => {
     };
   }, []);
 
+  const openModal = (image, index = null) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const nextImage = () => {
+    const currentIndex = images.findIndex(img => img.src === selectedImage.src);
+    const nextIndex = (currentIndex + 1) % images.length;
+    setSelectedImage(images[nextIndex]);
+  };
+
+  const prevImage = () => {
+    const currentIndex = images.findIndex(img => img.src === selectedImage.src);
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    setSelectedImage(images[prevIndex]);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+    document.body.style.overflow = 'unset';
+  };
+
+    // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    };
+
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isModalOpen, selectedImage]);
+
   return (
     <div className="min-h-screen">
       {/* Section Header */}
@@ -59,26 +99,95 @@ const Gallery = () => {
 
       <hr className="w-[20%] mt-2 text-center mx-auto" />
 
-      {/* Image Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 mx-4 mt-1">
-        {images.map((image, index) => (
-          <div key={index} className="flex justify-center w-full">
-            <figure
-              ref={(el) => (imageRefs.current[index] = el)}
-              className="w-full relative overflow-hidden bg-gray-100"
+            {/* Masonry Grid with No Empty Spaces */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className="break-inside-avoid group relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+              onClick={() => openModal(image)}
             >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-64 object-cover shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl"
-                fetchPriority={index < 4 ? "high" : "auto"}
-                decoding="async"
-                loading={index < 8 ? "eager" : "lazy"}
-              />
-            </figure>
-          </div>
-        ))}
+              <figure
+                ref={(el) => (imageRefs.current[index] = el)}
+                className="w-full relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-auto object-cover transition-all duration-700 group-hover:scale-110"
+                  fetchPriority={index < 4 ? "high" : "auto"}
+                  decoding="async"
+                  loading={index < 8 ? "eager" : "lazy"}
+                />
+
+                {/* Elegant overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-lg font-semibold drop-shadow-lg">
+                      {image.alt}
+                    </h3>
+                  </div>
+                </div>
+              </figure>
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedImage && (
+        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
+          <div className="relative max-w-4xl max-h-full w-full h-full flex items-center justify-center">
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-10 bg-white/20 backdrop-blur-sm rounded-full p-2 text-white hover:bg-white/30 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Previous button */}
+            <button
+              onClick={prevImage}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Next button */}
+            <button
+              onClick={nextImage}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Modal image */}
+            <img
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+
+            {/* Image title */}
+            <div className="absolute bottom-4 left-4 right-4 text-center">
+              <h3 className="text-white text-xl font-semibold bg-black/50 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
+                {selectedImage.alt}
+              </h3>
+            </div>
+          </div>
+
+          {/* Click outside to close */}
+          <div className="absolute inset-0 -z-10" onClick={closeModal}></div>
+        </div>
+      )}
     </div>
   );
 };

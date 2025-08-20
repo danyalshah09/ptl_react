@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useGsapScroll } from './hooks/useGsapScroll';
 import { useGsapScrollAnimation } from "./hooks/useGsapScrollAnimation";
 
 export default function AboutUs() {
+  const heroRef = useRef();
   const titleRef = useGsapScrollAnimation("left", { duration: 1.2 });
   const subtitleRef = useGsapScrollAnimation("down", { duration: 1.2 });
   const heritageRef = useGsapScrollAnimation("left", { duration: 1.2 });
@@ -11,6 +12,20 @@ export default function AboutUs() {
   const longImageRef = useGsapScrollAnimation("left", { duration: 1.2 });
   const rightImage1Ref = useGsapScrollAnimation("right", { duration: 1.2 });
   const rightImage2Ref = useGsapScrollAnimation("right", { duration: 1.2 });
+
+  // Parallax effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.5;
+        heroRef.current.style.transform = `translateY(${parallax}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // const headerRef = useRef();
   // const subtitleRef = useRef();
@@ -73,21 +88,25 @@ export default function AboutUs() {
 
   return (
       <div className="bg-white">
-        {/* Hero Section */}
-       <section
-        className="relative h-[600px] flex items-center justify-center bg-center bg-cover"
-        style={{ backgroundImage: "url('/assets/about/main/ptl_outside.webp')" }}
->
+        {/* Hero Section with Parallax */}
+<section className="relative h-[600px] overflow-hidden">
+  <div
+    ref={heroRef}
+    className="absolute inset-0 h-[120%] bg-center bg-cover bg-fixed"
+    style={{ backgroundImage: "url('/assets/about/main/ptl_outside.webp')" }}
+  ></div>
   <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/30" />
-  <div className="relative max-w-6xl mx-auto px-4 text-center text-white">
-          <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={titleRef}>
-      Passu Tourist Lodge
-      <br />
-            <span className="text-orange-300">Where Mountain Majesty Meets Modern Comfort</span>
-    </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto" ref={subtitleRef}>
-      Nestled at the foot of the iconic Passu Cones, we've been curating unforgettable Himalayan experiences since 2015
-    </p>
+  <div className="relative h-full flex items-center justify-center">
+    <div className="max-w-6xl mx-auto px-4 text-center text-white">
+      <h1 className="text-4xl md:text-5xl mb-6 leading-tight" ref={titleRef}>
+        Passu Tourist Lodge
+        <br />
+        <span className="text-orange-300">Where Mountain Majesty Meets Modern Comfort</span>
+      </h1>
+      <p className="text-lg md:text-xl max-w-2xl mx-auto" ref={subtitleRef}>
+        Nestled at the foot of the iconic Passu Cones, we've been curating unforgettable Himalayan experiences since 2015
+      </p>
+    </div>
   </div>
 </section>
 
