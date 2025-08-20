@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const videos = [
@@ -46,13 +46,15 @@ const videos = [
   }
 ];
 
-const VideoPlayer = ({ video }) => (
+const VideoPlayer = ({ video, isActive, onPlay, videoRef }) => (
   <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden">
     <video
+      ref={videoRef}
       className="w-full h-full object-contain"
       controls
       preload="metadata"
       poster={video.thumbnail}
+      onPlay={onPlay}
     >
       <source src={video.url} type="video/mp4" />
       <p className="text-gray-400 p-4">
@@ -66,8 +68,67 @@ const VideoPlayer = ({ video }) => (
 );
 
 const VideoSection = () => {
+  const [activeVideoId, setActiveVideoId] = useState(null);
+  const videoRefs = useRef({});
+  const sectionRef = useRef(null);
+
+  // Stop all videos when component unmounts or user leaves
+  useEffect(() => {
+    const currentSection = sectionRef.current;
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopAllVideos();
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            stopAllVideos();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (currentSection) {
+      observer.observe(currentSection);
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      stopAllVideos();
+    };
+  }, []);
+
+  const stopAllVideos = () => {
+    Object.values(videoRefs.current).forEach(videoRef => {
+      if (videoRef && videoRef.pause) {
+        videoRef.pause();
+        videoRef.currentTime = 0;
+      }
+    });
+    setActiveVideoId(null);
+  };
+
+  const handleVideoPlay = (videoId) => {
+    // Stop all other videos
+    Object.entries(videoRefs.current).forEach(([id, videoRef]) => {
+      if (id !== videoId.toString() && videoRef && videoRef.pause) {
+        videoRef.pause();
+        videoRef.currentTime = 0;
+      }
+    });
+    setActiveVideoId(videoId);
+  };
+
   return (
-    <section className="py-16  text-white">
+    <section ref={sectionRef} className="py-16 text-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-500 mb-4">
@@ -92,7 +153,12 @@ const VideoSection = () => {
               }}
               className="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500 bg-gray-800"
             >
-              <VideoPlayer video={video} />
+              <VideoPlayer
+                video={video}
+                isActive={activeVideoId === video.id}
+                onPlay={() => handleVideoPlay(video.id)}
+                videoRef={(el) => videoRefs.current[video.id] = el}
+              />
             </motion.div>
           ))}
         </div>

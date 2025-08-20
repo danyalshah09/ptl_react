@@ -1,113 +1,94 @@
 import React from "react";
 import { Zap, Wifi, Car, ShieldCheck, Coffee, Bike } from "lucide-react";
-import { motion } from "framer-motion";
 
 const facilities = [
   {
-    title: "24/7 Hot",
-    subtitle: "Water",
-    description: "Continuous hot water supply with smart temperature control",
-    icon: <Zap className="w-10 h-10" />,
+    title: "24/7 Hot Water",
+    description: "Continuous hot water supply throughout your stay",
+         icon: <Zap className="w-10 h-10" />,
   },
   {
-    title: "Power",
-    subtitle: "Backup",
-    description: "Uninterrupted electricity with advanced generator systems",
+    title: "Power Backup",
+    description: "Uninterrupted electricity with generator backup",
     icon: <ShieldCheck className="w-10 h-10" />,
   },
   {
-    title: "Musical",
-    subtitle: "Nights",
-    description: "Curated live performances and entertainment experiences",
-    icon: <Coffee className="w-10 h-10" />,
+    title: "Musical Nights",
+    description: "Live performances and entertainment evenings",
+    icon: <Coffee className="w-10 h-10"  />,
   },
   {
-    title: "High-Speed",
-    subtitle: "WiFi",
-    description: "Ultra-fast fiber optic internet throughout the property",
-    icon: <Wifi className="w-10 h-10" />,
+    title: "High-Speed WiFi",
+    description: "Enjoy internet even in the mountains",
+    icon: <Wifi className="w-10 h-10"  />,
   },
   {
-    title: "Premium",
-    subtitle: "Car Rental",
-    description: "Luxury vehicles with 24/7 concierge booking service",
+    title: "Car Rental",
+    description: "Premium vehicles with professional drivers",
     icon: <Car className="w-10 h-10" />,
   },
   {
-    title: "Adventure",
-    subtitle: "Cycling",
-    description: "Guided tours and premium bike rental experiences",
-    icon: <Bike className="w-10 h-10" />,
+    title: "Cycling Tours",
+    description: "Guided bike tours and mountain adventures",
+    icon: <Bike className="w-10 h-10"  />,
   },
 ];
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.15,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
-};
-
 export default function Facilities() {
   return (
-    <section className="relative overflow-hidden  dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-16">
-      {/* Centered Heading */}
+    <section className="py-16 bg-white">
+      {/* Simple Heading */}
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
-          Facilities
+        <h2 className="text-3xl font-bold text-gray-800">
+          Our <span className="text-black-700">Facilities</span>
         </h2>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/30 to-transparent pointer-events-none"></div>
-
-      <div className="container mx-auto relative z-10 px-4">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 max-w-7xl mx-auto">
+      {/* Clean Grid Layout */}
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
           {facilities.map((facility, index) => (
-            <motion.div
-              key={index}
-              className="group flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 p-4 sm:p-6 rounded-xl transition-all duration-700 ease-out relative overflow-hidden"
-              variants={fadeInUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.3 }}
-              custom={index}
-            >
-              <div className="absolute inset-0 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-700 ease-out" />
+                         <div
+               key={index}
+               className="flex flex-col items-center text-center group"
+             >
+               {/* Minimalist Icon Container with Border Animation */}
+               <div className="w-20 h-20 border border-gray-200 flex items-center justify-center mb-6 relative overflow-hidden">
+                 <div className="text-orange-700">
+                   {facility.icon}
+                 </div>
 
-              {/* Icon */}
-              <div className="relative flex-shrink-0 z-10">
-                <div className="text-gray-500 dark:text-orange-400 p-3 rounded-full bg-gray-200 dark:bg-red-700/80 group-hover:bg-white dark:group-hover:bg-gray-600/90 transition-all duration-500">
-                  {facility.icon}
-                </div>
-              </div>
+                 {/* Animated Border Overlays */}
+                 {/* Top border */}
+                 <div className="absolute top-0 left-0 h-px bg-red-600 w-0 group-hover:w-1/2 transition-all duration-500 ease-out"></div>
+                 <div className="absolute top-0 right-0 h-px bg-red-600 w-0 group-hover:w-1/2 transition-all duration-500 ease-out"></div>
 
-              {/* Vertical/Horizontal Separator */}
-              <div className="hidden sm:block w-px h-16 bg-gray-200 dark:bg-gray-700 group-hover:bg-orange-300 dark:group-hover:bg-orange-600 transition-colors duration-500"></div>
-              <div className="block sm:hidden w-full h-px bg-gray-200 dark:bg-gray-700 group-hover:bg-orange-300 dark:group-hover:bg-orange-600 transition-colors duration-500"></div>
+                 {/* Bottom border */}
+                 <div className="absolute bottom-0 left-0 h-px bg-red-600 w-0 group-hover:w-1/2 transition-all duration-500 ease-out"></div>
+                 <div className="absolute bottom-0 right-0 h-px bg-red-600 w-0 group-hover:w-1/2 transition-all duration-500 ease-out"></div>
 
-              {/* Text Info */}
-              <div className="flex-1 text-left relative z-10">
-                <h3 className="text-lg sm:text-2xl font-semibold text-gray-800 dark:text-white mb-2 group-hover:text-gray-900 dark:group-hover:text-white group-hover:drop-shadow-md transition-all duration-500">
-                  {facility.title}
-                </h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-2 font-medium group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-500">
-                  {facility.subtitle}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-relaxed transition-colors duration-500">
-                  {facility.description}
-                </p>
+                 {/* Left border */}
+                 <div className="absolute left-0 top-0 w-px bg-red-600 h-0 group-hover:h-1/2 transition-all duration-500 ease-out"></div>
+                 <div className="absolute left-0 bottom-0 w-px bg-red-600 h-0 group-hover:h-1/2 transition-all duration-500 ease-out"></div>
 
-                <div className="mt-3 h-px bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-gray-400 to-orange-600 rounded-full transform -translate-x-full group-hover:translate-x-0 transition-transform duration-1000 ease-out"></div>
-                </div>
-              </div>
-            </motion.div>
+                 {/* Right border */}
+                 <div className="absolute right-0 top-0 w-px bg-red-600 h-0 group-hover:h-1/2 transition-all duration-500 ease-out"></div>
+                 <div className="absolute right-0 bottom-0 w-px bg-red-600 h-0 group-hover:h-1/2 transition-all duration-500 ease-out"></div>
+
+                 {/* Small accent line */}
+                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-px bg-orange-700"></div>
+               </div>
+
+               {/* Professional Typography */}
+               <h3 className="text-base font-semibold text-gray-800 mb-3 tracking-wide">
+                 {facility.title}
+               </h3>
+
+               {/* Refined Description */}
+               <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
+                 {facility.description}
+               </p>
+             </div>
           ))}
         </div>
       </div>

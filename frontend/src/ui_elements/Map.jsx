@@ -1,17 +1,42 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { useGsapScrollAnimation } from "../pages/hooks/useGsapScrollAnimation";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 
 const MapSection = () => {
-  const mapRef = useGsapScrollAnimation("left", { duration: 1.5 });
+  const mapRef = useRef();
+
+  useEffect(() => {
+    const el = mapRef.current;
+    if (!el) return;
+
+    gsap.set(el, { x: -60, opacity: 0 });
+
+    const animation = gsap.to(el, {
+      x: 0,
+      opacity: 1,
+      duration: 1.5,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        once: true,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    return () => {
+      if (animation.scrollTrigger) animation.scrollTrigger.kill();
+      animation.kill();
+    };
+  }, []);
 
   return (
     <section
       id="map_section_container"
       ref={mapRef}
-
-      className="py-12 text-center opacity-0 translate-y-20"
+      className="py-12 px-4 sm:px-6 lg:px-8 text-center"
     >
       <h2 className="text-3xl font-bold text-center mb-8">
         Find Us <span className="text-orange-700">Here</span>

@@ -1,16 +1,45 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useGsapScrollAnimation } from "../pages/hooks/useGsapScrollAnimation";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const RoomCategories = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const roomheadingRef = useGsapScrollAnimation("left", { duration: 1.2 });
+  const roomheadingRef = useRef();
 
   const rooms = [
     { to: "/masterbed", imgSrc: "/assets/rooms/masterbed1.jpg", title: "Deluxe Room" },
     { to: "/twinbed", imgSrc: "/assets/images/ptl_twin.jpg", title: "Executive Room" },
     { to: "/triplebed", imgSrc: "/assets/rooms/triplebed1.jpg", title: "Triple Bed" },
   ];
+
+  // One-time scroll animation
+  useEffect(() => {
+    const el = roomheadingRef.current;
+    if (!el) return;
+
+    gsap.set(el, { x: -60, opacity: 0 });
+
+    const animation = gsap.to(el, {
+      x: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        once: true, // Critical: only trigger once
+        invalidateOnRefresh: true,
+      }
+    });
+
+    return () => {
+      if (animation.scrollTrigger) animation.scrollTrigger.kill();
+      animation.kill();
+    };
+  }, []);
 
 
   return (
