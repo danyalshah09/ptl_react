@@ -46,10 +46,10 @@ const Intro = () => {
         timeline1.from(
           text1Ref.current,
           {
-            x: -40,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power3.out",
+          x: -40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
           },
           "-=0.5"
         );
@@ -76,10 +76,10 @@ const Intro = () => {
         timeline2.from(
           heading2Ref.current,
           {
-            x: 60,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
+          x: 60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
           },
           "-=0.6"
         );
@@ -89,10 +89,10 @@ const Intro = () => {
         timeline2.from(
           text2Ref.current,
           {
-            x: 60,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power3.out",
+          x: 60,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
           },
           "-=0.4"
         );

@@ -116,20 +116,20 @@ const HotelBookingForm = ()=> {
   const nights = calculateNights();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br p-4">
-      <div className="max-w-2xl mx-auto">
-        {/* Cart Preview - Improved mobile responsiveness */}
-        <div className="mb-6 mt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <div className="bg-transparent p-0 py-10">
+      <div className="w-full">
+        {/* Cart Preview - Compact mobile design */}
+        <div className="mb-4 flex flex-col gap-2">
           <button
             onClick={handleViewCart}
-            className="w-full sm:w-auto bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 text-sm sm:text-base"
+            className="w-full bg-blue-500 text-white py-2 px-3 rounded-md hover:bg-blue-600 text-sm transition-colors"
           >
-            {showCart ? 'Hide Cart' : 'View Cart'} ({bookings.length} items)
+            {showCart ? 'Hide Cart' : 'View Cart'} ({bookings.length})
           </button>
           {bookings.length > 0 && (
             <button
               onClick={() => navigate("/cart", { state: { bookings } })}
-              className="w-full sm:w-auto bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 text-sm sm:text-base mt-2 sm:mt-0"
+              className="w-full bg-orange-500 text-white py-2 px-3 rounded-md hover:bg-orange-600 text-sm transition-colors"
             >
               Proceed to Checkout
             </button>
@@ -143,112 +143,119 @@ const HotelBookingForm = ()=> {
           </div>
         )}
 
-        {/* Cart Details - Improved for small screens */}
+        {/* Cart Details - Compact mobile design */}
         {showCart && bookings.length > 0 && (
-          <div className="bg-white p-3 sm:p-4 rounded-lg shadow-xl mb-6 sm:mb-8">
-            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Cart Details</h3>
-            <div className="overflow-x-auto -mx-3 sm:mx-0">
-              <div className="min-w-full inline-block align-middle">
-                <div className="overflow-hidden">
-                  <table className="min-w-full">
-                    <thead>
-                      <tr className="bg-gray-50">
-                        <th className="px-2 sm:px-4 py-2 text-left text-xs sm:text-sm">Room</th>
-                        <th className="px-2 sm:px-4 py-2 text-left text-xs sm:text-sm">Dates</th>
-                        <th className="px-2 sm:px-4 py-2 text-right text-xs sm:text-sm">Price</th>
-                        <th className="px-2 sm:px-4 py-2 text-right text-xs sm:text-sm">Subtotal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+          <div className="bg-gray-50 p-3 rounded-md mb-4 border">
+            <h3 className="text-sm font-semibold mb-2 text-gray-700">Cart Summary</h3>
+            <div className="space-y-2">
                       {bookings.map((booking, index) => (
-                        <tr key={index} className="border-t">
-                          <td className="px-2 sm:px-4 py-2">
-                            <div className="font-semibold text-xs sm:text-sm">{booking.category}</div>
-                            <div className="text-xs text-gray-600">
-                              {booking.rooms} room(s), {booking.nights} night(s)
+                <div key={index} className="bg-white p-2 rounded-md text-xs">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <div className="font-medium">{booking.category}</div>
+                      <div className="text-gray-500">
+                        {booking.checkin} → {booking.checkout}
+                      </div>
+                      <div className="text-gray-500">
+                        {booking.rooms} room(s) × {booking.nights} night(s)
+                      </div>
                             </div>
-                          </td>
-                          <td className="px-2 sm:px-4 py-2">
-                            <div className="text-xs sm:text-sm">{booking.checkin}</div>
-                            <div className="text-xs sm:text-sm">{booking.checkout}</div>
-                          </td>
-                          <td className="px-2 sm:px-4 py-2 text-right text-xs sm:text-sm">
-                            {booking.price} PKR
-                          </td>
-                          <td className="px-2 sm:px-4 py-2 text-right font-semibold text-xs sm:text-sm">
+                    <div className="font-medium">
                             {booking.subtotal} PKR
-                          </td>
-                        </tr>
-                      ))}
-                      <tr className="border-t">
-                        <td colSpan="3" className="px-2 sm:px-4 py-2 text-right font-bold text-xs sm:text-sm">
-                          Total:
-                        </td>
-                        <td className="px-2 sm:px-4 py-2 text-right font-bold text-xs sm:text-sm">
-                          {calculateTotalCost()} PKR
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
                 </div>
+                  </div>
+                </div>
+              ))}
+              <div className="flex justify-between items-center pt-2 border-t font-semibold text-sm">
+                <span>Total:</span>
+                <span>{calculateTotalCost()} PKR</span>
               </div>
             </div>
           </div>
         )}
 
-        {/* Booking Form - Improved mobile layout */}
+        {/* Booking Form - Minimalist mobile design */}
         <form
           onSubmit={handleAddBooking}
-          className="bg-gray-200 p-4 sm:p-8 shadow-xl rounded-lg w-[100%]"
+          className="bg-white border border-gray-200 p-3 rounded-lg shadow-sm"
         >
-          <h2 className="text-center text-orange-600 text-xl sm:text-3xl font-bold mb-4 sm:mb-6">
-            Book Your Perfect Stay
+          <h2 className="text-center text-orange-600 text-lg font-semibold mb-4">
+            Book Your Stay
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
-            {/* Personal Information */}
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Name</label>
+          <div className="space-y-3">
+            {/* Personal Information - Compact Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-1">Name</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
+                  className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-1">Phone</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 required
               />
+              </div>
             </div>
 
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Email</label>
+            <div>
+              <label className="block text-gray-700 text-sm font-medium mb-1">Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
+                className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 required
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Phone</label>
+            {/* Booking Details */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-1">Check-in</label>
               <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
+                type="date"
+                name="checkin"
+                value={formData.checkin}
                 onChange={handleChange}
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
+                min={new Date().toISOString().split("T")[0]}
+                  className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 required
               />
             </div>
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-1">Check-out</label>
+              <input
+                type="date"
+                name="checkout"
+                value={formData.checkout}
+                onChange={handleChange}
+                min={formData.checkin || new Date().toISOString().split("T")[0]}
+                  className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                required
+              />
+              </div>
+            </div>
 
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Room Category</label>
+            <div>
+              <label className="block text-gray-700 text-sm font-medium mb-1">Room Category</label>
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
+                className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               >
                 <option value="Master Bed">Master Bed</option>
                 <option value="Twin Bed">Twin Bed</option>
@@ -256,44 +263,10 @@ const HotelBookingForm = ()=> {
               </select>
             </div>
 
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Check-in Date</label>
-              <input
-                type="date"
-                name="checkin"
-                value={formData.checkin}
-                onChange={handleChange}
-                min={new Date().toISOString().split("T")[0]}
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
-                required
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Check-out Date</label>
-              <input
-                type="date"
-                name="checkout"
-                value={formData.checkout}
-                onChange={handleChange}
-                min={formData.checkin || new Date().toISOString().split("T")[0]}
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
-                required
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Number of Nights</label>
-              <input
-                type="text"
-                readOnly
-                value={nights > 0 ? nights : "0"}
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg bg-gray-100 text-sm sm:text-base"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Number of Rooms</label>
+            {/* Occupancy Details */}
+            <div className="grid grid-cols-3 gap-3">
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-1">Rooms</label>
               <input
                 type="number"
                 name="rooms"
@@ -301,41 +274,49 @@ const HotelBookingForm = ()=> {
                 onChange={handleChange}
                 min="1"
                 max="20"
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
+                  className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               />
             </div>
-
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Adults</label>
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-1">Adults</label>
               <input
                 type="number"
                 name="adults"
                 value={formData.adults}
                 onChange={handleChange}
                 min="1"
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
+                  className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               />
             </div>
-
-            <div className="space-y-1">
-              <label className="font-semibold text-gray-700 text-sm sm:text-base">Children</label>
+              <div>
+                <label className="block text-gray-700 text-sm font-medium mb-1">Children</label>
               <input
                 type="number"
                 name="children"
                 value={formData.children}
                 onChange={handleChange}
                 min="0"
-                className="w-full p-2 sm:p-3 border-2 border-gray-200 rounded-lg text-sm sm:text-base"
+                  className="w-full p-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               />
             </div>
           </div>
 
-          <div className="mt-4 sm:mt-6">
+            {/* Nights Display */}
+            {nights > 0 && (
+              <div className="bg-orange-50 p-2 rounded-md text-center">
+                <span className="text-sm text-orange-700 font-medium">
+                  {nights} night(s) selected
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="mt-4">
             <button
               type="submit"
-              className="w-full bg-black text-white py-2 sm:py-3 px-6 rounded-lg hover:bg-gray-800 text-sm sm:text-base"
+              className="w-full bg-orange-600 text-white py-2.5 px-4 rounded-md hover:bg-orange-700 text-sm font-medium transition-colors"
             >
-              Add Booking
+              Add to Cart
             </button>
           </div>
         </form>

@@ -52,7 +52,7 @@ export default function DineSection() {
   <div
     ref={heroRef}
     className="absolute inset-0 h-[120%] bg-center bg-cover bg-fixed"
-    style={{ backgroundImage: "url('/assets/images/dine/passu_cones.webp')" }}
+    style={{ backgroundImage: "url('/assets/dine/passu_cones.webp')" }}
   ></div>
   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
     <div className="text-center text-white">
@@ -71,7 +71,7 @@ export default function DineSection() {
           <h2 className="text-3xl font-serif text-center mb-8">Our Cuisines</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {['Wakhi', 'Continental', 'Pakistani', 'Chinese'].map((cuisine) => (
-              <div key={cuisine} className="p-4 bg-orange-100 rounded-lg">
+              <div key={cuisine} className="p-4 bg-orange-100">
                 <h3 className="font-semibold">{cuisine}</h3>
                 {cuisine === 'Wakhi' && <span className="text-xs text-orange-600">Local Specialty</span>}
               </div>
@@ -81,7 +81,7 @@ export default function DineSection() {
       </section>
 
       {/* Menu Section */}
-      <section className="py-16" ref={homeRef}>
+      <section className="" ref={homeRef}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-serif mb-4">Our Menu</h2>
@@ -135,7 +135,7 @@ export default function DineSection() {
           <div className="h-96 bg-gray-100 overflow-hidden">
            <img
            className='w-full h-full object-cover'
-                                    src="./assets/images/dine/ptl00.webp"
+                                    src="./assets/dine/ptl00.webp"
 
            alt="" />
 
@@ -147,7 +147,7 @@ export default function DineSection() {
   <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12">
     <div className="h-96 bg-gray-100 overflow-hidden rounded-lg">
       <img
-              src="./assets/images/dine/ptl_western_restaurent.webp"
+              src="./assets/dine/ptl_western_restaurent.webp"
               alt="Western Restaurant"
         className="w-full h-full object-cover"
       />

@@ -41,9 +41,6 @@ const Home = () => {
         <Intro />
       </Section>
 
-      <Section className="carousel-section" id="gallery">
-        <CarouselCustomArrows />
-      </Section>
 
       <Section
         ref={roomCategoriesRef}
@@ -57,6 +54,11 @@ const Home = () => {
       <Section className="facilities-section" id="facilities">
         <Facilities />
       </Section>
+
+      <Section className="carousel-section" id="gallery">
+        <CarouselCustomArrows />
+      </Section>
+
 
       <Section className="video-section" id="video">
         <VideoSection />

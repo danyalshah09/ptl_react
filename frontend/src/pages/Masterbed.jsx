@@ -4,7 +4,7 @@ const Masterbed = () => {
   return (
     <RoomDetails
       title="Master Bedroom Suite"
-     image="/assets/images/ptl3.jpg"
+     image="/assets/rooms/ptl3.jpg"
       price="8000"
       description="Experience unparalleled comfort in our 650 sq.ft sanctuary featuring panoramic views and premium amenities."
       amenities={[
@@ -24,10 +24,10 @@ const Masterbed = () => {
           title: "Booking Conditions",
           content: [
             "A maximum of three persons can sleep in this room with an additional rollaway bed (mattress).",
-            "A rollaway bed is available at a cost of Rs 3,000 per night.",
-            "Children under the age of 5 years can stay for free. (above 5 years up to 10 will be charged Rs.1500 per child, 10+ will be charged full with complimentary breakfast).",
+            "A rollaway bed is available at a cost of Rs 1,000 per night.",
+            "Children under the age of 5 years can stay for free. 10+ will be charged full with complimentary breakfast).",
             "A valid CNIC for locals and passport for foreign tourists is required upon arrival.",
-            "Upfront payment required at confirmation.",
+            "Upfront payment required at confirmation or in case of advance booking 50% of the total amount.",
             "Cancellation policy: 100% refund for 21+ days prior."
           ]
         },
@@ -48,7 +48,7 @@ const Masterbed = () => {
             "A valid credit card, cash deposit, or online transaction is required at booking.",
             "Upfront payment is required at booking confirmation.",
             "Rooms and prices are at management's discretion and depend on availability.",
-            "Offto Resort reserves the right to change rates and services."
+            "Passu Tourist Lodge reserves the right to change rates and services based on the season."
           ]
         },
         {

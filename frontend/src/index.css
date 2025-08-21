@@ -33,3 +33,23 @@ html {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
+
+/* Move pagination dots slightly lower */
+
+/* Change navigation arrow color */
+.swiper-button-next,
+.swiper-button-prev {
+  color: black !important;
+}
+
+.swiper-pagination {
+  bottom: 4px !important;
+}
+
+/* Change active pagination color to orange */
+:root {
+  --swiper-theme-color: rgb(184, 184, 184);
+}
+
+
+

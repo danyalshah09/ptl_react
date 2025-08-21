@@ -10,9 +10,9 @@ const RoomCategories = () => {
   const roomheadingRef = useRef();
 
   const rooms = [
-    { to: "/masterbed", imgSrc: "/assets/rooms/masterbed1.jpg", title: "Deluxe Room" },
-    { to: "/twinbed", imgSrc: "/assets/images/ptl_twin.jpg", title: "Executive Room" },
-    { to: "/triplebed", imgSrc: "/assets/rooms/triplebed1.jpg", title: "Triple Bed" },
+    { to: "/masterbed", imgSrc: "/assets/rooms/categories/masterbed1.webp", title: "Deluxe Room" },
+    { to: "/twinbed", imgSrc: "/assets/rooms/categories/ptl_twin.webp", title: "Executive Room" },
+    { to: "/triplebed", imgSrc: "/assets/rooms/categories/triplebed1.webp", title: "Triple Bed" },
   ];
 
   // One-time scroll animation

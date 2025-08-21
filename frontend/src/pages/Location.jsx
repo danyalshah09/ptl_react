@@ -54,49 +54,49 @@ export default function Location() {
     {
       name: "Karimabad Hunza",
       distance: "60 km",
-      time: "1.5-hour drive",
+      time: "45 mins drive",
       image: "/assets/location/karimabad1.webp",
     },
     {
       name: "Baltit Fort",
       distance: "60 km",
-      time: "1.5-hour drive",
+      time: "45-mins drive",
       image: "/assets/location/baltit.webp",
     },
     {
       name: "Attabad Lake",
       distance: "35 km",
-      time: "45-min drive",
+      time: "35-min drive",
       image: "/assets/location/attabad_lake.webp",
     },
     {
       name: "Hussaini Suspension Bridge",
       distance: "5 km",
-      time: "10-min drive",
+      time: "15-min drive",
       image: "/assets/location/hussaini_suspension.webp",
     },
     {
       name: "Borith Lake",
       distance: "7 km",
-      time: "15-min drive",
+      time: "20-min drive",
       image: "/assets/location/borith.webp",
     },
     {
       name: "Passu Village",
       distance: "1 km",
-      time: "5-min walk",
+      time: "3-min drive",
       image: "/assets/location/passu.webp",
     },
     {
       name: "Batura Lake",
       distance: "10 km",
-      time: "20-min drive",
+      time: "10-min drive",
       image: "/assets/location/batura.webp",
     },
     {
       name: "Khunjerab Border",
       distance: "85 km",
-      time: "2-hour drive",
+      time: "2.5-hour drive",
       image: "/assets/location/khunjerab1.webp",
     },
     {
@@ -126,7 +126,7 @@ export default function Location() {
         scrollTrigger: {
           trigger: attractionsRef.current,
           start: "top 80%",
-          toggleActions: "restart none none none",
+          once: true,
         },
       }
     );

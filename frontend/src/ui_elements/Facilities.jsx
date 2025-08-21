@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Zap, Wifi, Car, ShieldCheck, Coffee, Bike } from "lucide-react";
 import { useGsapScrollAnimation } from "../pages/hooks/useGsapScrollAnimation";
 
@@ -36,14 +36,23 @@ const facilities = [
 ];
 
 export default function Facilities() {
+  // Memoize animation options to prevent re-creation on each render
+  const headingOptions = useMemo(() => ({ duration: 1.2, distance: 60 }), []);
+  const facilityOptions1 = useMemo(() => ({ duration: 0.8, distance: 40, delay: 0.1 }), []);
+  const facilityOptions2 = useMemo(() => ({ duration: 0.8, distance: 40, delay: 0.2 }), []);
+  const facilityOptions3 = useMemo(() => ({ duration: 0.8, distance: 40, delay: 0.3 }), []);
+  const facilityOptions4 = useMemo(() => ({ duration: 0.8, distance: 40, delay: 0.4 }), []);
+  const facilityOptions5 = useMemo(() => ({ duration: 0.8, distance: 40, delay: 0.5 }), []);
+  const facilityOptions6 = useMemo(() => ({ duration: 0.8, distance: 40, delay: 0.6 }), []);
+
   // Create animation refs for heading and each facility item
-  const headingRef = useGsapScrollAnimation("down", { duration: 1.2, distance: 60 });
-  const facility1Ref = useGsapScrollAnimation("down", { duration: 0.8, distance: 40, delay: 0.1 });
-  const facility2Ref = useGsapScrollAnimation("down", { duration: 0.8, distance: 40, delay: 0.2 });
-  const facility3Ref = useGsapScrollAnimation("down", { duration: 0.8, distance: 40, delay: 0.3 });
-  const facility4Ref = useGsapScrollAnimation("down", { duration: 0.8, distance: 40, delay: 0.4 });
-  const facility5Ref = useGsapScrollAnimation("down", { duration: 0.8, distance: 40, delay: 0.5 });
-  const facility6Ref = useGsapScrollAnimation("down", { duration: 0.8, distance: 40, delay: 0.6 });
+  const headingRef = useGsapScrollAnimation("down", headingOptions);
+  const facility1Ref = useGsapScrollAnimation("down", facilityOptions1);
+  const facility2Ref = useGsapScrollAnimation("down", facilityOptions2);
+  const facility3Ref = useGsapScrollAnimation("down", facilityOptions3);
+  const facility4Ref = useGsapScrollAnimation("down", facilityOptions4);
+  const facility5Ref = useGsapScrollAnimation("down", facilityOptions5);
+  const facility6Ref = useGsapScrollAnimation("down", facilityOptions6);
 
   // Array of refs for easy mapping
   const facilityRefs = [facility1Ref, facility2Ref, facility3Ref, facility4Ref, facility5Ref, facility6Ref];
@@ -60,7 +69,7 @@ export default function Facilities() {
       {/* Clean Grid Layout */}
       <div className="max-w-4xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-                    {facilities.map((facility, index) => (
+          {facilities.map((facility, index) => (
             <div
               key={index}
               ref={facilityRefs[index]}

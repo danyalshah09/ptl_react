@@ -8,23 +8,23 @@ import "swiper/css/pagination";
 const RoomImageSlider = ({ roomType }) => {
   const roomImages = {
     masterbed: [
-      "/assets/rooms/masterbed111.jpg",
-      "/assets/rooms/masterbed2.jpg",
-      "/assets/rooms/masterbed3.jpg",
-      "/assets/rooms/masterbed4.jpg",
-      "/assets/rooms/masterbed.jpg",
+      "/assets/rooms/masterbed/masterbed111.webp",
+      "/assets/rooms/masterbed/masterbed2.webp",
+      "/assets/rooms/masterbed/masterbed3.webp",
+      "/assets/rooms/masterbed/masterbed4.webp",
+      "/assets/rooms/masterbed/masterbed.webp",
     ],
     twinbed: [
-      "/assets/rooms/twinbed4.webp",
-      "/assets/rooms/twinbed1.jpg",
-      "/assets/rooms/twinbed2.jpg",
-      "/assets/rooms/twinbed3.webp"
+      "/assets/rooms/twinbed/twinbed4.webp",
+      "/assets/rooms/twinbed/twinbed1.webp",
+      "/assets/rooms/twinbed/twinbed2.webp",
+      "/assets/rooms/twinbed/twinbed3.webp"
     ],
     triplebed: [
-      "/assets/rooms/triplebed.jpg",
-      "/assets/rooms/triplebed1.jpg",
-      "/assets/rooms/triplebed2.jpg",
-      "/assets/rooms/triplebed3.jpg"
+      "/assets/rooms/triplebed/triplebed.jpg",
+      "/assets/rooms/triplebed/triplebed2.webp",
+      "/assets/rooms/triplebed/triplebed3.webp",
+      "/assets/rooms/triplebed/triplebed4.webp"
     ],
   };
 
@@ -38,11 +38,11 @@ const RoomImageSlider = ({ roomType }) => {
           .swiper-button-prev {
             color: black !important;
           }
-          
+
           .swiper-pagination-bullet {
             background: gray !important;
           }
-          
+
           .swiper-pagination-bullet-active {
             background: white !important;
           }

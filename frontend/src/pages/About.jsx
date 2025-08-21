@@ -27,64 +27,13 @@ export default function AboutUs() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // const headerRef = useRef();
-  // const subtitleRef = useRef();
-  // const heritageRef = useRef();
   const statsRef = useRef();
-  // const imageRef = useRef();
-  // const longImageRef = useRef();
-  // const rightImage1Ref = useRef();
-  // const rightImage2Ref = useRef();
-  // const whyTextRef = useRef();
 
-  // useGsapScroll(headerRef, {
-  //   from: { y: 100, opacity: 0 },
-  //   to: { y: 0, opacity: 1, duration: 1 },
-  // });
-
-  // useGsapScroll(subtitleRef, {
-  //   from: { x: -100, opacity: 0 },
-  //   to: { x: 0, opacity: 1, duration: 2 },
-  // });
-
-  // useGsapScroll(heritageRef, {
-  //   from: { x: -100, opacity: 0 },
-  //   to: { x: 0, opacity: 1, duration: 1 },
-  // });
 
   useGsapScroll(statsRef, {
     from: { scale: 0.5, opacity: 0 },
     to: { scale: 1, opacity: 1, duration: 0.8, stagger: 0.2 },
   });
-
-  // useGsapScroll(imageRef, {
-  //   from: { y: 100, opacity: 0 },
-  //   to: { y: 0, opacity: 1, duration: 1 },
-  // });
-
-  // useGsapScroll(whyTextRef, {
-  //   from: { y: 30, opacity: 0 },
-  //   to: { y: 0, opacity: 1, duration: 0.8 },
-  // });
-
-
-  // useGsapScroll(longImageRef, {
-  //   from: { x: -100, opacity: 0 },
-  //   to: { x: 0, opacity: 1, duration: 1},
-  // });
-
-
-  // useGsapScroll(rightImage1Ref, {
-  //   from: { x: 100, opacity: 0 },
-  //   to: { x: 0, opacity: 1, duration: 1},
-  // });
-
-
-
-  // useGsapScroll(rightImage2Ref, {
-  //   from: { x: 100, opacity: 0 },
-  //   to: { x: 0, opacity: 1, duration: 1},
-  // });
 
   return (
       <div className="bg-white">
