@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGsapScrollAnimation } from "../pages/hooks/useGsapScrollAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,15 @@ const Intro = () => {
   const text2Ref = useRef(null);
   const img3Ref = useRef(null);
   const text3Ref = useRef(null);
+  const signatureRef = useGsapScrollAnimation("down", {
+    duration: 1.6,
+    distance: 40,
+  });
+
+  const paraRef = useGsapScrollAnimation("down", {
+    duration: 1.6,
+    distance: 40,
+  });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -87,6 +97,23 @@ const Intro = () => {
           "-=0.4"
         );
       }
+
+      // Section 3 animation
+      const timeline3 = gsap.timeline({
+        scrollTrigger: {
+          trigger: text3Ref.current,
+          start: "top 80%",
+        },
+      });
+
+      if (text3Ref.current) {
+        timeline3.from(text3Ref.current, {
+          x: -60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -121,7 +148,7 @@ const Intro = () => {
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 items-start">
         <div ref={img3Ref}>
           <img
-            src="./assets/images/testimonial1.jpg"
+            src="./assets/images/guest.webp"
             alt="Passu Tourist Lodge"
             className="  object-contain w-full lg:w-[90%] shadow-md mx-auto"
           />
@@ -151,7 +178,7 @@ const Intro = () => {
             enjoyable. Every guest is part of our story, and we are dedicated to
             creating moments you will carry with you long after you leave Passu.
           </p>
-          <span className="signature-style block mt-6 text-4xl text-orange-700">
+          <span ref={signatureRef} className="signature-style block mt-6 text-4xl text-orange-700">
             "Come as guests and leave as family"
           </span>
         </div>
@@ -161,7 +188,7 @@ const Intro = () => {
       <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-2 items-center">
         <div>
           <p
-            ref={text2Ref}
+            ref={text3Ref}
             className="text-lg text-gray-600 leading-relaxed text-justify"
           >
             Here, every moment feels special — from sipping warm tea while
@@ -179,7 +206,7 @@ const Intro = () => {
         </div>
         <div ref={img3Ref}>
           <img
-            src="./assets/images/demo.png"
+            src="./assets/images/demo.webp"
             alt="Passu Tourist Lodge"
             className="  object-cover w-full lg:w-[75%] shadow-md mx-auto"
           />
